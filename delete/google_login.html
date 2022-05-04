@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="/__/firebase/7.14.2/firebase-app.js"></script>
+    <script defer src="/__/firebase/7.14.2/firebase-auth.js"></script>
+    <script defer src="/__/firebase/7.14.2/firebase-firestore.js"></script>
+    <script defer src="/__/firebase/init.js"></script>
+    <title>Document</title>
+</head>
+<div>
+    <input type="text" id="login-status" readonly="readonly">
+    <button id="login-btn">login</button>
+</div>
+
+<body>
+    <script>
+        function login_chack() {
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    document.getElementById("login-status").value = "login"
+                } else {
+                    document.getElementById("login-status").value = "not logged"
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // 1st check
+            login_chack();
+
+            // wite
+            document.getElementById("login-btn").onclick = function() {
+                var provider = new firebase.auth.GoogleAuthProvider();
+                firebase.auth().signInWithPopup(provider).then(function(result) {
+                    login_chack();
+                }).catch(function(error) {
+                    login_chack();
+                });
+            };
+        });
+    </script>
+</body>
+
+</html>
