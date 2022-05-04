@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "abe-masafumi/smore",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
