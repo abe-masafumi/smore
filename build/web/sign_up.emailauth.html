@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles/common.css">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <!-- firebase -->
+</head>
+
+<body>
+    <header class="page-header center">
+        <h1>新規登録</h1>
+    </header>
+    <main>
+        <div class="center">
+            <!-- googleログイン -->
+            <div class="space_32"></div>
+            <div>
+                googleでログイン
+            </div>
+
+            <!-- form -->
+            <div class="space_32"></div>
+            <!-- phpのページへ遷移 -->
+            <div class="form_container">
+                <div class="space_32"></div>
+                <p>メールアドレス</p>
+                <input type="text" placeholder="email" id="email">
+                <div class="space_32"></div>
+                <p>パスワード</p>
+                <input type="text" placeholder="pass" id="pass01">
+                <div class="space_32"></div>
+                <p>もう一度パスワードを入力してください</p>
+                <input type="text" placeholder="pass" id="pass02">
+                <div class="space_48"></div>
+                <button id="post">登録</button>
+            </div>
+            <div>
+                <ul id="snap-data">
+
+                </ul>
+            </div>
+        </div>
+    </main>
+    <footer class="page-footer"></footer>
+    <script type="module">
+        // firebase メールとパスワードログイン
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js';
+        import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,onAuthStateChanged } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+        const firebaseConfig = { 
+            apiKey: "AIzaSyBxcekDS5A88ia8yJNaYqf3zj-IDyZE8o4",
+            authDomain: "smore-832e4.firebaseapp.com",
+            projectId: "smore-832e4",
+            storageBucket: "smore-832e4.appspot.com",
+            messagingSenderId: "311127753115",
+            appId: "1:311127753115:web:67ed1ae316ff0f8fefe13e",
+            measurementId: "G-XTNRM12DGK" 
+        };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        document.getElementById("post").addEventListener('click', async (e) => {
+
+            const email = document.getElementById("email").value;
+            const pass01 = document.getElementById("pass01").value;
+            const pass02 = document.getElementById("pass02").value;
+            if (pass01 == pass02)  {
+                // ここから 新規登録はできてるっぽいがエラーが出てるのが謎
+                // 新規登録 
+                // すでに登録されています。パスワードは６桁いるよ. とかの通知が欲しいカーも
+                // ログインしてる人にだけ表示させる方法はidをリスト化してnoneする
+                // firebaseの設定を何回も使うのでページを分ける(できればログイン判定も全てのページで行うので別ページがいい)
+                await createUserWithEmailAndPassword(auth, email, pass01)
+                .then((userCredential) => {
+                    // Signed in
+                    const user = userCredential.user;
+                    // ...
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    // ..
+                });
+            } else {
+                alert("パスワードが一致しません")
+            }
+
+            // ログイン
+            signInWithEmailAndPassword(auth, email, pass01)
+            .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+                console.log(user);
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+            });
+        });
+
+        // ログインユーザー情報
+        onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/firebase.User
+            const uid = user.uid;
+            console.log(uid);
+            console.log("ログインちゅーーーーーーーーーー");
+            // ...
+        } else {
+            // User is signed out
+            // ...
+            console.log("ログインしてなーい");
+        }
+        });
+        
+
+    </script>
+    <script src="./main.js"></script>
+</body>
+
+</html>
