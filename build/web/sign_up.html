@@ -26,22 +26,19 @@
             <!-- form -->
             <div class="space_32"></div>
             <!-- phpのページへ遷移 -->
-            <form action="">
-                <div class="form_container">
-                    <div class="space_32"></div>
-                    <p>メールアドレス</p>
-                    <input type="text" placeholder="email">
-                    <div class="space_32"></div>
-                    <p>パスワード</p>
-                    <input type="text" placeholder="pass">
-                    <div class="space_32"></div>
-                    <p>もう一度パスワードを入力してください</p>
-                    <input type="text" placeholder="pass">
-                    <div class="space_48"></div>
-                    <!-- phpのページへ遷移 -->
-                    <input type="submit" value="登録">
-                </div>
-            </form>
+            <div class="form_container">
+                <div class="space_32"></div>
+                <p>メールアドレス</p>
+                <input type="text" placeholder="email" id="email">
+                <div class="space_32"></div>
+                <p>パスワード</p>
+                <input type="text" placeholder="pass" id="pass01">
+                <div class="space_32"></div>
+                <p>もう一度パスワードを入力してください</p>
+                <input type="text" placeholder="pass" id="pass02">
+                <div class="space_48"></div>
+                <button id="post">登録</button>
+            </div>
             <div>
                 <ul id="snap-data">
 
@@ -58,7 +55,7 @@
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js';
         // import { getFirestore, collection } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-lite.js';
         // import { doc, setDoc, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
-        import { doc, setDoc, addDoc, getDocs,getFirestore ,collection} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+        import { doc, setDoc, addDoc, getDocs, getFirestore ,collection} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
         const firebaseConfig = { 
             apiKey: "AIzaSyBxcekDS5A88ia8yJNaYqf3zj-IDyZE8o4",
             authDomain: "smore-832e4.firebaseapp.com",
@@ -105,6 +102,32 @@
         });
 
         
+        // データの追加
+
+        document.getElementById("post").addEventListener('click', async (e) => {
+            const email = document.getElementById("email").value;
+            const pass01 = document.getElementById("pass01").value;
+            const pass02 = document.getElementById("pass02").value;
+            // console.log(email);
+            if (pass01 == pass02) {
+            //   ドキュメントIDを手動で作成する場合はこっち
+            //     setDoc(doc(db, "pet"), {
+            //     email: email,
+            //     pass: pass01,
+            // });
+            //   ドキュメントIDを自動で作成する場合はこっち
+            const coll = collection(db, "cities");
+            const docRef = await addDoc(coll, {
+                name: "Tokyo",
+                country: "Japan"
+            });
+            console.log("Document written with ID: ", docRef.id);
+            } else {
+                alert("パスワードが一致しませんでした")
+            }
+        });
+        
+
 
 
 
