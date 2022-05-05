@@ -1,0 +1,262 @@
+/* ---ローディング--- */
+
+.loading {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 35;
+    background: rgb(226, 132, 10);
+    opacity: 1;
+    animation: loading 3s linear 0s 1 both;
+}
+
+@keyframes loading {
+    0% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 1;
+    }
+    99% {
+        opacity: 0;
+        z-index: 35;
+    }
+    100% {
+        opacity: 0;
+        user-select: none;
+        z-index: -1;
+    }
+}
+
+
+/* ----------- */
+
+
+/* loading setting ----end------*/
+
+
+/* .body{
+	font-family: Roboto, "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体", "ヒラギノ角ゴ Pro W3", "メイリオ", sans-serif;
+	line-height: 1.75;
+	font-size: 16px;
+	width: 960px;
+	margin: auto;
+	background-image: url("../img/orange20apple20logo20ipad20air20220wallpapers_063890df8488097ce56c40c085b09b1f_raw.jpeg");
+	background-attachment: fixed;
+	background-position: center;
+	background-size: 960px;
+	user-select: none;
+	background-size: cover;
+} */
+
+
+/*　パディングをサイズ内側にする処理　*/
+
+* {
+    padding: 0;
+    margin: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+/* common setting */
+
+.space_24 {
+    height: 24px;
+}
+
+.space_32 {
+    height: 32px;
+}
+
+.space_40 {
+    height: 40px;
+}
+
+.space_48 {
+    height: 48px;
+}
+
+.space_56 {
+    height: 56px;
+}
+
+.space_64 {
+    height: 64px;
+}
+
+.space_80 {
+    height: 80px;
+}
+
+.space_120 {
+    height: 120px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.m_auto {
+    margin: auto;
+}
+
+.flex_box {
+    display: flex;
+}
+
+.text_center {
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    border-style: none;
+    /* width: 200px; */
+    text-align: center;
+    cursor: pointer;
+    /* text-align: center; */
+    margin: 10px auto;
+    height: 35px;
+    width: 300px;
+    font-size: 20px;
+    border-radius: 20px;
+}
+
+.none {
+    display: none;
+    pointer-events: none;
+}
+
+.mask {
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 23;
+}
+
+
+/* ---タイトルのテキストシャドウ--- */
+
+.h1 {
+    position: relative;
+    margin: 0;
+    font-size: 48px;
+    z-index: 10;
+    color: rgb(211, 230, 45);
+    text-shadow: #fc0 1px 0 10px;
+}
+
+
+/* ----- */
+
+
+/* ---写真中央揃え--- */
+
+.img_box {
+    background-color: pink;
+    text-align: center;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+}
+
+.img_box img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+
+/* ----- */
+
+
+/* フレームワーク */
+
+.row {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(var(--bs-gutter-y) * -1);
+    margin-right: calc(var(--bs-gutter-x) / -2);
+    margin-left: calc(var(--bs-gutter-x) / -2);
+}
+
+.col-auto {
+    flex: 0 0 auto;
+    width: auto;
+}
+
+.col-1 {
+    flex: 0 0 auto;
+    width: 8.3333333333%;
+}
+
+.col-2 {
+    flex: 0 0 auto;
+    width: 16.6666666667%;
+}
+
+.col-3 {
+    flex: 0 0 auto;
+    width: 25%;
+}
+
+.col-4 {
+    flex: 0 0 auto;
+    width: 33.3333333333%;
+}
+
+.col-5 {
+    flex: 0 0 auto;
+    width: 41.6666666667%;
+}
+
+.col-6 {
+    flex: 0 0 auto;
+    width: 50%;
+}
+
+.col-7 {
+    flex: 0 0 auto;
+    width: 58.3333333333%;
+}
+
+.col-8 {
+    flex: 0 0 auto;
+    width: 66.6666666667%;
+}
+
+.col-9 {
+    flex: 0 0 auto;
+    width: 75%;
+}
+
+.col-10 {
+    flex: 0 0 auto;
+    width: 83.3333333333%;
+}
+
+.col-11 {
+    flex: 0 0 auto;
+    width: 91.6666666667%;
+}
+
+.col-12 {
+    flex: 0 0 auto;
+    width: 100%;
+}
