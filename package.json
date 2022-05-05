@@ -3,12 +3,9 @@
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
-
-
     "scripts": {
         "build": "firebase deploy"
     },
-
     "repository": {
         "type": "git",
         "url": "git+https://github.com/abe-masafumi/smore.git"
@@ -20,6 +17,6 @@
     },
     "homepage": "https://github.com/abe-masafumi/smore#readme",
     "dependencies": {
-        "firebase": "^9.7.0"
+        "firebase": "^8.10.1"
     }
 }

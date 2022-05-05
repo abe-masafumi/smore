@@ -42,10 +42,76 @@
                     <input type="submit" value="登録">
                 </div>
             </form>
+            <div>
+                <ul id="snap-data">
+
+                </ul>
+            </div>
         </div>
     </main>
     <footer class="page-footer"></footer>
+    <!-- <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script> -->
+    <script type="module">
+        // import { } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-SERVICE.js'
+        // (SERVICE は firebase-firestore などの SDK 名です）。
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js';
+        // import { getFirestore, collection } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-lite.js';
+        // import { doc, setDoc, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+        import { doc, setDoc, addDoc, getDocs,getFirestore ,collection} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+        const firebaseConfig = { 
+            apiKey: "AIzaSyBxcekDS5A88ia8yJNaYqf3zj-IDyZE8o4",
+            authDomain: "smore-832e4.firebaseapp.com",
+            projectId: "smore-832e4",
+            storageBucket: "smore-832e4.appspot.com",
+            messagingSenderId: "311127753115",
+            appId: "1:311127753115:web:67ed1ae316ff0f8fefe13e",
+            measurementId: "G-XTNRM12DGK" 
+        };
 
+        
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        
+
+        // async function getCities(db) {
+        //     // コレクションの取得
+        //     const citiesCol = collection(db, 'pet');
+        //     console.log("citiesCol");
+        //     console.log(citiesCol);
+        //     const citySnapshot = await getDocs();
+        //     console.log("citySnapshot");
+        //     console.log(citySnapshot);
+
+        //     const cityList = citySnapshot.docs.map(doc => doc.data());
+        //     return cityList;
+        // }
+        // console.log(getCities(db));
+
+        // DBからデータの読み取り
+        const querySnapshot = await collection(db, "pet");
+        getDocs(querySnapshot).then((snapshot) => {
+            // console.log(snapshot.docs.map((doc) => doc.data()));
+            const b = snapshot.docs.map((doc) => doc.data());
+            // console.log(b)
+            // リストで表示
+            for (let i = 0; i < b.length; i++) {
+                console.log(b[i])
+                const li = document.createElement("li");
+                li.textContent = b[i]["name"];
+                const ul = document.getElementById("snap-data");
+                ul.appendChild(li)
+            }
+        });
+
+        
+
+
+
+     
+
+
+    </script>
     <script src="./main.js"></script>
 </body>
 
