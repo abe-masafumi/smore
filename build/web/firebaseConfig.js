@@ -12,6 +12,5 @@ export function connectDB() {
         measurementId: "G-XTNRM12DGK" 
     };
     const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    return auth
+    return app
 } 
