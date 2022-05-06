@@ -8,6 +8,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="./styles/common.css">
     <link rel="stylesheet" href="./styles/styles.css">
+    <script type="text/javascript" src="./qrcode.js"></script>
+    <!-- QRコードライブラリ -->
     <!-- firebase -->
 </head>
 
@@ -43,6 +45,9 @@
                 <ul id="snap-data">
 
                 </ul>
+                <div id="qrcode"></div>
+                <!-- <input type="file" id="qrcode-test"> -->
+                <img id="test" src="" alt="">
             </div>
         </div>
     </main>
@@ -118,7 +123,18 @@
             console.log("ログインしてなーい");
         }
         });
-        
+    </script>
+    <script type="text/javascript">
+        // 作成したQRコードのURLが取得できない(resデータにはかえってくるが取得するとNULLになる)
+    const qrcodetag = document.getElementById("qrcode")
+    var qrcode = new QRCode(qrcodetag, {
+        text: "https://github.com/davidshimjs/qrcodejs",
+        width: 128,
+        height: 128,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+    });
 
     </script>
     <script src="./main.js"></script>
