@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>smore</title>
+    <link rel="stylesheet" href="./styles/styles.css">
+    <link rel="stylesheet" href="./styles/common.css">
+</head>
+
+<body>
+    <header class="page-header center">
+        <h1>店舗情報登録</h1>
+    </header>
+    <main>
+        <div class="center">
+            <!-- form -->
+            <div class="space_32"></div>
+            <!-- ログインしてない時は非表示 -->
+            <div class="none" id="prompt">ログインしてください</div>
+            <!-- phpのページへ遷移 -->
+            <div class="form_container" id="form_container">
+                <div class="space_32"></div>
+                <p>店舗名</p>
+                <input type="text" placeholder="店舗名" id="shopn_ame">
+                <div class="space_32"></div>
+                <p>住所</p>
+                <input type="text" placeholder="住所" id="address">
+                <div class="space_32"></div>
+                <p>連絡先</p>
+                <input type="text" placeholder="連絡先" id="phone_no">
+                <div class="space_48"></div>
+                <button id="post_button">登録</button>
+            </div>
+
+        </div>
+    </main>
+    <footer class="page-footer"></footer>
+    <script type="module">
+    
+    import {connectDB} from "./firebaseConfig.js"
+    import { getAuth,onAuthStateChanged } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+    import { collection, addDoc, getFirestore, doc, setDoc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+    // firebaseと接続
+    const app = connectDB();
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    let user_info;
+
+          // ログインユーザー情報
+    onAuthStateChanged(auth, (user) => {
+    if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        user_info = user.uid;
+        console.log(user_info);
+        console.log("ログインちゅーーーーーーーーーー");
+        // ...
+    } else {
+        // User is signed out
+        // ...
+        const form_container = document.getElementById('form_container');
+        const prompt = document.getElementById('prompt');
+        prompt.classList.remove("none");
+        form_container.classList.add("none");
+        console.log("ログインしてなーい");
+    }
+  });
+
+    // ログイン
+    document.getElementById("post_button").addEventListener('click', async () => {
+        const shopn_ame = document.getElementById("shopn_ame").value;
+        const address = document.getElementById("address").value;
+        const phone_no = document.getElementById("phone_no").value;
+        try {
+            // ドキュメント自動生成
+            // const coll = collection(db, "cities");
+            // const docRef = await addDoc(coll, {
+            //     shopn_ame: shopn_ame,
+            //     address: address,
+            //     phone_no: phone_no,
+            //     uid: user_info,
+            // });
+            // ドキュメントをユーザーIDにする 
+            await setDoc(doc(db, "cities", user_info), {
+                shopn_ame: shopn_ame,
+                address: address,
+                phone_no: phone_no,
+            });
+        // console.log("Document written with ID: ", docRef.id,"正常に書き込みました");
+        window.location.href = './店舗管理画面.html';
+        } catch (e) {
+        console.error("Error adding document: ", e);
+      }
+    });
+
+
+    </script>
+</body>
+
+</html>
