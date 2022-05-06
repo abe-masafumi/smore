@@ -68,17 +68,18 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
+        // ここから 新規登録はできてるっぽいがエラーが出てるのが謎
+        // すでに登録されています。パスワードは６桁いるよ. とかの通知が欲しいカーも
+        // ログインしてる人にだけ表示させる方法はidをリスト化してnoneする
+        // firebaseの設定を何回も使うのでページを分ける(できればログイン判定も全てのページで行うので別ページがいい)
+        // 新規登録 
         document.getElementById("post").addEventListener('click', async (e) => {
 
             const email = document.getElementById("email").value;
             const pass01 = document.getElementById("pass01").value;
             const pass02 = document.getElementById("pass02").value;
             if (pass01 == pass02)  {
-                // ここから 新規登録はできてるっぽいがエラーが出てるのが謎
-                // 新規登録 
-                // すでに登録されています。パスワードは６桁いるよ. とかの通知が欲しいカーも
-                // ログインしてる人にだけ表示させる方法はidをリスト化してnoneする
-                // firebaseの設定を何回も使うのでページを分ける(できればログイン判定も全てのページで行うので別ページがいい)
+
                 await createUserWithEmailAndPassword(auth, email, pass01)
                 .then((userCredential) => {
                     // Signed in
