@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>smore</title>
-    <link rel="stylesheet" href="./styles/styles.css">
-    <link rel="stylesheet" href="./styles/common.css">
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/common.css">
 </head>
 
 <body>
@@ -40,7 +40,7 @@
     <footer class="page-footer"></footer>
     <script type="module">
     
-    import {connectDB} from "./firebaseConfig.js"
+    import {connectDB} from "../firebaseConfig.js"
     import { getAuth,onAuthStateChanged } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
     import { collection, addDoc, getFirestore, doc, setDoc, getDoc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
     // firebaseと接続
@@ -50,8 +50,9 @@
 
     let user_info;
 
-          // ログインユーザー情報
+    // ログインユーザー情報
     onAuthStateChanged(auth, async (user) =>  {
+        // ユーザーがログインしてる AND 店舗情報がすでに登録されていたら画面を店舗管理画面へ移動
     if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
@@ -68,10 +69,6 @@
         // doc.data() will be undefined in this case
             console.log("No such document!");
         }
-        
-
-        
-        // ...
     } else {
         // User is signed out
         // ...
@@ -113,5 +110,4 @@
 
     </script>
 </body>
-
 </html>

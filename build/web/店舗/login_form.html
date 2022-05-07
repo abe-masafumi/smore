@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./styles/styles.css">
-    <link rel="stylesheet" href="./styles/common.css">
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/common.css">
 </head>
 
 <body>
@@ -41,7 +41,7 @@
     </main>
     <footer class="page-footer"></footer>
     <script type="module">
-    import {connectDB} from "./firebaseConfig.js"
+    import {connectDB} from "../firebaseConfig.js"
     import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
     // firebaseと接続
     const app = connectDB();
