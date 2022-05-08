@@ -1,7 +1,7 @@
 // firebseの初期化
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js';
 // import { getAuth } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-export function connectDB() {
+export function connect_shopDB() {
     const firebaseConfig = { 
         apiKey: "AIzaSyBxcekDS5A88ia8yJNaYqf3zj-IDyZE8o4",
         authDomain: "smore-832e4.firebaseapp.com",

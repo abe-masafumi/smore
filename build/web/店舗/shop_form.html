@@ -40,11 +40,11 @@
     <footer class="page-footer"></footer>
     <script type="module">
     
-    import {connectDB} from "../firebaseConfig.js"
+    import {connect_shopDB} from "../firebaseConfig.js"
     import { getAuth,onAuthStateChanged } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
     import { collection, addDoc, getFirestore, doc, setDoc, getDoc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
     // firebaseと接続
-    const app = connectDB();
+    const app = connect_shopDB();
     const auth = getAuth(app);
     const db = getFirestore(app);
 
