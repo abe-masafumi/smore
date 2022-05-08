@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>smore</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/common.css">
+</head>
+
+<body>
+    <header class="page-header center">
+        <h1>ペット情報登録</h1>
+    </header>
+    <main>
+        <div class="center">
+            <!-- form -->
+            <div class="space_32"></div>
+            <!-- ログインしてない時は非表示 -->
+            <div class="none" id="prompt">ログインしてください</div>
+            <!-- phpのページへ遷移 -->
+            <div class="form_container" id="form_container">
+                <div class="space_32"></div>
+                <p>ペットの名前</p>
+                <input type="text" placeholder="ペットの名前">
+                <div class="space_32"></div>
+                <p>生年月日</p>
+                <input type="text" placeholder="生年月日">
+                <div class="space_32"></div>
+                <!-- <p>性別 (男の子・女の子)</p>
+                <input type="text" placeholder="性別" id="phone_no"> -->
+                <p>性別 (男の子・女の子)<br>
+                    <input type="radio" name="性別" value="男"> 男
+                    <input type="radio" name="性別" value="女"> 女
+                    </p>
+                <div class="space_48"></div>
+                <p>犬種</p>
+                <input type="text" placeholder="犬種">
+                <div class="space_48"></div>
+                <!-- <p>去勢・避妊（未・済）</p>
+                <input type="text" placeholder="去勢・避妊（未・済）" id="phone_no"> -->
+                <p>去勢・避妊（未・済)<br>
+                    <input type="radio" name="去勢" value="未"> 未
+                    <input type="radio" name="去勢" value="済"> 済
+                    </p>
+                <div class="space_48"></div>
+                <p>体重</p>
+                <input type="text" placeholder="体重">
+                <div class="space_48"></div>
+                <p>毛色</p>
+                <input type="text" placeholder="毛色">
+                <div class="space_48"></div>
+                <!-- <p>耳（たれ耳・立ち耳)</p>
+                <input type="text" placeholder="耳 (たれ耳・立ち耳)" id="phone_no"> -->
+                <p>耳（たれ耳・立ち耳)<br>
+                    <input type="radio" name="耳" value="たれ耳"> たれ耳
+                    <input type="radio" name="耳" value="立ち耳"> 立ち耳
+                    </p>
+                <div class="space_48"></div>
+                <p>ごはん(品名・量)</p>
+                <input type="text" placeholder="ごはん耳">
+                <div class="space_48"></div>
+                <p>かかりつけの病院</p>
+                <input type="text" placeholder="かかりつけの病院">
+                <div class="space_48"></div>
+                <p>病歴・アレルギー</p>
+                <input type="text" placeholder="病歴・アレルギー">
+                <div class="space_48"></div>
+                <p>お薬</p>
+                <input type="text" placeholder="お薬">
+                <div class="space_48"></div>
+                <p>サロン</p>
+                <input type="text" placeholder="サロン">
+                <div class="space_48"></div>
+                <p>マイクロチップ番号</p>
+                <input type="text" placeholder="マイクロチップ番号">
+                <div class="space_48"></div>
+                <!-- <p>犬の登録をし、鑑札を受け取っていますか？（はい、いいえ、分からない）</p>
+                <input type="text" placeholder="犬の登録をし、鑑札を受け取っていますか？（はい、いいえ、分からない）" id="phone_no"> -->
+                <p>犬の登録をし、鑑札を受け取っていますか？（はい、いいえ、分からない)<br>
+                    <input type="radio" name="登録" value="はい"> はい
+                    <input type="radio" name="登録" value="いいえ"> いいえ
+                    <input type="radio" name="登録" value="分からない"> 分からない
+                    </p>
+                <div class="space_48"></div>
+                <!-- <p>狂犬病予防注射を受け、注射済み票を受け取っていますか？（はい、いいえ、分からない</p>
+                <input type="text" placeholder="狂犬病予防注射を受け、注射済み票を受け取っていますか？（はい、いいえ、分からない）" id="phone_no"> -->
+                <p>狂犬病予防注射を受け、注射済み票を受け取っていますか？（はい、いいえ、分からない<br>
+                    <input type="radio" name="注射" value="はい"> はい
+                    <input type="radio" name="注射" value="いいえ"> いいえ
+                    <input type="radio" name="注射" value="分からない"> 分からない
+                    </p>
+                <div class="space_48"></div>
+                <p>写真1:ペット写真</p>
+                <input type="file">
+                <div class="space_48"></div>
+                <p>写真2:狂犬病予防注射済み票</p>
+                <input type="file">
+                <div class="space_48"></div>
+                <p>写真3:混合ワクチン接種証明書</p>
+                <input type="file">
+                <div class="space_48"></div>
+                <button id="post_button">登録</button>
+                <div class="space_48"></div>
+            </div>
+        </div>
+    </main>
+    <footer class="page-footer"></footer>
+    <script type="module">
+    
+    import {connectDB} from "../firebaseConfig.js"
+    import { getAuth,onAuthStateChanged } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+    import { collection, addDoc, getFirestore, doc, setDoc, getDoc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+    // firebaseと接続
+    const app = connectDB();
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    let user_info;
+
+    // ログインユーザー情報
+    onAuthStateChanged(auth, async (user) =>  {
+        // ユーザーがログインしてる AND 店舗情報がすでに登録されていたら画面を店舗管理画面へ移動
+    if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        user_info = user.uid;
+        console.log(user_info);
+        console.log("ログインちゅーーーーーーーーーー");
+
+        const docRef = doc(db, "pets", user_info);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            console.log("Document data:", docSnap.data());
+            window.location.href = './飼い主my_page.html';
+        } else {
+        // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    } else {
+        // User is signed out
+        // ...
+        const form_container = document.getElementById('form_container');
+        const prompt = document.getElementById('prompt');
+        prompt.classList.remove("none");
+        form_container.classList.add("none");
+        console.log("ログインしてなーい");
+    }
+  });
+
+    // 登録
+    document.getElementById("post_button").addEventListener('click', async () => {
+        // const shopn_ame = document.getElementById("shopn_ame").value;
+        // const address = document.getElementById("address").value;
+        // const phone_no = document.getElementById("phone_no").value;
+        try {
+            // ドキュメント自動生成
+            // const coll = collection(db, "cities");
+            // const docRef = await addDoc(coll, {
+            //     shopn_ame: shopn_ame,
+            //     address: address,
+            //     phone_no: phone_no,
+            //     uid: user_info,
+            // });
+            // ドキュメントをユーザーIDにする 
+            await setDoc(doc(db, "pets", user_info), {
+                // shopn_ame: shopn_ame,
+                // address: address,
+                // phone_no: phone_no,
+            });
+            console.log("Document written with ID: ", docRef.id,"正常に書き込みました");
+            window.location.href = './飼い主my_page.html';
+        } catch (e) {
+        console.error("Error adding document: ", e);
+      }
+    });
+
+
+    </script>
+</body>
+</html>

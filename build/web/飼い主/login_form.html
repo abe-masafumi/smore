@@ -49,6 +49,7 @@
 
     // ログイン
     document.getElementById("login_button").addEventListener('click',() => {
+        // ここに取得処理
         const email = document.getElementById("email").value;
         const pass = document.getElementById("pass").value;
         signInWithEmailAndPassword(auth, email, pass)
@@ -62,6 +63,7 @@
             const errorCode = error.code;
             const errorMessage = error.message;
         });
+        console.log("未実装");
     });
       // ログインユーザー情報
   onAuthStateChanged(auth, (user) => {
@@ -71,7 +73,7 @@
         const uid = user.uid;
         console.log(uid);
         console.log("ログインちゅーーーーーーーーーー");
-        window.location.href = './shop_form.html';
+        window.location.href = './pet_form.html';
         // ...
     } else {
         // User is signed out
