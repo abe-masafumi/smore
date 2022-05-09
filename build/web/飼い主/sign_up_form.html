@@ -45,10 +45,10 @@
 
 
 <script type="module">
-  import {connectDB} from "../firebaseConfig.js"
+  import { connect_petDB } from "../firebaseConfig.js"
   import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
   // firebaseと接続
-  const app = connectDB();
+  const app = connect_petDB();
   const auth = getAuth(app);
   // ここから 新規登録はできてるっぽいがエラーが出てるのが謎
   // すでに登録されています。パスワードは６桁いるよ. とかの通知が欲しいカーも
@@ -85,7 +85,7 @@
         const uid = user.uid;
         console.log(uid);
         console.log("ログインちゅーーーーーーーーーー");
-        window.location.href = './shop_form.html';
+        window.location.href = './pet_form.html';
         // ...
     } else {
         // User is signed out

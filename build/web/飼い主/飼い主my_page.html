@@ -15,22 +15,67 @@
         <h1>my_page</h1>
     </header>
     <main>
-        <ul class="center">
-            <li>
-                ここにペットのDBから表示
-            </li>
-            <li>
-                ここにペットのDBから表示
-            </li>
-            <li>
-                ここにペットのDBから表示
-            </li>
-            <li>
-                ここにペットのDBから表示
-            </li>
-    </ul>
+        <div class="top_button">
+            <p onclick="location.href=['./登録済み店舗.html']">店舗一覧</p>
+
+            <p>QRボタン</p>
+        </div>
+        <ul class="center" id="pet_ul">
+            <!-- jsで作成 -->
+        </ul>
     </main>
     <footer class="page-footer"></footer>
+    <script type="module">
+        import { connect_petDB } from "../firebaseConfig.js"
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+        import { getFirestore, collection, getDocs } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+
+        // firebaseと接続
+        const app = connect_petDB();
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const ul = document.getElementById('pet_ul');
+        // let user_info;
+        // 非同期処理で実行順序が変わったのでコールバックで処理
+        async function get_data(user_info) {
+            const querySnapshot = await getDocs(collection(db, user_info));
+            querySnapshot.forEach(doc => {
+            // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data());
+                const li = document.createElement('li');
+                const name = document.createElement('p')
+                name.textContent = doc.data()["pet_name"];
+                li.appendChild(name)
+                ul.appendChild(li);
+            });
+        }
+
+        // ログインユーザー情報
+        onAuthStateChanged(auth, (user) => {
+          if (user) {
+              // User is signed in, see docs for a list of available properties
+              // https://firebase.google.com/docs/reference/js/firebase.User
+              const user_info = user.uid;
+              console.log(user_info);
+              console.log("ログインちゅーーーーーーーーーー");
+            //   window.location.href = './pet_form.html';
+            return get_data(user_info)
+              // ...
+          } else {
+              // User is signed out
+              // ...
+              console.log("ログインしてなーい");
+          }
+        });
+
+        // console.log(user_info);
+        
+
+
+
+
+
+      </script>
 </body>
 
 </html>

@@ -41,10 +41,10 @@
     </main>
     <footer class="page-footer"></footer>
     <script type="module">
-    import {connectDB} from "../firebaseConfig.js"
+    import { connect_petDB } from "../firebaseConfig.js"
     import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
     // firebaseと接続
-    const app = connectDB();
+    const app = connect_petDB();
     const auth = getAuth(app);
 
     // ログイン
@@ -63,7 +63,6 @@
             const errorCode = error.code;
             const errorMessage = error.message;
         });
-        console.log("未実装");
     });
       // ログインユーザー情報
   onAuthStateChanged(auth, (user) => {
