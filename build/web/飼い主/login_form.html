@@ -11,20 +11,22 @@
 </head>
 
 <body>
+
     <header class="page-header center">
         <h1>ログイン</h1>
     </header>
+
     <main>
         <div class="center">
             <!-- googleログイン -->
             <div class="space_32"></div>
+            <!-- 未実装 -->
             <div>
                 googleでログイン
             </div>
 
-            <!-- form -->
             <div class="space_32"></div>
-            <!-- phpのページへ遷移 -->
+            <!-- form 今はボタン送信-->
             <div class="form_container">
                 <div class="space_32"></div>
                 <p>メールアドレス</p>
@@ -39,7 +41,9 @@
             <p onclick="location.href=['./sign_up_form.html']">登録はこちらから</p>
         </div>
     </main>
+
     <footer class="page-footer"></footer>
+
     <script type="module">
     import { connect_petDB } from "../firebaseConfig.js"
     import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
@@ -47,7 +51,21 @@
     const app = connect_petDB();
     const auth = getAuth(app);
 
-    // ログイン
+    // ログインしてた時は
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/firebase.User
+            const uid = user.uid;
+            console.log(uid,"状態:ログイン中");
+            window.location.href = './飼い主my_page.html';
+        } else {
+            // ...
+            console.log("状態:ログアウト");
+        }
+    });
+
+    // ボタンクリックでログイン
     document.getElementById("login_button").addEventListener('click',() => {
         // ここに取得処理
         const email = document.getElementById("email").value;
@@ -62,25 +80,10 @@
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
+            console.log(errorCode);
+            console.log(errorMessage);
         });
     });
-      // ログインユーザー情報
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid;
-        console.log(uid);
-        console.log("ログインちゅーーーーーーーーーー");
-        window.location.href = './pet_form.html';
-        // ...
-    } else {
-        // User is signed out
-        // ...
-        console.log("ログインしてなーい");
-    }
-  });
-
     </script>
 </body>
 

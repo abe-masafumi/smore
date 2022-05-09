@@ -16,29 +16,35 @@
     </header>
     <main>
         <div class="top_button">
-            <p onclick="location.href=['./登録済み店舗.html']">店舗一覧</p>
+            <button onclick="location.href=['./登録済み店舗.html']">店舗一覧</button>
 
             <p>QRボタン</p>
         </div>
+        <div class="space_32"></div>
+
         <ul class="center" id="pet_ul">
             <!-- jsで作成 -->
         </ul>
+        <div class="space_32"></div>
+
+        <div class="center">
+            <button onclick="location.href=['./pet_form.html']">追加</button>
+        </div>
     </main>
     <footer class="page-footer"></footer>
     <script type="module">
         import { connect_petDB } from "../firebaseConfig.js"
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
         import { getFirestore, collection, getDocs } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
-
         // firebaseと接続
         const app = connect_petDB();
         const auth = getAuth(app);
         const db = getFirestore(app);
+
         const ul = document.getElementById('pet_ul');
-        // let user_info;
         // 非同期処理で実行順序が変わったのでコールバックで処理
-        async function get_data(user_info) {
-            const querySnapshot = await getDocs(collection(db, user_info));
+        async function get_data(uid) {
+            const querySnapshot = await getDocs(collection(db, uid));
             querySnapshot.forEach(doc => {
             // doc.data() is never undefined for query doc snapshots
                 console.log(doc.id, " => ", doc.data());
@@ -50,31 +56,21 @@
             });
         }
 
-        // ログインユーザー情報
+        // ログインしてた時は
         onAuthStateChanged(auth, (user) => {
           if (user) {
               // User is signed in, see docs for a list of available properties
               // https://firebase.google.com/docs/reference/js/firebase.User
-              const user_info = user.uid;
-              console.log(user_info);
-              console.log("ログインちゅーーーーーーーーーー");
+              const uid = user.uid;
+              console.log(uid);
+              console.log(uid,"状態:ログイン中");
             //   window.location.href = './pet_form.html';
-            return get_data(user_info)
-              // ...
+            return get_data(uid)
           } else {
               // User is signed out
-              // ...
-              console.log("ログインしてなーい");
+              console.log("状態:ログアウト");
           }
         });
-
-        // console.log(user_info);
-        
-
-
-
-
-
       </script>
 </body>
 

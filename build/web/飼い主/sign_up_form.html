@@ -50,49 +50,48 @@
   // firebaseと接続
   const app = connect_petDB();
   const auth = getAuth(app);
-  // ここから 新規登録はできてるっぽいがエラーが出てるのが謎
-  // すでに登録されています。パスワードは６桁いるよ. とかの通知が欲しいカーも
-  // ログインしてる人にだけ表示させる方法はidをリスト化してnoneする
-  // firebaseの設定を何回も使うのでページを分ける(できればログイン判定も全てのページで行うので別ページがいい)
-  // 新規登録  登録後自動的にログイン
-  document.getElementById("post").addEventListener('click', async (e) => {
-    const email = document.getElementById("email").value;
-    const pass01 = document.getElementById("pass01").value;
-    const pass02 = document.getElementById("pass02").value;
-    if (pass01 == pass02)  {
 
-        await createUserWithEmailAndPassword(auth, email, pass01)
-        .then((userCredential) => {
-            // Signed in
-            // const user = userCredential.user;
-            console.log(userCredential);
-            // ...
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // ..
-        });
-    } else {
-        alert("パスワードが一致しません")
-    }
-  });
-  // ログインユーザー情報
+  // ログインしてた時は
   onAuthStateChanged(auth, (user) => {
     if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
         const uid = user.uid;
         console.log(uid);
-        console.log("ログインちゅーーーーーーーーーー");
-        window.location.href = './pet_form.html';
-        // ...
+        console.log(uid,"状態:ログイン中");
+        window.location.href = './飼い主my_page.html';
     } else {
         // User is signed out
-        // ...
-        console.log("ログインしてなーい");
+        console.log("状態:ログアウト");
     }
   });
+
+  // すでに登録されています。パスワードは６桁いるよ. とかの通知が欲しい
+  // ログインしてる人にだけ表示させる方法はidをリスト化してnoneする
+  // 新規登録  登録後自動的にログイン
+  document.getElementById("post").addEventListener('click', async (e) => {
+    const email = document.getElementById("email").value;
+    const pass01 = document.getElementById("pass01").value;
+    const pass02 = document.getElementById("pass02").value;
+    if (pass01 == pass02)  {
+        // 新規登録処理 登録後自動ログイン
+        await createUserWithEmailAndPassword(auth, email, pass01)
+        .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            console.log(user);
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode);
+            console.log(errorMessage);
+        });
+    } else {
+        alert("パスワードが一致しません")
+    }
+  });
+
 </script>
 </body>
 </html>
