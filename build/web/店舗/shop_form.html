@@ -34,7 +34,6 @@
                 <div class="space_48"></div>
                 <button id="post_button">登録</button>
             </div>
-
         </div>
     </main>
     <footer class="page-footer"></footer>
@@ -42,7 +41,7 @@
     
     import {connect_shopDB} from "../firebaseConfig.js"
     import { getAuth,onAuthStateChanged } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-    import { collection, addDoc, getFirestore, doc, setDoc, getDoc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+    import { collection, addDoc, getFirestore, doc, getDocs, getDoc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
     // firebaseと接続
     const app = connect_shopDB();
     const auth = getAuth(app);
@@ -60,18 +59,19 @@
         console.log(user_info);
         console.log("ログインちゅーーーーーーーーーー");
 
-        const docRef = doc(db, "cities", user_info);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-            console.log("Document data:", docSnap.data());
-            window.location.href = './店舗管理画面.html';
-        } else {
-        // doc.data() will be undefined in this case
-            console.log("No such document!");
-        }
+        // 未実装　すでに登録してたら画面遷移
+        // const querySnapshot = await getDocs(collection(db, "sss"));
+        // querySnapshot.forEach(doc => {
+        //     console.log(doc.id, " => ", doc.data());
+        // });
+        // console.log(querySnapshot);
+        // if (querySnapshot) {
+        //     window.location.href = './店舗管理画面.html';
+        // } else {
+        //     console.log("No such document!");
+        // }
     } else {
         // User is signed out
-        // ...
         const form_container = document.getElementById('form_container');
         const prompt = document.getElementById('prompt');
         prompt.classList.remove("none");
@@ -80,34 +80,32 @@
     }
   });
 
-    // ログイン
+
     document.getElementById("post_button").addEventListener('click', async () => {
         const shopn_ame = document.getElementById("shopn_ame").value;
         const address = document.getElementById("address").value;
         const phone_no = document.getElementById("phone_no").value;
         try {
             // ドキュメント自動生成
-            // const coll = collection(db, "cities");
-            // const docRef = await addDoc(coll, {
-            //     shopn_ame: shopn_ame,
-            //     address: address,
-            //     phone_no: phone_no,
-            //     uid: user_info,
-            // });
-            // ドキュメントをユーザーIDにする 
-            await setDoc(doc(db, "cities", user_info), {
+            const coll = collection(db, user_info);
+            const docRef = await addDoc(coll, {
                 shopn_ame: shopn_ame,
                 address: address,
                 phone_no: phone_no,
+                // uid: user_info,
             });
+            // ドキュメントをユーザーIDにする 
+            // await setDoc(doc(db, "cities", user_info), {
+            //     shopn_ame: shopn_ame,
+            //     address: address,
+            //     phone_no: phone_no,
+            // });
         // console.log("Document written with ID: ", docRef.id,"正常に書き込みました");
         window.location.href = './店舗管理画面.html';
         } catch (e) {
         console.error("Error adding document: ", e);
       }
     });
-
-
     </script>
 </body>
 </html>
