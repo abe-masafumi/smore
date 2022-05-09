@@ -16,15 +16,14 @@
     </header>
     <main>
         <div class="center">
-            <!-- googleログイン -->
             <div class="space_32"></div>
+            <!-- googleログイン 未実装-->
             <div>
                 googleでログイン
             </div>
 
-            <!-- form -->
             <div class="space_32"></div>
-            <!-- phpのページへ遷移 -->
+            <!-- form 今はボタンで送信-->
             <div class="form_container">
                 <div class="space_32"></div>
                 <p>メールアドレス</p>
@@ -47,7 +46,22 @@
     const app = connect_shopDB();
     const auth = getAuth(app);
 
-    // ログイン
+    // ログインしてた時は
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/firebase.User
+            const uid = user.uid;
+            console.log(uid);
+            console.log(uid,"状態:ログイン中");
+            window.location.href = './shop_form.html';
+        } else {
+            // User is signed out
+            console.log("状態:ログアウト");
+        }
+     });
+
+    // ボタンクリックでログイン
     document.getElementById("login_button").addEventListener('click',() => {
         const email = document.getElementById("email").value;
         const pass = document.getElementById("pass").value;
@@ -56,30 +70,14 @@
             // Signed in
             const user = userCredential.user;
             console.log(user);
-            // ...
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
+            console.log(errorCode);
+            console.log(errorMessage);
         });
     });
-      // ログインユーザー情報
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid;
-        console.log(uid);
-        console.log("ログインちゅーーーーーーーーーー");
-        window.location.href = './shop_form.html';
-        // ...
-    } else {
-        // User is signed out
-        // ...
-        console.log("ログインしてなーい");
-    }
-  });
-
     </script>
 </body>
 

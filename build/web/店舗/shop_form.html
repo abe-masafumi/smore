@@ -16,11 +16,10 @@
     </header>
     <main>
         <div class="center">
-            <!-- form -->
             <div class="space_32"></div>
             <!-- ログインしてない時は非表示 -->
             <div class="none" id="prompt">ログインしてください</div>
-            <!-- phpのページへ遷移 -->
+            <!-- form 今はボタンで送信-->
             <div class="form_container" id="form_container">
                 <div class="space_32"></div>
                 <p>店舗名</p>
@@ -47,17 +46,16 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
-    let user_info;
 
-    // ログインユーザー情報
+    // ログインしてた時は
     onAuthStateChanged(auth, async (user) =>  {
         // ユーザーがログインしてる AND 店舗情報がすでに登録されていたら画面を店舗管理画面へ移動
     if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
-        user_info = user.uid;
-        console.log(user_info);
-        console.log("ログインちゅーーーーーーーーーー");
+        const uid = user.uid;
+        console.log(uid);
+        console.log(uid,"状態:ログイン中");
 
         // 未実装　すでに登録してたら画面遷移
         // const querySnapshot = await getDocs(collection(db, "sss"));
@@ -76,7 +74,7 @@
         const prompt = document.getElementById('prompt');
         prompt.classList.remove("none");
         form_container.classList.add("none");
-        console.log("ログインしてなーい");
+            console.log("状態:ログアウト");
     }
   });
 

@@ -64,33 +64,32 @@
         await createUserWithEmailAndPassword(auth, email, pass01)
         .then((userCredential) => {
             // Signed in
-            // const user = userCredential.user;
-            console.log(userCredential);
-            // ...
+            const user = userCredential.user;
+            console.log(user);
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            // ..
+            console.log(errorCode);
+            console.log(errorMessage);
+
         });
     } else {
-        alert("パスワードが一致しません")
+        alert("パスワードが一致しません");
     }
   });
-  // ログインユーザー情報
+  // ログインしてた時は
   onAuthStateChanged(auth, (user) => {
     if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
         const uid = user.uid;
         console.log(uid);
-        console.log("ログインちゅーーーーーーーーーー");
+        console.log(uid,"状態:ログイン中");
         window.location.href = './shop_form.html';
-        // ...
     } else {
         // User is signed out
-        // ...
-        console.log("ログインしてなーい");
+        console.log("状態:ログアウト");
     }
   });
 </script>
