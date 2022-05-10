@@ -15,6 +15,7 @@
         <h1>my_page</h1>
     </header>
     <main>
+        <div class="space_32"></div>
         <div class="top_button">
             <button onclick="location.href=['./登録済み店舗.html']">店舗一覧</button>
 
@@ -28,46 +29,52 @@
         <div class="space_32"></div>
 
         <div class="center">
-            <button onclick="location.href=['./pet_form.html']">追加</button>
+            <button onclick="location.href=['./pet_form.html']">ペット追加</button>
         </div>
     </main>
     <footer class="page-footer"></footer>
     <script type="module">
-        import { connect_petDB } from "../firebaseConfig.js"
+        import { connect_firebase } from "../firebaseConfig.js"
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-        import { getFirestore, collection, getDocs } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+        import { getFirestore, collection, getDocs , doc, onSnapshot} from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
         // firebaseと接続
-        const app = connect_petDB();
+        const app = connect_firebase();
         const auth = getAuth(app);
         const db = getFirestore(app);
 
         const ul = document.getElementById('pet_ul');
         // 非同期処理で実行順序が変わったのでコールバックで処理
         async function get_data(uid) {
-            const querySnapshot = await getDocs(collection(db, uid));
-            querySnapshot.forEach(doc => {
-            // doc.data() is never undefined for query doc snapshots
-                console.log(doc.id, " => ", doc.data());
+            // リアルタイム更新
+            const petsRef = await collection(db, 'users', uid, 'pets');
+            const snapShots = await onSnapshot(petsRef,
+            (snapshot) => {
+                snapshot.forEach((s) => {
+                // 処理
+                console.log(s.data());
                 const li = document.createElement('li');
-                const name = document.createElement('p')
-                name.textContent = doc.data()["pet_name"];
-                li.appendChild(name)
+                li.textContent = s.data()["名前"];
                 ul.appendChild(li);
+                })
+            },
+            (error) => {
+                console.log("データを読み込めませんでした。",error);
             });
+            // サンプル
+            // const snapShots = await getDocs(collection(db, 'users', uid, 'pets'))
+            // snapShots.forEach((s) => {
+            // // なんらかの処理
+            // console.log(s.data());
+            // })
         }
 
         // ログインしてた時は
         onAuthStateChanged(auth, (user) => {
           if (user) {
-              // User is signed in, see docs for a list of available properties
-              // https://firebase.google.com/docs/reference/js/firebase.User
               const uid = user.uid;
-              console.log(uid);
               console.log(uid,"状態:ログイン中");
-            //   window.location.href = './pet_form.html';
             return get_data(uid)
           } else {
-              // User is signed out
               console.log("状態:ログアウト");
           }
         });

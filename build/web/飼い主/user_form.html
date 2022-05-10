@@ -11,36 +11,28 @@
 </head>
 <body>
   <header class="page-header center">
-    <h1>新規登録画面</h1>
+    <h1>ユーザー情報登録</h1>
   </header>
   <main>
     <div class="center">
         <div class="space_32"></div>
 
-        <!-- google-loginボタン -->
-        <div>
-            googleでログイン
-        </div>
-
-        <div class="space_32"></div>
-
         <!-- phpのページへ遷移 -->
         <div class="form_container">
             <div class="space_32"></div>
-            <p>メールアドレス</p>
-            <input type="text" placeholder="email" id="email">
+            <p>名前</p>
+            <input type="text" placeholder="your_name" id="name">
             <div class="space_32"></div>
-            <p>パスワード</p>
-            <input type="text" placeholder="pass" id="pass01">
+            <p>住所</p>
+            <input type="text" placeholder="adress" id="address">
             <div class="space_32"></div>
-            <p>もう一度パスワードを入力してください</p>
-            <input type="text" placeholder="pass" id="pass02">
-            <div class="space_48"></div>
+            <p>電話番号</p>
+            <input type="text" placeholder="phone_number" id="phone_number">
+            <div class="space_32"></div>
+           
             <button id="post">登録</button>
         </div>
         <div class="space_32"></div>
-
-      <p onclick="location.href=['./login_form.html']">ログインはこちら</p>
     </div>
 </main>
 <footer class="page-footer"></footer>
@@ -49,19 +41,24 @@
 <script type="module">
   import { connect_firebase } from "../firebaseConfig.js"
   import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+  import { getFirestore, doc, setDoc, addDoc, collection } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
   // firebaseと接続
   const app = connect_firebase();
   const auth = getAuth(app);
+  const db = getFirestore(app);
 
+  let user_id;
+  let user_email;
   // ログインしてた時は
   onAuthStateChanged(auth, (user) => {
     if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
-        const user_id = user.uid;
+        user_id = user.uid;
+        user_email = user.email;
         console.log(user_id,"状態:ログイン中");
-        window.location.href = './user_form.html';
+        window.location.href = './飼い主my_page.html';
     } else {
         // User is signed out
         console.log("状態:ログアウト");
@@ -72,27 +69,31 @@
   // ログインしてる人にだけ表示させる方法はidをリスト化してnoneする
   // 新規登録  登録後自動的にログイン
   document.getElementById("post").addEventListener('click', async (e) => {
-    const email = document.getElementById("email").value;
-    const pass01 = document.getElementById("pass01").value;
-    const pass02 = document.getElementById("pass02").value;
-    if (pass01 == pass02) {
-        // 新規登録処理 登録後自動ログイン
-        await createUserWithEmailAndPassword(auth, email, pass01)
-        .then((userCredential) => {
-            // Signed in
-            const user = userCredential.user;
-            console.log(user);
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorCode);
-            console.log(errorMessage);
-        });
-    } else {
-        alert("パスワードが一致しません");
-    }
+    const name = document.getElementById("name").value;
+    const address = document.getElementById("address").value;
+    const phone_number = document.getElementById("phone_number").value;
+    let data = {
+                名前: name,
+                住所: address,
+                電話番号: phone_number,
+                email: user_email,
+                LINE: "",
+                メモ: "",
+                u_id: user_id
+              } 
+        console.log(data);
+    try {
+             // ドキュメントを自動生成
+            // const coll = collection(db, "users");
+            // const docRef = await addDoc(coll, data);
+            // ドキュメントをユーザーIDにする 
+            await setDoc(doc(db, "users", user_id), data);
+            // window.location.href = './飼い主my_page.html';
+        } catch (e) {
+        console.error("Error adding document: ", e);
+      }
   });
+
 </script>
 </body>
 </html>

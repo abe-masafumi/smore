@@ -39,4 +39,7 @@ import { } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-SERVICE.js'
 [参考youtube](https://www.youtube.com/watch?v=9NOg_HSbo9w)
 
 ### subコレクション
-https://zenn.dev/hiro__dev/scraps/bfe3ca1757ffae
+
+[参考資料](https://zenn.dev/hiro__dev/scraps/bfe3ca1757ffae)
+[参考資料](https://qiita.com/karayok/items/0996c8f0ea219c284dbd)
+[できることとできないこと](https://zenn.dev/yucatio/articles/173f386c471398)
