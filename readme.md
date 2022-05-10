@@ -37,3 +37,6 @@ import { } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-SERVICE.js'
 ### DBからのデータ取得
 
 [参考youtube](https://www.youtube.com/watch?v=9NOg_HSbo9w)
+
+### subコレクション
+https://zenn.dev/hiro__dev/scraps/bfe3ca1757ffae

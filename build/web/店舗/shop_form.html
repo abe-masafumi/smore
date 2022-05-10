@@ -38,14 +38,15 @@
     <footer class="page-footer"></footer>
     <script type="module">
     
-    import {connect_shopDB} from "../firebaseConfig.js"
+    import { connect_firebase } from "../firebaseConfig.js"
     import { getAuth,onAuthStateChanged } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-    import { collection, addDoc, getFirestore, doc, getDocs, getDoc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+    import { collection, addDoc, getFirestore, doc, getDocs, getDoc,setDoc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
     // firebaseと接続
-    const app = connect_shopDB();
+    const app = connect_firebase();
     const auth = getAuth(app);
     const db = getFirestore(app);
 
+    let shop_email;
 
     // ログインしてた時は
     onAuthStateChanged(auth, async (user) =>  {
@@ -53,11 +54,11 @@
     if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid;
-        console.log(uid);
-        console.log(uid,"状態:ログイン中");
+        console.log(user);
+        shop_email = user.email;
+        console.log("状態:ログイン中");
 
-        // 未実装　すでに登録してたら画面遷移
+        // 未実装　すでに登録してたら画面遷移 いや待てよ！店舗複数持ちの人はいるのか？
         // const querySnapshot = await getDocs(collection(db, "sss"));
         // querySnapshot.forEach(doc => {
         //     console.log(doc.id, " => ", doc.data());
@@ -83,23 +84,36 @@
         const shopn_ame = document.getElementById("shopn_ame").value;
         const address = document.getElementById("address").value;
         const phone_no = document.getElementById("phone_no").value;
+        // ここでユーザー情報を取得した時点で、ユニークなIDを作成し、バーコードを作成、画像化,保存
+        // ...
         try {
             // ドキュメント自動生成
-            const coll = collection(db, user_info);
-            const docRef = await addDoc(coll, {
-                shopn_ame: shopn_ame,
-                address: address,
-                phone_no: phone_no,
-                // uid: user_info,
-            });
-            // ドキュメントをユーザーIDにする 
-            // await setDoc(doc(db, "cities", user_info), {
-            //     shopn_ame: shopn_ame,
+            // const coll = collection(db, "shops");
+            // const docRef = await addDoc(coll, {
             //     address: address,
-            //     phone_no: phone_no,
+            //     email: shop_email,
+            //     id: user_id,
+            //     shop_name: shopn_ame,
+            //     note:"",
+            //     phone_nomber: phone_no,
+            //     photo: "",
+            //     sns: "",
             // });
-        // console.log("Document written with ID: ", docRef.id,"正常に書き込みました");
-        window.location.href = './店舗管理画面.html';
+
+            // ドキュメントをユーザーIDにする 
+            await setDoc(doc(db, "shops", "1112222"), {
+                address: address,
+                email: shop_email,
+                id: "",
+                shop_name: shopn_ame,
+                phone_nomber: phone_no,
+                web:"",
+                photo: "",
+                sns: "",
+                QRcode:"img"
+            });
+            // console.log("Document written with ID: ", docRef.id,"正常に書き込みました");
+            window.location.href = './店舗管理画面.html';
         } catch (e) {
         console.error("Error adding document: ", e);
       }

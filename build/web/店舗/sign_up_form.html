@@ -45,10 +45,10 @@
 
 
 <script type="module">
-  import {connect_shopDB} from "../firebaseConfig.js"
+  import { connect_firebase } from "../firebaseConfig.js"
   import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
   // firebaseと接続
-  const app = connect_shopDB();
+  const app = connect_firebase();
   const auth = getAuth(app);
   // ここから 新規登録はできてるっぽいがエラーが出てるのが謎
   // すでに登録されています。パスワードは６桁いるよ. とかの通知が欲しいカーも
