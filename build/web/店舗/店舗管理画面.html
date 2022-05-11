@@ -13,6 +13,8 @@
 <body>
     <header class="page-header center">
         <h1>店舗管理画面</h1>
+        <button id="sign_out">ログアウト</button>
+
     </header>
     <main>
         <!-- ここは店舗名とQRコードボタンを配置 -->
@@ -20,7 +22,7 @@
 
         <div class="top_button">
             <p>店舗名</p>
-            <p>QRボタン</p>
+            <button onclick="location.href=['./qrcode.html']">QRボタン</button>
         </div>
         <div class="center">
             <div class="space_32"></div>
@@ -33,5 +35,45 @@
     </main>
     <footer class="page-footer"></footer>
 </body>
+<script type="module">
+    
+    import { connect_firebase } from "../firebaseConfig.js"
+    import { getAuth,onAuthStateChanged,signOut } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+    // firebaseと接続
+    const app = connect_firebase();
+    const auth = getAuth(app);
 
+    const sign_out = document.getElementById('sign_out').addEventListener('click', (e) => { 
+        signOut(auth).then(() => {
+        // Sign-out successful.
+        console.log("ログインページに戻ってください");
+        window.location.href = './login_form.html';
+        }).catch((error) => {
+        // An error happened.
+        console.log("ログアウトできませんでした");
+        });
+    });
+
+
+    // ログインしてた時は
+    onAuthStateChanged(auth, async (user) =>  {
+        // ユーザーがログインしてる AND 店舗情報がすでに登録されていたら画面を店舗管理画面へ移動
+    if (user) {
+         // User is signed in
+        console.log(user);
+        // shop_id = user.uid;
+        // shop_email = user.email;
+        console.log("状態:ログイン中");
+
+    } else {
+        // User is signed out
+        const form_container = document.getElementById('form_container');
+        const prompt = document.getElementById('prompt');
+        prompt.classList.remove("none");
+        form_container.classList.add("none");
+            console.log("状態:ログアウト");
+    }
+  });
+
+    </script>
 </html>
