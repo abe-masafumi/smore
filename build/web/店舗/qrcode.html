@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <img src="" alt="qrcode" id="img">
+  <script type="module">
+    import { connect_firebase } from "../firebaseConfig.js"
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+    import { getFirestore, collection, getDoc , doc, onSnapshot} from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+
+    // firebaseと接続
+    const app = connect_firebase();
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const img = document.getElementById('img');
+    // qrcodeURLを取得して表示
+    async function get_data(uid) {
+      const docRef = doc(db, "shops", uid);
+      const docSnap = await getDoc(docRef);
+      const codeURL = docSnap.data()["QRcode"];
+      img.src = codeURL;
+    }
+
+    // ログインしてた時は
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+          const uid = user.uid;
+          console.log(uid,"状態:ログイン中");
+        return get_data(uid)
+      } else {
+          console.log("状態:ログアウト");
+      }
+    });
+    
+  </script>
+</body>
+</html>
