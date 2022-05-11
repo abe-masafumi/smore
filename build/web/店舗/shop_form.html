@@ -8,11 +8,13 @@
     <title>smore</title>
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="stylesheet" href="../styles/common.css">
+    <script type="text/javascript" src="./qrcode.js"></script>
 </head>
 
 <body>
     <header class="page-header center">
-        <h1>ペット登録</h1>
+        <h1>店舗登録</h1>
+        <button id="sign_out">ログアウト</button>
     </header>
     <main>
         <div class="center">
@@ -32,6 +34,10 @@
                 <input type="text" placeholder="連絡先" id="phone_no">
                 <div class="space_48"></div>
                 <button id="post_button">登録</button>
+                <p>test-upload-file</p>
+                <input type="file" id="test">
+                <div class="space_48"></div>
+                <div id="qrcode" class="none"></div>
             </div>
         </div>
     </main>
@@ -39,14 +45,30 @@
     <script type="module">
     
     import { connect_firebase } from "../firebaseConfig.js"
-    import { getAuth,onAuthStateChanged } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-    import { collection, addDoc, getFirestore, doc, getDocs, getDoc,setDoc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+    import { getAuth,onAuthStateChanged,signOut } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+    import { collection, addDoc, getFirestore, doc, getDocs, getDoc,setDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+    import { getStorage,ref,uploadBytes,uploadString } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-storage.js";
     // firebaseと接続
     const app = connect_firebase();
     const auth = getAuth(app);
     const db = getFirestore(app);
+    const storage = getStorage(app);
 
+    let shop_id;
     let shop_email;
+
+    // ログアウト処理
+    const sign_out = document.getElementById('sign_out').addEventListener('click', (e) => { 
+        signOut(auth).then(() => {
+        // Sign-out successful.
+        console.log("ログインページに戻ってください");
+        window.location.href = './login_form.html';
+        }).catch((error) => {
+        // An error happened.
+        console.log("ログアウトできませんでした");
+        });
+    });
+
 
     // ログインしてた時は
     onAuthStateChanged(auth, async (user) =>  {
@@ -55,8 +77,9 @@
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
         console.log(user);
-        shop_email = user.email;
-        console.log("状態:ログイン中");
+        shop_id = await user.uid;
+        shop_email = await user.email;
+        console.log(shop_id,"状態:ログイン中");
 
         // 未実装　すでに登録してたら画面遷移 いや待てよ！店舗複数持ちの人はいるのか？
         // const querySnapshot = await getDocs(collection(db, "sss"));
@@ -78,9 +101,32 @@
             console.log("状態:ログアウト");
     }
   });
+   // qcode作成     
+  function saveCanvas(){
+    const qrcodetag = document.getElementById("qrcode")
+    var qrcode = new QRCode(qrcodetag, {
+        text: `./agreement/?${shop_id}`,
+        width: 128,
+        height: 128,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        // correctLevel : QRCode.CorrectLevel.H
+    });
+        var canvas = qrcodetag.firstElementChild;
+        let context = canvas.getContext('2d');
+        // base64エンコードされたデータを取得 「data:image/png;base64,iVBORw0k～」
+        var base64 = canvas.toDataURL("png");
+        // console.log(base64);
+        // base64データをblobに変換
+        // var blob = new Blob([base64], {
+        // type: "application/pdf"
+    // });
+    // console.log(blob);
+    return base64
+    }
 
-
-    document.getElementById("post_button").addEventListener('click', async () => {
+    document.getElementById("post_button").addEventListener('click', async (e) => {
+        const file = saveCanvas()
         const shopn_ame = document.getElementById("shopn_ame").value;
         const address = document.getElementById("address").value;
         const phone_no = document.getElementById("phone_no").value;
@@ -92,19 +138,20 @@
             // const docRef = await addDoc(coll, {
             //     address: address,
             //     email: shop_email,
-            //     id: user_id,
+            //     id: "",
             //     shop_name: shopn_ame,
-            //     note:"",
             //     phone_nomber: phone_no,
+            //     web:"",
             //     photo: "",
             //     sns: "",
+            //     QRcode:"img"
             // });
 
             // ドキュメントをユーザーIDにする 
-            await setDoc(doc(db, "shops", "1112222"), {
+            await setDoc(doc(db, "shops", shop_id), {
                 address: address,
                 email: shop_email,
-                id: "",
+                shop_id: shop_id,
                 shop_name: shopn_ame,
                 phone_nomber: phone_no,
                 web:"",
@@ -112,10 +159,16 @@
                 sns: "",
                 QRcode:"img"
             });
+
+            // qrcodeをfirestrageに保存
+            const storageRef = ref(storage, "images/" + shop_id + "/" + "shopQRcode");
+            uploadString(storageRef, file,'data_url').then((snapshot) => {
+                console.log('Uploaded a blob or file!');
+            });
             // console.log("Document written with ID: ", docRef.id,"正常に書き込みました");
-            window.location.href = './店舗管理画面.html';
+            // window.location.href = './店舗管理画面.html';
         } catch (e) {
-        console.error("Error adding document: ", e);
+            console.error("Error adding document: ", e);
       }
     });
     </script>
