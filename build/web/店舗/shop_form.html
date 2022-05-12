@@ -111,7 +111,7 @@
         // ここでユーザー情報を取得した時点で、ユニークなIDを作成し、バーコードを作成、画像化,保存,バーコードURLをfirestoreに保存
         try {
             // qrcodeをfirestrageに保存
-            const storageRef = ref(storage, "images/" + shop_id + "/" + "shopQRcode");
+            const storageRef = ref(storage, "shops/" + shop_id + "/" + "images/" + "QRcode/" );
             await uploadString(storageRef, file,'data_url').then(async(snapshot) => {
                 console.log('Uploaded a blob or file!');
                 // 保存したqrcodeのurlを取得してfirestoreに一緒に保存
