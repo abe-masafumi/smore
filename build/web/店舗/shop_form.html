@@ -12,40 +12,43 @@
 </head>
 
 <body>
-    <header class="page-header center">
-        <h1>店舗登録</h1>
-        <button id="sign_out">ログアウト</button>
-    </header>
-    <main>
-        <div class="center">
-            <div class="space_32"></div>
-            <!-- ログインしてない時は非表示 -->
-            <div class="none" id="prompt">ログインしてください</div>
-            <!-- form 今はボタンで送信-->
-            <div class="form_container" id="form_container">
+    <div class="none" id="prompt">ログインしてください</div>
+    <div id="big_container">
+        <header class="page-header center">
+            <h1>店舗登録</h1>
+            <button id="sign_out">ログアウト</button>
+        </header>
+        <main>
+            <div class="center">
                 <div class="space_32"></div>
-                <p>店舗名</p>
-                <input type="text" placeholder="店舗名" id="shopn_ame">
-                <div class="space_32"></div>
-                <p>住所</p>
-                <input type="text" placeholder="住所" id="address">
-                <div class="space_32"></div>
-                <p>連絡先</p>
-                <input type="text" placeholder="連絡先" id="phone_no">
-                <div class="space_48"></div>
-                <button id="post_button">登録</button>
-                <!-- 隠しqrcode　消さないで！ -->
-                <div id="qrcode" class="none"></div>
+                <!-- form 今はボタンで送信-->
+                <div id="form_container">
+                    <div class="space_32"></div>
+                    <p>店舗名</p>
+                    <input type="text" placeholder="店舗名" id="shopn_ame">
+                    <div class="space_32"></div>
+                    <p>住所</p>
+                    <input type="text" placeholder="住所" id="address">
+                    <div class="space_32"></div>
+                    <p>連絡先</p>
+                    <input type="text" placeholder="連絡先" id="phone_no">
+                    <div class="space_48"></div>
+                    <button id="post_button">登録</button>
+                    <!-- 隠しqrcode　消さないで！ -->
+                    <div id="qrcode" class="none"></div>
+                </div>
             </div>
-        </div>
-    </main>
-    <footer class="page-footer"></footer>
+        </main>
+        <footer class="page-footer"></footer>
+        
+    </div>
     <script type="module">
     
     import { connect_firebase } from "../firebaseConfig.js"
-    import { getAuth,onAuthStateChanged,signOut } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-    import { collection, addDoc, getFirestore, doc, getDocs, getDoc,setDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
-    import { getStorage,ref,uploadString,getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-storage.js";
+    import { make_sign_out_display } from  "../functions.js"
+    import { getAuth,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+    import { getFirestore, doc, setDoc, Timestamp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+    import { getStorage, ref, uploadString, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-storage.js";
     // firebaseと接続
     const app = connect_firebase();
     const auth = getAuth(app);
@@ -55,25 +58,10 @@
     let shop_id;
     let shop_email;
 
-    // ログアウト処理
-    const sign_out = document.getElementById('sign_out').addEventListener('click', (e) => { 
-        signOut(auth).then(() => {
-        // Sign-out successful.
-        console.log("ログインページに戻ってください");
-        window.location.href = './login_form.html';
-        }).catch((error) => {
-        // An error happened.
-        console.log("ログアウトできませんでした");
-        });
-    });
-
-
-    // ログインしてた時は
+    // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
     onAuthStateChanged(auth, async (user) =>  {
-        // ユーザーがログインしてる AND 店舗情報がすでに登録されていたら画面を店舗管理画面へ移動
+    // ユーザーがログインしてる AND 店舗情報がすでに登録されていたら画面を店舗管理画面へ移動
     if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
         console.log(user);
         shop_id = await user.uid;
         shop_email = await user.email;
@@ -92,13 +80,11 @@
         // }
     } else {
         // User is signed out
-        const form_container = document.getElementById('form_container');
-        const prompt = document.getElementById('prompt');
-        prompt.classList.remove("none");
-        form_container.classList.add("none");
-            console.log("状態:ログアウト");
+        console.log("状態:ログアウト");
+        make_sign_out_display()
     }
   });
+
    // qcode作成     
   function saveCanvas(){
     const qrcodetag = document.getElementById("qrcode")
@@ -108,18 +94,12 @@
         height: 128,
         colorDark : "#000000",
         colorLight : "#ffffff",
-        // correctLevel : QRCode.CorrectLevel.H
+        correctLevel : QRCode.CorrectLevel.H
     });
         var canvas = qrcodetag.firstElementChild;
         let context = canvas.getContext('2d');
         // base64エンコードされたデータを取得 「data:image/png;base64,iVBORw0k～」
         var base64 = canvas.toDataURL("png");
-        // console.log(base64);
-        // base64データをblobに変換
-        // var blob = new Blob([base64], {
-        // type: "application/pdf"
-    // });
-    // console.log(blob);
     return base64
     }
 
@@ -128,19 +108,18 @@
         const shopn_ame = document.getElementById("shopn_ame").value;
         const address = document.getElementById("address").value;
         const phone_no = document.getElementById("phone_no").value;
-        // ここでユーザー情報を取得した時点で、ユニークなIDを作成し、バーコードを作成、画像化,保存
-        // ...
+        // ここでユーザー情報を取得した時点で、ユニークなIDを作成し、バーコードを作成、画像化,保存,バーコードURLをfirestoreに保存
         try {
             // qrcodeをfirestrageに保存
             const storageRef = ref(storage, "images/" + shop_id + "/" + "shopQRcode");
-            await uploadString(storageRef, file,'data_url').then((snapshot) => {
+            await uploadString(storageRef, file,'data_url').then(async(snapshot) => {
                 console.log('Uploaded a blob or file!');
                 // 保存したqrcodeのurlを取得してfirestoreに一緒に保存
-                getDownloadURL(storageRef)
-                .then((url) => {
+                await getDownloadURL(storageRef)
+                .then(async(url) => {
                     console.log("firesorageのqrcodeURL",url);
                      // ドキュメントをユーザーIDにする 
-                    setDoc(doc(db, "shops", shop_id), {
+                    await setDoc(doc(db, "shops", shop_id), {
                         address: address,
                         email: shop_email,
                         shop_id: shop_id,
@@ -149,27 +128,15 @@
                         web:"",
                         photo: "",
                         sns: "",
-                        QRcode:url
+                        QRcode: url,
+                        date: Timestamp.fromDate(new Date()),
                     });
                 })
                 .catch((error) => {
                     // Handle any errors
-                    console.log("エラー",error);
+                    console.log("firestoreに書き込めませんでした",error);
                 });
             });
-            // ドキュメント自動生成
-            // const coll = collection(db, "shops");
-            // const docRef = await addDoc(coll, {
-            //     address: address,
-            //     email: shop_email,
-            //     id: "",
-            //     shop_name: shopn_ame,
-            //     phone_nomber: phone_no,
-            //     web:"",
-            //     photo: "",
-            //     sns: "",
-            //     QRcode:"img"
-            // });
             window.location.href = './店舗管理画面.html';
         } catch (e) {
             console.error("Error adding document: ", e);

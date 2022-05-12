@@ -38,11 +38,12 @@
             <div class="space_48"></div>
             <button id="post">登録</button>
         </div>
+        <div class="space_48"></div>
+
       <p onclick="location.href=['./login_form.html']">ログインはこちら</p>
     </div>
 </main>
 <footer class="page-footer"></footer>
-
 
 <script type="module">
   import { connect_firebase } from "../firebaseConfig.js"
@@ -50,9 +51,21 @@
   // firebaseと接続
   const app = connect_firebase();
   const auth = getAuth(app);
-  // ここから 新規登録はできてるっぽいがエラーが出てるのが謎
+
+  // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+        const uid = user.uid;
+        console.log(uid);
+        console.log(uid,"状態:ログイン中");
+        window.location.href = './shop_form.html';
+    } else {
+        // User is signed out
+        console.log("状態:ログアウト");
+    }
+  });
+
   // すでに登録されています。パスワードは６桁いるよ. とかの通知が欲しいカーも
-  // ログインしてる人にだけ表示させる方法はidをリスト化してnoneする
   // firebaseの設定を何回も使うのでページを分ける(できればログイン判定も全てのページで行うので別ページがいい)
   // 新規登録  登録後自動的にログイン
   document.getElementById("post").addEventListener('click', async (e) => {
@@ -60,10 +73,8 @@
     const pass01 = document.getElementById("pass01").value;
     const pass02 = document.getElementById("pass02").value;
     if (pass01 == pass02)  {
-
         await createUserWithEmailAndPassword(auth, email, pass01)
         .then((userCredential) => {
-            // Signed in
             const user = userCredential.user;
             console.log(user);
         })
@@ -72,24 +83,9 @@
             const errorMessage = error.message;
             console.log(errorCode);
             console.log(errorMessage);
-
         });
     } else {
         alert("パスワードが一致しません");
-    }
-  });
-  // ログインしてた時は
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid;
-        console.log(uid);
-        console.log(uid,"状態:ログイン中");
-        window.location.href = './shop_form.html';
-    } else {
-        // User is signed out
-        console.log("状態:ログアウト");
     }
   });
 </script>

@@ -32,8 +32,9 @@
                 <p>パスワード</p>
                 <input type="text" placeholder="pass" id="pass">
                 <div class="space_48"></div>
-                <button id="login_button">登録</button>
+                <button id="login_button">ログイン</button>
             </div>
+            <div class="space_48"></div>
             <!-- 登録してない人に登録画面へ遷移 -->
             <p onclick="location.href=['./sign_up_form.html']">登録はこちらから</p>
         </div>
@@ -46,28 +47,23 @@
     const app = connect_firebase();
     const auth = getAuth(app);
 
-    // ログインしてた時は
+    // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
     onAuthStateChanged(auth, (user) => {
         if (user) {
-            // User is signed in, see docs for a list of available properties
-            // https://firebase.google.com/docs/reference/js/firebase.User
             const uid = user.uid;
-            console.log(uid);
             console.log(uid,"状態:ログイン中");
             window.location.href = './shop_form.html';
         } else {
-            // User is signed out
             console.log("状態:ログアウト");
         }
      });
 
-    // ボタンクリックでログイン
+    // ログイン処理
     document.getElementById("login_button").addEventListener('click',() => {
         const email = document.getElementById("email").value;
         const pass = document.getElementById("pass").value;
         signInWithEmailAndPassword(auth, email, pass)
         .then((userCredential) => {
-            // Signed in
             const user = userCredential.user;
             console.log(user);
         })

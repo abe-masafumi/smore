@@ -10,36 +10,38 @@
   <link rel="stylesheet" href="../styles/styles.css">
 </head>
 <body>
-  <header class="page-header center">
-    <h1>ユーザー情報登録</h1>
-  </header>
-  <main>
-    <div class="center">
-        <div class="space_32"></div>
-
-        <!-- phpのページへ遷移 -->
-        <div class="form_container">
-            <div class="space_32"></div>
-            <p>名前</p>
-            <input type="text" placeholder="your_name" id="name">
-            <div class="space_32"></div>
-            <p>住所</p>
-            <input type="text" placeholder="adress" id="address">
-            <div class="space_32"></div>
-            <p>電話番号</p>
-            <input type="text" placeholder="phone_number" id="phone_number">
-            <div class="space_32"></div>
-           
-            <button id="post">登録</button>
-        </div>
-        <div class="space_32"></div>
-    </div>
-</main>
-<footer class="page-footer"></footer>
-
+  <div class="none" id="prompt">ログインしてください</div>
+  <div id="big_container">
+    <header class="page-header center">
+      <h1>ユーザー情報登録</h1>
+    </header>
+    <main>
+      <div class="center">
+          <div class="space_32"></div>
+          <!-- phpのページへ遷移 -->
+          <div class="form_container">
+              <div class="space_32"></div>
+              <p>名前</p>
+              <input type="text" placeholder="your_name" id="name">
+              <div class="space_32"></div>
+              <p>住所</p>
+              <input type="text" placeholder="adress" id="address">
+              <div class="space_32"></div>
+              <p>電話番号</p>
+              <input type="text" placeholder="phone_number" id="phone_number">
+              <div class="space_32"></div>
+    
+              <button id="post">登録</button>
+          </div>
+          <div class="space_32"></div>
+      </div>
+    </main>
+    <footer class="page-footer"></footer>
+  </div>
 
 <script type="module">
   import { connect_firebase } from "../firebaseConfig.js"
+  import { make_sign_out_display } from  "../functions.js"
   import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
   import { getFirestore, doc, setDoc, addDoc, collection } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
@@ -50,18 +52,17 @@
 
   let user_id;
   let user_email;
-  // ログインしてた時は
+  
+    // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
   onAuthStateChanged(auth, (user) => {
     if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
         user_id = user.uid;
         user_email = user.email;
         console.log(user_id,"状態:ログイン中");
-        window.location.href = './飼い主my_page.html';
     } else {
         // User is signed out
         console.log("状態:ログアウト");
+        make_sign_out_display();
     }
   });
 
@@ -83,12 +84,9 @@
               } 
         console.log(data);
     try {
-             // ドキュメントを自動生成
-            // const coll = collection(db, "users");
-            // const docRef = await addDoc(coll, data);
             // ドキュメントをユーザーIDにする 
             await setDoc(doc(db, "users", user_id), data);
-            // window.location.href = './飼い主my_page.html';
+            window.location.href = './飼い主my_page.html';
         } catch (e) {
         console.error("Error adding document: ", e);
       }

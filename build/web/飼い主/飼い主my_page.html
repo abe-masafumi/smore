@@ -11,30 +11,33 @@
 </head>
 
 <body>
-    <header class="page-header center">
-        <h1>my_page</h1>
-    </header>
-    <main>
-        <div class="space_32"></div>
-        <div class="top_button">
-            <button onclick="location.href=['./登録済み店舗.html']">店舗一覧</button>
-
-            <p>QRボタン</p>
-        </div>
-        <div class="space_32"></div>
-
-        <ul class="center" id="pet_ul">
-            <!-- jsで作成 -->
-        </ul>
-        <div class="space_32"></div>
-
-        <div class="center">
-            <button onclick="location.href=['./pet_form.html']">ペット追加</button>
-        </div>
-    </main>
-    <footer class="page-footer"></footer>
+    <div class="none" id="prompt">ログインしてください</div>
+    <div id="big_container">
+        <header class="page-header center">
+            <h1>my_page</h1>
+            <button id="sign_out">ログアウト</button>
+        </header>
+        <main>
+            <div class="space_32"></div>
+            <div class="top_button">
+                <button onclick="location.href=['./登録済み店舗.html']">店舗一覧</button>
+                <p>QRボタン</p>
+            </div>
+            <div class="space_32"></div>
+            <ul class="center" id="pet_ul">
+                <!-- jsで作成 -->
+            </ul>
+            <div class="space_32"></div>
+            <div class="center">
+                <button onclick="location.href=['./pet_form.html']">ペット追加</button>
+            </div>
+        </main>
+        <footer class="page-footer"></footer>
+        
+    </div>
     <script type="module">
         import { connect_firebase } from "../firebaseConfig.js"
+        import { make_sign_out_display } from  "../functions.js"
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
         import { getFirestore, collection, getDocs , doc, onSnapshot} from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
         // firebaseと接続
@@ -43,14 +46,14 @@
         const db = getFirestore(app);
 
         const ul = document.getElementById('pet_ul');
-        // 非同期処理で実行順序が変わったのでコールバックで処理
+        // ログインユーザーの"pets"データを取得
         async function get_data(uid) {
             // リアルタイム更新
             const petsRef = await collection(db, 'users', uid, 'pets');
             const snapShots = await onSnapshot(petsRef,
             (snapshot) => {
                 snapshot.forEach((s) => {
-                // 処理
+                // 処理 ペット一覧を作成
                 console.log(s.data());
                 const li = document.createElement('li');
                 li.textContent = s.data()["名前"];
@@ -60,15 +63,9 @@
             (error) => {
                 console.log("データを読み込めませんでした。",error);
             });
-            // サンプル
-            // const snapShots = await getDocs(collection(db, 'users', uid, 'pets'))
-            // snapShots.forEach((s) => {
-            // // なんらかの処理
-            // console.log(s.data());
-            // })
         }
 
-        // ログインしてた時は
+    // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
         onAuthStateChanged(auth, (user) => {
           if (user) {
               const uid = user.uid;
@@ -76,6 +73,7 @@
             return get_data(uid)
           } else {
               console.log("状態:ログアウト");
+              make_sign_out_display()
           }
         });
       </script>

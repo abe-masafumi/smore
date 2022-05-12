@@ -11,49 +11,39 @@
 </head>
 
 <body>
-    <header class="page-header center">
-        <h1>店舗管理画面</h1>
-        <button id="sign_out">ログアウト</button>
-
-    </header>
-    <main>
-        <!-- ここは店舗名とQRコードボタンを配置 -->
-        <div class="space_32"></div>
-
-        <div class="top_button">
-            <p>店舗名</p>
-            <button onclick="location.href=['./qrcode.html']">QRボタン</button>
-        </div>
-        <div class="center">
+    <div class="none" id="prompt">ログインしてください</div>
+    <div id="big_container">
+        <header class="page-header center">
+            <h1>店舗管理画面</h1>
+            <button id="sign_out">ログアウト</button>
+        </header>
+        <main>
+            <!-- ここは店舗名とQRコードボタンを配置 -->
             <div class="space_32"></div>
-            <button onclick="location.href=['./顧客管理画面.html']">顧客管理</button>
-            <div class="space_32"></div>
-            <button>クーポン発行</button>
-            <div class="space_32"></div>
-            <button>メッセージ</button>
-        </div>
-    </main>
-    <footer class="page-footer"></footer>
+            <div class="top_button">
+                <p>店舗名</p>
+                <button onclick="location.href=['./qrcode.html']">QRボタン</button>
+            </div>
+            <div class="center">
+                <div class="space_32"></div>
+                <button onclick="location.href=['./顧客管理画面.html']">顧客管理</button>
+                <div class="space_32"></div>
+                <button>クーポン発行</button>
+                <div class="space_32"></div>
+                <button>メッセージ</button>
+            </div>
+        </main>
+        <footer class="page-footer"></footer>
+    </div>
 </body>
 <script type="module">
     
     import { connect_firebase } from "../firebaseConfig.js"
-    import { getAuth,onAuthStateChanged,signOut } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+    import { make_sign_out_display } from  "../functions.js"
+    import { getAuth,onAuthStateChanged} from " https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
     // firebaseと接続
     const app = connect_firebase();
     const auth = getAuth(app);
-
-    const sign_out = document.getElementById('sign_out').addEventListener('click', (e) => { 
-        signOut(auth).then(() => {
-        // Sign-out successful.
-        console.log("ログインページに戻ってください");
-        window.location.href = './login_form.html';
-        }).catch((error) => {
-        // An error happened.
-        console.log("ログアウトできませんでした");
-        });
-    });
-
 
     // ログインしてた時は
     onAuthStateChanged(auth, async (user) =>  {
@@ -67,11 +57,8 @@
 
     } else {
         // User is signed out
-        const form_container = document.getElementById('form_container');
-        const prompt = document.getElementById('prompt');
-        prompt.classList.remove("none");
-        form_container.classList.add("none");
-            console.log("状態:ログアウト");
+        console.log("状態:ログアウト");
+        make_sign_out_display();
     }
   });
 

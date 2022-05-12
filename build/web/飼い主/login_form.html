@@ -37,6 +37,8 @@
                 <div class="space_48"></div>
                 <button id="login_button">登録</button>
             </div>
+            <div class="space_48"></div>
+
             <!-- 登録してない人に登録画面へ遷移 -->
             <p onclick="location.href=['./sign_up_form.html']">登録はこちらから</p>
         </div>
@@ -51,33 +53,25 @@
     const app = connect_firebase();
     const auth = getAuth(app);
 
-    // ログインしてた時は
+    // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
     onAuthStateChanged(auth, (user) => {
         if (user) {
-            // User is signed in, see docs for a list of available properties
-            // https://firebase.google.com/docs/reference/js/firebase.User
             const uid = user.uid;
             console.log(uid,"状態:ログイン中");
-
-            
-            window.location.href = './飼い主my_page.html';
+            window.location.href = './user_form.html';
         } else {
-            // ...
             console.log("状態:ログアウト");
         }
     });
 
-    // ボタンクリックでログイン
+    // ログイン処理
     document.getElementById("login_button").addEventListener('click',() => {
-        // ここに取得処理
         const email = document.getElementById("email").value;
         const pass = document.getElementById("pass").value;
         signInWithEmailAndPassword(auth, email, pass)
         .then((userCredential) => {
-            // Signed in
             const user = userCredential.user;
             console.log(user);
-            // ...
         })
         .catch((error) => {
             const errorCode = error.code;
