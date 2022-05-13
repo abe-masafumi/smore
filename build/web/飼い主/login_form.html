@@ -27,15 +27,20 @@
 
             <div class="space_32"></div>
             <!-- form 今はボタン送信-->
+
             <div class="form_container">
-                <div class="space_32"></div>
-                <p>メールアドレス</p>
-                <input type="text" placeholder="email" id="email">
-                <div class="space_32"></div>
-                <p>パスワード</p>
-                <input type="text" placeholder="pass" id="pass">
-                <div class="space_48"></div>
-                <button id="login_button">登録</button>
+                <form id="myform">
+                    <div class="space_32"></div>
+                    <p>メールアドレス</p>
+                    <input type="email" placeholder="email" id="email" required>
+                    <div class="space_32"></div>
+                    <p>パスワード</p>
+                    <input type="password" placeholder="pass" id="password" required>
+                    <p><input type="checkbox" id="password_check">
+                   パスワードを表示する</p>
+                    <div class="space_48"></div>
+                    <input type="submit">
+                </form>
             </div>
             <div class="space_48"></div>
 
@@ -45,7 +50,7 @@
     </main>
 
     <footer class="page-footer"></footer>
-
+    <script src="../form_login_common.js"></script>
     <script type="module">
     import { connect_firebase } from "../firebaseConfig.js"
     import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
@@ -65,9 +70,10 @@
     });
 
     // ログイン処理
-    document.getElementById("login_button").addEventListener('click',() => {
+    document.getElementById("myform").addEventListener('submit',(e) => {
+        e.preventDefault();
         const email = document.getElementById("email").value;
-        const pass = document.getElementById("pass").value;
+        const pass = document.getElementById("password").value;
         signInWithEmailAndPassword(auth, email, pass)
         .then((userCredential) => {
             const user = userCredential.user;

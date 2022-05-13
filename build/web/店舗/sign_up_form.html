@@ -26,17 +26,23 @@
 
         <!-- phpのページへ遷移 -->
         <div class="form_container">
-            <div class="space_32"></div>
-            <p>メールアドレス</p>
-            <input type="text" placeholder="email" id="email">
-            <div class="space_32"></div>
-            <p>パスワード</p>
-            <input type="text" placeholder="pass" id="pass01">
-            <div class="space_32"></div>
-            <p>もう一度パスワードを入力してください</p>
-            <input type="text" placeholder="pass" id="pass02">
-            <div class="space_48"></div>
-            <button id="post">登録</button>
+            <form id="myform">
+              <div class="space_32"></div>
+              <p>メールアドレス</p>
+              <input type="text" placeholder="email" id="email">
+              <div class="space_32"></div>
+              <p>パスワード</p>
+              <input type="password" placeholder="pass" id="password01">
+              <p><input type="checkbox" id="password_check01">
+                パスワードを表示する</p>
+              <div class="space_32"></div>
+              <p>もう一度パスワードを入力してください</p>
+              <input type="password" placeholder="pass" id="password02">
+              <p><input type="checkbox" id="password_check02">
+                パスワードを表示する</p>
+              <div class="space_48"></div>
+              <input type="submit">
+            </form>
         </div>
         <div class="space_48"></div>
 
@@ -44,7 +50,7 @@
     </div>
 </main>
 <footer class="page-footer"></footer>
-
+<script src="../form_sign_up_common.js"></script>
 <script type="module">
   import { connect_firebase } from "../firebaseConfig.js"
   import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
@@ -68,10 +74,11 @@
   // すでに登録されています。パスワードは６桁いるよ. とかの通知が欲しいカーも
   // firebaseの設定を何回も使うのでページを分ける(できればログイン判定も全てのページで行うので別ページがいい)
   // 新規登録  登録後自動的にログイン
-  document.getElementById("post").addEventListener('click', async (e) => {
+  document.getElementById("myform").addEventListener('submit', async (e) => {
+    e.preventDefault();
     const email = document.getElementById("email").value;
-    const pass01 = document.getElementById("pass01").value;
-    const pass02 = document.getElementById("pass02").value;
+    const pass01 = document.getElementById("password01").value;
+    const pass02 = document.getElementById("password02").value;
     if (pass01 == pass02)  {
         await createUserWithEmailAndPassword(auth, email, pass01)
         .then((userCredential) => {
