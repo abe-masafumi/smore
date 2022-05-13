@@ -61,5 +61,7 @@ import { } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-SERVICE.js'
 
 - formタグで作成し直す
 
+- user_form すでに記入されていたら飛ばす
+
 [cloud vision](https://cloud.google.com/vision/docs/detect-labels-image-client-libraries?hl=ja#using_the_client_library)
 [参考資料](https://qiita.com/popy1017/items/78cd72cd6337973c3b65)
