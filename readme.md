@@ -68,6 +68,8 @@ import { } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-SERVICE.js'
 
 [パラメータの取得](https://gray-code.com/javascript/get-parameter-of-url/)
 
+[まとめ記事](https://www.wakuwakubank.com/posts/723-firebase-firestore-query/)
+
 
 ### deploy後の確認
 
