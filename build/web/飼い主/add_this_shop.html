@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Access-Control-Allow-Origin: * -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>smore</title>
+  <link rel="stylesheet" href="../styles/common.css">
+  <link rel="stylesheet" href="../styles/styles.css">
+</head>
+<body>
+  <div class="none" id="prompt">ログインしてください</div>
+  <div id="big_container">
+    <header class="page-header center">
+      <h1>shop追加</h1>
+      <button id="sign_out">ログアウト</button>
+    </header>
+    <main>
+      <div class="center">
+        <div class="space_32"></div>
+
+        
+        <p>店舗に来店しますか？</p>
+        <div class="space_32"></div>
+
+        <button id="add_shop">はい</button>
+        <div class="space_32"></div>
+
+        <p>キャンセル</p>
+      </div>
+    </main>
+    <footer class="page-footer"></footer>
+  </div>
+
+<script type="module">
+  import { connect_firebase } from "../firebaseConfig.js"
+  import { make_sign_out_display } from  "../functions.js"
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+  import { getFirestore, doc, setDoc, collection, Timestamp,getDoc,updateDoc,arrayUnion } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+
+  // firebaseと接続
+  const app = connect_firebase();
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  let user_id;
+  let user_email;
+  
+  // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+        user_id = user.uid;
+        user_email = user.email;
+        console.log(user_id,"状態:ログイン中");
+    } else {
+        // User is signed out
+        console.log("状態:ログアウト");
+        make_sign_out_display();
+    }
+  });
+
+  // 追加ボタンクリックでfirestoreに配列を追加(timestamp)
+  document.getElementById('add_shop').addEventListener('click', async () => {
+  let params = (new URL(document.location)).searchParams;
+  let shop_id = params.get('shop_ID');
+  console.log("shop_ID",shop_id);
+
+  const docRef = doc(db, "users", user_id, "registration_shop" , shop_id);
+  // ドキュメントの存在確認
+  const docSnap = await getDoc(docRef);
+  // 存在していたら
+  if (docSnap.exists()) {
+  console.log("Document data:", docSnap.data()["time"]);
+  // リストに追加
+  await updateDoc(docRef, {
+    time: arrayUnion(Timestamp.fromDate
+    (new Date()))
+  });
+} else {
+  console.log("No such document!","配列を新規追加");
+  // リスト作成
+  const data = {time:[Timestamp.fromDate(new Date())]}
+  try {
+        await setDoc(doc(db, 'users', user_id, 'registration_shop', shop_id), data); // memosのドキュメントにobjを追加
+        console.log("正常に書き込みました");
+            // window.location.href = './飼い主my_page.html';
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
+    }
+  });
+
+
+
+
+</script>
+</body>
+</html>

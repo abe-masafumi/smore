@@ -65,3 +65,14 @@ import { } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-SERVICE.js'
 
 [cloud vision](https://cloud.google.com/vision/docs/detect-labels-image-client-libraries?hl=ja#using_the_client_library)
 [参考資料](https://qiita.com/popy1017/items/78cd72cd6337973c3b65)
+
+[パラメータの取得](https://gray-code.com/javascript/get-parameter-of-url/)
+
+
+### deploy後の確認
+
+urlが変更するとqrcodeの読み取り後のサイトも変更しないといけない
+
+### err
+
+Error: FirebaseError: Expected type 'fc', but it was: a custom Rc object

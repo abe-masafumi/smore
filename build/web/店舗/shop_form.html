@@ -89,7 +89,8 @@
   function saveCanvas(){
     const qrcodetag = document.getElementById("qrcode")
     var qrcode = new QRCode(qrcodetag, {
-        text: `./agreement/?${shop_id}`,
+        // デプロイ後確認🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗
+        text: `https://smore-832e4.web.app/飼い主/add_this_shop.html?shop_ID=${shop_id}`,
         width: 128,
         height: 128,
         colorDark : "#000000",
