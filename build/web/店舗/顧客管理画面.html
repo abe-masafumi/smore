@@ -11,20 +11,69 @@
 </head>
 
 <body>
-    <header class="page-header center">
-        <h1>顧客管理画面</h1>
-    </header>
-    <main>
-        <!-- ここは店舗名とQRコードボタンを配置 -->
-        <div class="space_32"></div>
-        <ul class="center">
-            <li><button>Aさん:○○ちゃん</button></li>
-            <li><button>Bさん:○○ちゃん</button></li>
-            <li><button>Cさん:○○ちゃん</button></li>
-        </ul>
+    <div class="none" id="prompt">ログインしてください</div>
+    <div id="big_container">
+        <header class="page-header center">
+            <button onclick="location.href=['./店舗管理画面.html']">戻る</button>
+            <h1>顧客管理画面</h1>
+            <button id="sign_out">ログアウト</button>
+        </header>
+        <main>
+            <!-- ここは店舗名とQRコードボタンを配置 -->
+            <div class="space_32"></div>
+            <ul class="center" id="shop_ul">
+                <!-- jsで作成 -->
+            </ul>
+        </main>
+        <footer class="page-footer"></footer>
+    </div>
+    <script type="module">
+        import { connect_firebase } from "../firebaseConfig.js"
+        import { make_sign_out_display } from  "../functions.js"
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+        import { getFirestore, collection, getDoc , doc, onSnapshot, query, where} from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+        // firebaseと接続
+        const app = connect_firebase();
+        const auth = getAuth(app);
+        const db = getFirestore(app);
 
-    </main>
-    <footer class="page-footer"></footer>
+        const ul = document.getElementById('shop_ul');
+        // ログインユーザーの"pets"データを取得
+        async function get_data(uid) {
+            // リアルタイム更新
+            const docRef = doc(db, "users", uid, "registration_shop", "henohenomohezi");
+            const docSnap = await getDoc(docRef);
+            // docの書き方
+            if (docSnap.exists()) {
+            const data = docSnap.data()["shops"];
+
+            data.forEach(async(element) => {
+                const _docRef = doc(db, "shops", element);
+                const _docSnap = await getDoc(_docRef);
+                const data = _docSnap.data();
+
+                const li = document.createElement('li');
+                li.textContent = data["shop_name"];
+                ul.appendChild(li)
+            });
+            } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+            }
+        }
+
+    // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
+        onAuthStateChanged(auth, (user) => {
+          if (user) {
+              const uid = user.uid;
+              console.log(uid,"状態:ログイン中");
+            return get_data(uid)
+          } else {
+              console.log("状態:ログアウト");
+              make_sign_out_display()
+          }
+        });
+      </script>
 </body>
 
 </html>
