@@ -8,32 +8,40 @@
     <title>smore</title>
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="stylesheet" href="../styles/common.css">
+    <style>html,body{overflow: hidden}</style>
+
     <script type="text/javascript" src="./qrcode.js"></script>
 </head>
 
 <body>
     <div class="none" id="prompt">ログインしてください</div>
     <div id="big_container">
-        <header class="page-header center">
-            <h1>店舗登録</h1>
-            <button id="sign_out">ログアウト</button>
+        <header class="page-header row">
+            <div class="col-3 center">
+                <button id="sign_out" class="">ログアウト</button>
+            </div>
+            <h1 class="col-6 center">店舗登録</h1>
+            <div class="col-3"></div>
         </header>
         <main>
             <div class="center">
-                <div class="space_32"></div>
-                <!-- form 今はボタンで送信-->
                 <div id="form_container">
-                    <div class="space_32"></div>
-                    <p>店舗名</p>
-                    <input type="text" placeholder="店舗名" id="shopn_ame">
-                    <div class="space_32"></div>
-                    <p>住所</p>
-                    <input type="text" placeholder="住所" id="address">
-                    <div class="space_32"></div>
-                    <p>連絡先</p>
-                    <input type="text" placeholder="連絡先" id="phone_no">
                     <div class="space_48"></div>
-                    <button id="post_button">登録</button>
+                    <form id="myform" class="m_auto">
+                        
+                        <p>店舗名</p>
+                        <input type="text" placeholder="店舗名" id="shopn_ame" required style="font-size: 16px;">
+                        <div class="space_32"></div>
+                        <p>住所(店舗)</p>
+                        <input type="text" placeholder="住所" id="address" required style="font-size: 16px;">
+                        <div class="space_32"></div>
+                        <p>連絡先(店舗)</p>
+                        <input type="tel" placeholder="連絡先" id="phone_no" required style="font-size: 16px;">
+                        <div class="space_48"></div>
+                        <div class="text_center">
+                            <input type="submit" value="登録" id="post_button" style="width: 100px; height: 40px; border-radius: 40%;">
+                        </div>
+                    </form>
                     <!-- 隠しqrcode　消さないで！ -->
                     <div id="qrcode" class="none"></div>
                 </div>
@@ -104,7 +112,8 @@
     return base64
     }
 
-    document.getElementById("post_button").addEventListener('click', async (e) => {
+    document.getElementById("myform").addEventListener('submit', async (e) => {
+        e.preventDefault();
         const file = saveCanvas()
         const shopn_ame = document.getElementById("shopn_ame").value;
         const address = document.getElementById("address").value;

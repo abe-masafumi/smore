@@ -8,6 +8,8 @@
   <title>smore</title>
   <link rel="stylesheet" href="../styles/common.css">
   <link rel="stylesheet" href="../styles/styles.css">
+  <style>html,body{overflow: hidden}</style>
+
 </head>
 <body>
   <header class="page-header center">
@@ -15,33 +17,28 @@
   </header>
   <main>
     <div class="center">
-        <div class="space_32"></div>
-
-        <!-- google-loginボタン -->
-        <div>
-            googleでログイン
-        </div>
-
-        <div class="space_32"></div>
-
-        <!-- phpのページへ遷移 -->
-        <div class="form_container">
-            <form id="myform">
-              <div class="space_32"></div>
+      
+      <div class="form_container">
+          <div class="space_48"></div>
+            <form id="myform" class="m_auto">
               <p>メールアドレス</p>
-              <input type="text" placeholder="email" id="email">
+              <input type="text" placeholder=" email" id="email" style="font-size: 16px;">
               <div class="space_32"></div>
               <p>パスワード</p>
-              <input type="password" placeholder="pass" id="password01">
+              <input type="password" placeholder=" password" id="password01" style="font-size: 16px;">
+              <div class="space_24"></div>
               <p><input type="checkbox" id="password_check01">
                 パスワードを表示する</p>
               <div class="space_32"></div>
-              <p>もう一度パスワードを入力してください</p>
-              <input type="password" placeholder="pass" id="password02">
+              <p>パスワード再入力</p>
+              <input type="password" placeholder=" password" id="password02" style="font-size: 16px;">
+              <div class="space_24"></div>
               <p><input type="checkbox" id="password_check02">
                 パスワードを表示する</p>
               <div class="space_48"></div>
-              <input type="submit">
+              <div class="text_center">
+                <input type="submit" value="登録" style="width: 100px; height: 40px; border-radius: 40%;">
+              </div>
             </form>
         </div>
         <div class="space_48"></div>

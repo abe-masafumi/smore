@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>smore</title>
     <link rel="stylesheet" href="../styles/common.css">
     <link rel="stylesheet" href="../styles/styles.css">
 </head>
@@ -13,10 +13,16 @@
 <body>
     <div class="none" id="prompt">ログインしてください</div>
     <div id="big_container">
-        <header class="page-header center">
-            <button onclick="location.href=['./店舗管理画面.html']">戻る</button>
-            <h1>顧客管理画面</h1>
-            <button id="sign_out">ログアウト</button>
+        <header class="page-header row"> 
+                <div class="center col-4">
+                    <p onclick="location.href=['./店舗管理画面.html']">戻る</p>
+                </div>
+                <div class="col-4 center">
+                    <h1>顧客管理画面</h1>
+                </div>
+                <div class="col-4 center">
+                    <button id="sign_out" class="none">ログアウト</button>
+                </div>
         </header>
         <main>
             <!-- ここは店舗名とQRコードボタンを配置 -->

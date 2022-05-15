@@ -101,6 +101,7 @@ header {
 .top_button {
     display: flex;
     justify-content: space-evenly;
+    height: 100px;
 }
 
 .img_container {
@@ -109,3 +110,4 @@ header {
     height: 80px;
     border-radius: 50%;
 }
+

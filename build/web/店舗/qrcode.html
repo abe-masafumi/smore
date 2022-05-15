@@ -4,10 +4,18 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link rel="stylesheet" href="../styles/common.css">
+  <link rel="stylesheet" href="../styles/styles.css">
+  <style>html,body{overflow: hidden}</style>
+
+  <title>smore</title>
 </head>
-<body>
-  <img src="" alt="qrcode" id="img">
+<body >
+  <div class="space_32"></div>
+  <h1 class="text_center">店舗専用のQRコード</h1>
+  <div class="center" style="height: 500px;">
+    <img src="" alt="qrcode" id="img">
+  </div>
   <script type="module">
     import { connect_firebase } from "../firebaseConfig.js"
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
