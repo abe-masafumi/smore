@@ -8,6 +8,7 @@
   <title>smore</title>
   <link rel="stylesheet" href="../styles/common.css">
   <link rel="stylesheet" href="../styles/styles.css">
+  <style>html,body{overflow: hidden}</style>
 </head>
 <body>
   <header class="page-header center">
@@ -15,42 +16,35 @@
   </header>
   <main>
     <div class="center">
-        <div class="space_32"></div>
-
-        <!-- google-loginボタン -->
-        <div>
-            googleでログイン
-        </div>
-
-        <div class="space_32"></div>
-
-        <!-- phpのページへ遷移 -->
         <div class="form_container">
-            <form id="myform">
-              <div class="space_32"></div>
+          <div class="space_48"></div>
+            <form id="myform" class="m_auto">
               <p>メールアドレス</p>
-              <input type="email" placeholder="email" id="email" required>
+              <input type="email" placeholder=" email" id="email" required style="font-size: 16px;">
               <div class="space_32"></div>
               <p>パスワード</p>
-              <input type="password" placeholder="pass" id="password01" required>
+              <input type="password" placeholder=" password" id="password01" required style="font-size: 16px;">
+              <div class="space_24"></div>
               <p><input type="checkbox" id="password_check01">
                 パスワードを表示する</p>
               <div class="space_32"></div>
-              <p>もう一度パスワードを入力してください</p>
-              <input type="password" placeholder="pass" id="password02" required> 
+              <p>パスワード再入力</p>
+              <input type="password" placeholder=" password" id="password02" required style="font-size: 16px;"> 
+              <div class="space_24"></div>
               <p><input type="checkbox" id="password_check02">
                 パスワードを表示する</p>
               <div class="space_48"></div>
-              <input type="submit">
+              <div class="text_center">
+                <input type="submit" value="登録">
+              </div>
             </form>
         </div>
-        <div class="space_32"></div>
+        <div class="space_48"></div>
 
       <p onclick="location.href=['./login_form.html']">ログインはこちら</p>
     </div>
 </main>
 <footer class="page-footer"></footer>
-
 <script src="../form_sign_up_common.js"></script>
 <script type="module">
   import { connect_firebase } from "../firebaseConfig.js"

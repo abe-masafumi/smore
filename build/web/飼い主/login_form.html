@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>smore</title>
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="stylesheet" href="../styles/common.css">
+    <style>html,body{overflow: hidden}</style>
 </head>
 
 <body>
@@ -18,27 +19,23 @@
 
     <main>
         <div class="center">
-            <!-- googleログイン -->
-            <div class="space_32"></div>
-            <!-- 未実装 -->
-            <div>
-                googleでログイン
-            </div>
 
-            <div class="space_32"></div>
-            <!-- form 今はボタン送信-->
             <div class="form_container">
-                <form id="myform">
-                    <div class="space_32"></div>
+                <div class="space_48"></div>
+
+                <form id="myform" class="m_auto">
                     <p>メールアドレス</p>
-                    <input type="email" placeholder="email" id="email" required>
+                    <input type="email" placeholder=" email" id="email" required style="font-size: 16px;">
                     <div class="space_32"></div>
                     <p>パスワード</p>
-                    <input type="password" placeholder="pass" id="password" required>
+                    <input type="password" placeholder=" pass" id="password" required style="font-size: 16px;">
+                    <div class="space_32"></div>
                     <p><input type="checkbox" id="password_check">
                    パスワードを表示する</p>
                     <div class="space_48"></div>
-                    <input type="submit">
+                    <div class="text_center">
+                        <input type="submit" value="ログイン">
+                    </div>    
                 </form>
             </div>
             <div class="space_48"></div>

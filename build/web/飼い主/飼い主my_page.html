@@ -5,31 +5,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>smore</title>
     <link rel="stylesheet" href="../styles/common.css">
     <link rel="stylesheet" href="../styles/styles.css">
+    <style>html,body{overflow-x : hidden;overflow-y : auto;}</style>
 </head>
 
 <body>
     <div class="none" id="prompt">ログインしてください</div>
     <div id="big_container">
-        <header class="page-header center">
-            <h1>my_page</h1>
-            <button id="sign_out">ログアウト</button>
+        <header class="page-header row">
+            <div class="col-4 center">
+                <button id="sign_out">ログアウト</button>
+            </div>
+            <h1 class="col-4 center">my_page</h1>
+            <div class="col-4 center">
+                <button onclick="location.href=['./qrcode.html']">QRボタン</button>
+            </div>
         </header>
         <main>
-            <div class="space_32"></div>
+            <div class="row text_center" style="height: 100px;">
+                <div class="sample col-5 m_auto" style="text-align: left; padding-left: 20px;">
+                    <p class="text">
+                        user名<br/>
+                        <p id="user_name"></p>
+                    </p>
+                </div>
+                <div class="col-3"></div>
+                <div class="col-4 center">
+                    <button onclick="location.href=['./登録済み店舗.html']">店舗一覧</button>
+                    <!-- <button onclick="location.href=['./qrcode.html']">QRボタン</button> -->
+                </div>
+            </div>
+            <!-- <div class="space_32"></div>
             <div class="top_button">
                 <button onclick="location.href=['./登録済み店舗.html']">店舗一覧</button>
                 <button>qrコード</button>
-            </div>
+            </div> -->
             <div class="space_32"></div>
             <ul class="center" id="pet_ul">
                 <!-- jsで作成 -->
             </ul>
             <div class="space_32"></div>
             <div class="center">
-                <button onclick="location.href=['./pet_form.html']">ペット追加</button>
+                <button id="pet_add_button" onclick="location.href=['./pet_form.html']">ペット追加</button>
             </div>
         </main>
         <footer class="page-footer"></footer>
@@ -39,15 +58,21 @@
         import { connect_firebase } from "../firebaseConfig.js"
         import { make_sign_out_display } from  "../functions.js"
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-        import { getFirestore, collection, getDocs , doc, onSnapshot} from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+        import { getFirestore, collection, getDoc , doc, onSnapshot} from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
         // firebaseと接続
         const app = connect_firebase();
         const auth = getAuth(app);
         const db = getFirestore(app);
 
+        const shop_name = document.getElementById('user_name');
         const ul = document.getElementById('pet_ul');
         // ログインユーザーの"pets"データを取得
         async function get_data(uid) {
+            const docRef = await doc(db, 'users', uid);
+            const docSnap = await getDoc(docRef);
+            const shopName = docSnap.data()["名前"];
+            shop_name.textContent = shopName
+
             // リアルタイム更新
             const petsRef = await collection(db, 'users', uid, 'pets');
             const snapShots = await onSnapshot(petsRef,

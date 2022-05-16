@@ -12,34 +12,38 @@
 <body>
   <div class="none" id="prompt">ログインしてください</div>
   <div id="big_container">
-    <header class="page-header center">
-      <h1>ユーザー情報登録</h1>
-      <button id="sign_out">ログアウト</button>
-    </header>
+    <header class="page-header row">
+      <div class="col-4 center">
+          <button id="sign_out">ログアウト</button>
+      </div>
+      <h1 class="col-4 center">ユーザー情報登録</h1>
+      <div class="col-4"></div>
+  </header>
     <main>
       <div class="center">
-          <div class="space_32"></div>
-          <!-- phpのページへ遷移 -->
           <div class="form_container">
-              <div class="space_32"></div>
+            <div class="space_48"></div>
+            <form id="myform" class="m_auto">
+
               <p>名前</p>
-              <input type="text" placeholder="your_name" id="name">
+              <input type="text" placeholder=" your_name" id="name" required style="font-size: 16px;">
               <div class="space_32"></div>
               <p>住所</p>
-              <input type="text" placeholder="adress" id="address">
+              <input type="text" placeholder=" adress" id="address" required style="font-size: 16px;">
               <div class="space_32"></div>
               <p>電話番号</p>
-              <input type="text" placeholder="phone_number" id="phone_number">
-              <div class="space_32"></div>
-    
-              <button id="post">登録</button>
+              <input type="tel" placeholder=" phone_number" id="phone_number" required style="font-size: 16px;">
+              <div class="space_48"></div>
+              <div class="text_center">
+                <input type="submit" value="登録" id="post_button">
+            </div>
+            </form>
           </div>
-          <div class="space_32"></div>
       </div>
     </main>
     <footer class="page-footer"></footer>
-  </div>
 
+  </div>
 <script type="module">
   import { connect_firebase } from "../firebaseConfig.js"
   import { make_sign_out_display } from  "../functions.js"
@@ -70,7 +74,8 @@
   // すでに登録されています。パスワードは６桁いるよ. とかの通知が欲しい
   // ログインしてる人にだけ表示させる方法はidをリスト化してnoneする
   // 新規登録  登録後自動的にログイン
-  document.getElementById("post").addEventListener('click', async (e) => {
+  document.getElementById("myform").addEventListener('submit', async (e) => {
+    e.preventDefault();
     const name = document.getElementById("name").value;
     const address = document.getElementById("address").value;
     const phone_number = document.getElementById("phone_number").value;

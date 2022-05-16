@@ -228,7 +228,7 @@
             console.log(data);
         try {
             await setDoc(doc(db, 'users', user_id, 'pets', newDoc), data) // memosのドキュメントにobjを追加
-            // window.location.href = './飼い主my_page.html';
+            window.location.href = './飼い主my_page.html';
         } catch (e) {
         console.error("Error adding document: ", e);
       }
