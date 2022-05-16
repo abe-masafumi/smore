@@ -19,81 +19,84 @@
         </header>
         <main>
             <div class="center">
-                <!-- form -->
-                <div class="space_32"></div>
                 <div class="form_container" id="form_container">
-                    <div class="space_32"></div>
-                    <p>ペットの名前</p>
-                    <input type="text" placeholder="ペットの名前" id="pet_name">
-                    <div class="space_32"></div>
-                    <p>生年月日</p>
-                    <input type="text" placeholder="生年月日" id="birthday">
-                    <div class="space_32"></div>
-                    <p>性別 (男の子・女の子)<br>
-                        <input type="radio" name="性別" value="男"> 男
-                        <input type="radio" name="性別" value="女"> 女
-                        </p>
-                    <div class="space_48"></div>
-                    <p>犬種</p>
-                    <input type="text" placeholder="犬種">
-                    <div class="space_48"></div>
-                    <p>去勢・避妊（未・済)<br>
-                        <input type="radio" name="去勢" value="未"> 未
-                        <input type="radio" name="去勢" value="済"> 済
-                        </p>
-                    <div class="space_48"></div>
-                    <p>体重</p>
-                    <input type="text" placeholder="体重">
-                    <div class="space_48"></div>
-                    <p>毛色</p>
-                    <input type="text" placeholder="毛色">
-                    <div class="space_48"></div>
-                    <p>耳（たれ耳・立ち耳)<br>
-                        <input type="radio" name="耳" value="たれ耳"> たれ耳
-                        <input type="radio" name="耳" value="立ち耳"> 立ち耳
-                        </p>
-                    <div class="space_48"></div>
-                    <p>ごはん(品名・量)</p>
-                    <input type="text" placeholder="ごはん耳">
-                    <div class="space_48"></div>
-                    <p>かかりつけの病院</p>
-                    <input type="text" placeholder="かかりつけの病院">
-                    <div class="space_48"></div>
-                    <p>病歴・アレルギー</p>
-                    <input type="text" placeholder="病歴・アレルギー">
-                    <div class="space_48"></div>
-                    <p>お薬</p>
-                    <input type="text" placeholder="お薬">
-                    <div class="space_48"></div>
-                    <p>サロン</p>
-                    <input type="text" placeholder="サロン">
-                    <div class="space_48"></div>
-                    <p>マイクロチップ番号</p>
-                    <input type="text" placeholder="マイクロチップ番号">
-                    <div class="space_48"></div>
-                    <p>犬の登録をし、鑑札を受け取っていますか？（はい、いいえ、分からない)<br>
-                        <input type="radio" name="登録" value="はい"> はい
-                        <input type="radio" name="登録" value="いいえ"> いいえ
-                        <input type="radio" name="登録" value="分からない"> 分からない
-                        </p>
-                    <div class="space_48"></div>
-                    <p>狂犬病予防注射を受け、注射済み票を受け取っていますか？（はい、いいえ、分からない<br>
-                        <input type="radio" name="注射" value="はい"> はい
-                        <input type="radio" name="注射" value="いいえ"> いいえ
-                        <input type="radio" name="注射" value="分からない"> 分からない
-                        </p>
-                    <div class="space_48"></div>
-                    <p>写真1:ペット写真</p>
-                    <input type="file">
-                    <div class="space_48"></div>
-                    <p>写真2:狂犬病予防注射済み票</p>
-                    <input type="file">
-                    <div class="space_48"></div>
-                    <p>写真3:混合ワクチン接種証明書</p>
-                    <input type="file">
-                    <div class="space_48"></div>
-                    <button id="post_button">登録</button>
-                    <div class="space_48"></div>
+                    
+                    <form id="myform" class="m_auto">
+                        <div class="space_32"></div>
+                        <p>ペットの名前</p>
+                        <input type="text" placeholder=" ペットの名前" id="pet_name" required style="font-size: 16px;">
+                        <div class="space_32"></div>
+                        <p>生年月日</p>
+                        <input type="text" placeholder=" 生年月日" id="birthday" required style="font-size: 16px;">
+                        <div class="space_32"></div>
+                        <p>性別 (男の子・女の子)<br>
+                            <input type="radio" name="sex" value="男"> 男
+                            <input type="radio" name="sex" value="女" required> 女
+                            </p>
+                        <div class="space_48"></div>
+                        <p>犬種</p>
+                        <input type="text" id="type" placeholder=" 犬種" required style="font-size: 16px;">
+                        <div class="space_48"></div>
+                        <p>去勢・避妊（未・済)<br>
+                            <input type="radio" name="去勢" value="未" required> 未
+                            <input type="radio" name="去勢" value="済"> 済
+                            </p>
+                        <div class="space_48"></div>
+                        <p>体重</p>
+                        <input type="number" id="weight" placeholder=" 体重" required style="font-size: 16px;">
+                        <div class="space_48"></div>
+                        <p>毛色</p>
+                        <input type="text" id="color" placeholder=" 毛色" required style="font-size: 16px;">
+                        <div class="space_48"></div>
+                        <p>耳（たれ耳・立ち耳)<br>
+                            <input type="radio" name="耳" value="たれ耳" required> たれ耳
+                            <input type="radio" name="耳" value="立ち耳"> 立ち耳
+                            </p>
+                        <div class="space_48"></div>
+                        <p>ごはん(品名・量)</p>
+                        <input type="text" id="meal" placeholder=" ごはん" style="font-size: 16px;">
+                        <div class="space_48"></div>
+                        <p>かかりつけの病院</p>
+                        <input type="text" id="doctor" placeholder=" かかりつけの病院" style="font-size: 16px;">
+                        <div class="space_48"></div>
+                        <p>病歴・アレルギー</p>
+                        <input type="text" id="allergy" placeholder=" 病歴・アレルギー" style="font-size: 16px;">
+                        <div class="space_48"></div>
+                        <p>お薬</p>
+                        <input type="text" id="medicine" placeholder=" お薬" style="font-size: 16px;">
+                        <div class="space_48"></div>
+                        <p>サロン</p>
+                        <input type="text" id="salon" placeholder=" サロン" style="font-size: 16px;">
+                        <div class="space_48"></div>
+                        <p>マイクロチップ番号</p>
+                        <input type="text" id="microchip_number" placeholder=" マイクロチップ番号" style="font-size: 16px;">
+                        <div class="space_48"></div>
+                        <p>犬の登録をし、鑑札を受け取っていますか？（はい、いいえ、分からない)<br>
+                            <input type="radio" name="登録" value="はい" required> はい
+                            <input type="radio" name="登録" value="いいえ"> いいえ
+                            <input type="radio" name="登録" value="分からない"> 分からない
+                            </p>
+                        <div class="space_48"></div>
+                        <p>狂犬病予防注射を受け、注射済み票を受け取っていますか？（はい、いいえ、分からない<br>
+                            <input type="radio" name="注射" value="はい" required> はい
+                            <input type="radio" name="注射" value="いいえ"> いいえ
+                            <input type="radio" name="注射" value="分からない"> 分からない
+                            </p>
+                        <div class="space_48"></div>
+                        <p>写真1:ペット写真</p>
+                        <input type="file"  accept='.jpeg, .png, .jpg' id="pet_img" required>
+                        <div class="space_48"></div>
+                        <p>写真2:狂犬病予防注射済み票</p>
+                        <input type="file" id="狂犬病予防注射済み票">
+                        <div class="space_48"></div>
+                        <p>写真3:混合ワクチン接種証明書</p>
+                        <input type="file" id="混合ワクチン接種証明書">
+                        <div class="space_48"></div>
+                        <div class="text_center">
+                            <input type="submit" value="登録" id="post_button">
+                        </div>
+                        <div class="space_48"></div>
+                    </form>
                 </div>
             </div>
         </main>
@@ -105,13 +108,20 @@
     import { make_sign_out_display } from  "../functions.js"
     import { getAuth, onAuthStateChanged } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
     import { collection, addDoc, getFirestore, doc, setDoc, getDoc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+    import { getStorage, ref, uploadString, getDownloadURL,uploadBytes } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-storage.js";
+
     // firebaseと接続
     const app = connect_firebase();
     const auth = getAuth(app);
     const db = getFirestore(app);
+    const storage = getStorage(app);
 
     let user_id;
     let user_email;
+    let newDoc;
+    let pet_img_url;
+    let 狂犬病予防注射済み票_url;
+    let 混合ワクチン接種証明書url;
 
     // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
     onAuthStateChanged(auth, async (user) =>  {
@@ -119,53 +129,106 @@
             user_id = user.uid;
             user_email = user.email;
             console.log("状態:ログイン中");
+            return make_docID(user_id)
         } else {
             console.log("状態:ログアウト");
             make_sign_out_display();
             }
         });
+    
+    // ドキュメントidを先に自動生成
+    function make_docID(user_id) {
+        const usersCollectionRef = collection(db, 'users', user_id, 'pets');
+        newDoc = doc(usersCollectionRef).id
+    }
+
+
+    // input[type="file"]の中身は先に取得する
+    let pet_img_file;
+    let 狂犬病予防注射済み票_file;
+    let 混合ワクチン接種証明書_file;
+    const pet_img = document.getElementById("pet_img").addEventListener('change',(e) => {
+        pet_img_file = e.target.files[0];
+    });
+    const 狂犬病予防注射済み票 = document.getElementById("狂犬病予防注射済み票").addEventListener('change',(e) => {
+        狂犬病予防注射済み票_file = e.target.files[0];
+    });
+
+    const 混合ワクチン接種証明書 = document.getElementById("混合ワクチン接種証明書").addEventListener('change',(e) => {
+        混合ワクチン接種証明書_file = e.target.files[0];
+    });
 
     // 登録
-    document.getElementById("post_button").addEventListener('click', async () => {
+    const myform = document.getElementById("myform")
+    myform.addEventListener('submit', async (e) => {
+        e.preventDefault();
+         try {
+            const pet_imgref = ref(storage, "pets/" + newDoc + "/" + "pet_img");
+            await uploadBytes(pet_imgref, pet_img_file).then(async(snapshot) => {
+                console.log('Uploaded a blob or file!');
+                // 保存したqrcodeのurlを取得してfirestoreに一緒に保存
+                pet_img_url = await getDownloadURL(pet_imgref);
+            });
+            const 狂犬病予防注射済み票ref = ref(storage, "pets/" + newDoc + "/" + "狂犬病予防注射済み票_img");
+            await uploadBytes(狂犬病予防注射済み票ref, 狂犬病予防注射済み票_file).then(async(snapshot) => {
+                console.log('Uploaded a blob or file!');
+                // 保存したqrcodeのurlを取得してfirestoreに一緒に保存
+                狂犬病予防注射済み票_url = await getDownloadURL(狂犬病予防注射済み票ref);
+            });
+            const 混合ワクチン接種証明書ref = ref(storage, "pets/" + newDoc + "/" + "混合ワクチン接種証明書_img");
+            await uploadBytes(混合ワクチン接種証明書ref, 混合ワクチン接種証明書_file).then(async(snapshot) => {
+                console.log('Uploaded a blob or file!');
+                // 保存したqrcodeのurlを取得してfirestoreに一緒に保存
+                混合ワクチン接種証明書url = await getDownloadURL(混合ワクチン接種証明書ref);
+            });
+        } catch (e){ 
+            console.error("Error adding document: ", e);
+        }
         const pet_name = document.getElementById("pet_name").value;
         const birthday = document.getElementById("birthday").value;
-        // const phone_no = document.getElementById("phone_no").value;
+        const sex = myform.elements.sex.value;
+        const 去勢 = myform.去勢.value;
+        const 耳 = myform.耳.value;
+        const 登録 = myform.登録.value;
+        const 注射 = myform.注射.value;
+        const type = document.getElementById("type").value;
+        const weight = document.getElementById("weight").value;
+        const color = document.getElementById("color").value;
+        const meal = document.getElementById("meal").value;
+        const doctor = document.getElementById("doctor").value;
+        const allergy = document.getElementById("allergy").value;
+        const medicine = document.getElementById("medicine").value;
+        const salon = document.getElementById("salon").value;
+        const microchip_number = document.getElementById("microchip_number").value;
+        console.log({petname:pet_name,birthday:birthday,sex:sex,去勢:去勢,耳:耳,登録:登録,注射:注射,
+            type:type,weight:weight,color:color,meal:meal,doctor:doctor,allergy:allergy,medicine:medicine,
+            salon:salon,microchip_number:microchip_number});
         let data = {
-                写真: "img",
+                写真: pet_img_url,
                 名前: pet_name,
-                犬の登録をし鑑札を受け取っていますか: "",
-                狂犬病予防注射を受け注射済み票を受け取っていますか: "",
+                犬の登録をし鑑札を受け取っていますか: 登録,
+                狂犬病予防注射を受け注射済み票を受け取っていますか: 注射,
                 生年月日: birthday,
-                犬種: "",
-                去勢避妊: "",
-                体重: "",
-                毛色: "",
-                耳: "",
+                犬種: type,
+                去勢避妊: 去勢,
+                体重: weight,
+                毛色: color,
+                耳: 耳,
                 鼻動画: "movie",
-                性別: "",
-                ごはん: "",
-                かかりつけの病院: "",
-                病歴アレルギー: "",
-                お薬: "",
-                サロン: "",
-                マイクロチップ番号: "",
-                狂犬病予防注射済み票: "img",
-                混合ワクチン接種証明書: "img",
-                その他メモ: "",
+                性別: sex,
+                ごはん: meal,
+                かかりつけの病院: doctor,
+                病歴アレルギー: allergy,
+                お薬: medicine,
+                サロン: salon,
+                マイクロチップ番号: microchip_number,
+                狂犬病予防注射済み票: 狂犬病予防注射済み票_url,
+                混合ワクチン接種証明書: 混合ワクチン接種証明書url,
             }
             console.log(data);
         try {
-            // ドキュメント自動生成
-            // const coll = collection(db, "pets");
-            // const docRef = await addDoc(coll, data);
-            // new
-            // ドキュメントをユーザーIDにする 
-            // await setDoc(doc(db, "pets", "petID1"), data);
-            // new 
-            const usersCollectionRef = await collection(db, 'users', user_id, 'pets'); //ログインユーザーのmemosコレクションへのレファレンス（ない場合は作成される） // doc.idをmemoドキュメントのidフィールドの値と同じにする 
-            await setDoc(doc(usersCollectionRef), data) // memosのドキュメントにobjを追加
-            // console.log("Document written with ID: ", docRef.id,"正常に書き込みました");
-            window.location.href = './飼い主my_page.html';
+            await setDoc(doc(db, 'users', user_id, 'pets', newDoc), data) // memosのドキュメントにobjを追加
+            // window.location.href = './飼い主my_page.html';
         } catch (e) {
         console.error("Error adding document: ", e);
       }
