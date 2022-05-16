@@ -87,6 +87,10 @@ fieldset {
 /* ここまでリセットCSS */
 
 /* ここから */
+body {
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
 header {
     background-color: pink;
     height: 80px;
@@ -111,3 +115,22 @@ header {
     border-radius: 50%;
 }
 
+#pet_add_button {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+}
+
+input[type="submit"] {
+    border-radius: 100vh;
+    width: 100px;
+    height: 40px;
+    background-color: rgb(100, 151, 182);
+}
+
+button {
+    border-radius: 100vh;
+    width: 80px;
+    height: 30px;
+    background-color: rgb(232, 233, 227);
+}
