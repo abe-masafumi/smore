@@ -42,7 +42,6 @@
                 <button onclick="location.href=['./登録済み店舗.html']">店舗一覧</button>
                 <button>qrコード</button>
             </div> -->
-            <div class="space_32"></div>
             <ul class="center" id="pet_ul">
                 <!-- jsで作成 -->
             </ul>
@@ -78,11 +77,23 @@
             const snapShots = await onSnapshot(petsRef,
             (snapshot) => {
                 snapshot.forEach((s) => {
-                // 処理 ペット一覧を作成
-                console.log(s.data());
-                const li = document.createElement('li');
-                li.textContent = s.data()["名前"];
-                ul.appendChild(li);
+                    console.log(s.data());
+                    const data_list = s.data();
+                // // 処理 ペット一覧を作成
+                const child = document.createElement('li');
+                child.innerHTML = `<div class="row div1" style="margin-bottom: 15px;">
+      <div class="col-4 center">
+        <div class="img_box"><img src=${data_list["写真"]}></div>
+      </div>
+      <div class="col-8 m_auto text-left" style="padding-left: 8px;">
+        <p>名前: <span>${data_list["名前"]}</span></p>
+        <p>性別: <span>${data_list["性別"]}</span></p>
+        <p>生年月日: <span>${data_list["生年月日"]}</span></p>
+      </div>
+
+    </div>`;
+                ul.appendChild(child);
+
                 })
             },
             (error) => {

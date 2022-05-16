@@ -118,6 +118,10 @@
     text-align: center;
 }
 
+.text_left {
+    text-align: left;
+}
+
 .btn {
     display: inline-block;
     border-style: none;
@@ -169,15 +173,15 @@
     background-color: pink;
     text-align: center;
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    width: 75px;
+    height: 75px;
     overflow: hidden;
 }
 
 .img_box img {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
+    width: 75px;
+    height: 75px;
+    object-fit: fill;
 }
 
 
