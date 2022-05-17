@@ -6,16 +6,23 @@ const auth = getAuth(app);
 
 // ログアウト処理
 document.getElementById('sign_out').addEventListener('click', (e) => { 
-    signOut(auth).then(() => {
-        // Sign-out successful.
-        console.log("ログインページに戻ってください");
-        window.location.href = './login_form.html';
-    }).catch((error) => {
-        // An error happened.
-        console.log("ログアウトできませんでした",error);
-    });
-});
+    const info = confirm("ログアウトしますか？");
+    if (info) {
 
+        signOut(auth).then(() => {
+            // Sign-out successful.
+            console.log("ログインページに戻ってください");
+            window.location.href = './login_form.html';
+        }).catch((error) => {
+            // An error happened.
+            console.log("ログアウトできませんでした",error);
+        });
+    } else {
+        return
+    }
+
+    });
+    
 export function make_sign_out_display() {
     const big_container = document.getElementById('big_container');
     const prompt = document.getElementById('prompt');
