@@ -8,6 +8,7 @@
   <title>smore</title>
   <link rel="stylesheet" href="../styles/common.css">
   <link rel="stylesheet" href="../styles/styles.css">
+  <style>html,body{overflow: hidden}</style>
 </head>
 
 <body>
@@ -35,20 +36,16 @@
             <p id="name"></p>
           </li>
           <li>
-            <h1>犬の登録をし、鑑札を受け取っていますか？（はい、いいえ、分からない）</h1>
-            <p id="登録"></p>
-          </li>
-          <li>
-            <h1>狂犬病予防注射を受け、注射済み票を受け取っていますか？（はい、いいえ、分からない）</h1>
-            <p id="注射"></p>
-          </li>
-          <li>
             <h1>生年月日</h1>
             <p id="birthday"></p>
           </li>
           <li>
             <h1>性別 (男の子・女の子)</h1>
             <p id="sex"></p>
+          </li>
+          <li>
+            <h1>犬種</h1>
+            <p id="犬種"></p>
           </li>
           <li>
             <h1>去勢・避妊（未・済）</h1>
@@ -65,6 +62,14 @@
           <li>
             <h1>耳（たれ耳・立ち耳）質問:耳のたれ耳、立ち耳は成長と共に変わる？</h1>
             <p id="era"></p>
+          </li>
+          <li>
+            <h1>犬の登録をし、鑑札を受け取っていますか？（はい、いいえ、分からない）</h1>
+            <p id="登録"></p>
+          </li>
+          <li>
+            <h1>狂犬病予防注射を受け、注射済み票を受け取っていますか？（はい、いいえ、分からない）</h1>
+            <p id="注射"></p>
           </li>
           <li>
             <h1>ごはん(品名・量)</h1>
@@ -122,6 +127,7 @@
 
     const p_img = document.getElementById('p_img');
     const name = document.getElementById('name');
+    const 犬種 = document.getElementById('犬種');
     const 登録 = document.getElementById('登録');
     const 注射 = document.getElementById('注射');
     const birthday = document.getElementById('birthday');
@@ -156,6 +162,7 @@
       console.log(data["写真"]);
       p_img.src = data["写真"];
       name.textContent = data["名前"];
+      犬種.textContent = data["犬種"];
       登録.textContent = data["犬の登録をし鑑札を受け取っていますか"];
       注射.textContent = data["狂犬病予防注射を受け注射済み票を受け取っていますか"];
       birthday.textContent = data["生年月日"];
