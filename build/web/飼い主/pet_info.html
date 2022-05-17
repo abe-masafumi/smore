@@ -2,64 +2,197 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>smore</title>
-    <link rel="stylesheet" href="../styles/common.css">
-    <link rel="stylesheet" href="../styles/styles.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>smore</title>
+  <link rel="stylesheet" href="../styles/common.css">
+  <link rel="stylesheet" href="../styles/styles.css">
 </head>
 
 <body>
-    <div class="none" id="prompt">ログインしてください</div>
-    <div id="big_container">
-        <header class="page-header row">
-            <div class="col-4 center">
-                <button id="sign_out">ログアウト</button>
-            </div>
-            <h1 class="col-4 center">my_page</h1>
-            <div class="col-4 center">
-                <button onclick="location.href=['./qrcode.html']">QRボタン</button>
-            </div>
-        </header>
-        <main>
-            <div class="row text_center" style="height: 100px;">
-                <div class="sample col-5 m_auto" style="text-align: left; padding-left: 20px;">
+  <div class="none" id="prompt">ログインしてください</div>
+  <div id="big_container">
+    <header class="page-header row">
+      <div class="col-4 center">
+        <button onclick="location.href=['./飼い主my_page.html']">戻る</button> 
+      </div>
+      <h1 class="col-4 center">詳細</h1>
+      <div class="col-4 center">
+      </div>
+    </header>
+    <main>
+      <div>
+        <!-- ----------pet_info-------------- -->
+        <ul style="width: 100%;">
+          <li style="width: 250px; height: auto; object-fit: cover;">
+            <img style="width: 100%; height: auto;"
+              src=""
+              alt="" id="p_img">
+          </li>
+          <li>
+            <h1>名前</h1>
+            <p id="name"></p>
+          </li>
+          <li>
+            <h1>犬の登録をし、鑑札を受け取っていますか？（はい、いいえ、分からない）</h1>
+            <p id="登録"></p>
+          </li>
+          <li>
+            <h1>狂犬病予防注射を受け、注射済み票を受け取っていますか？（はい、いいえ、分からない）</h1>
+            <p id="注射"></p>
+          </li>
+          <li>
+            <h1>生年月日</h1>
+            <p id="birthday"></p>
+          </li>
+          <li>
+            <h1>性別 (男の子・女の子)</h1>
+            <p id="sex"></p>
+          </li>
+          <li>
+            <h1>去勢・避妊（未・済）</h1>
+            <p id="去勢"></p>
+          </li>
+          <li>
+            <h1>体重</h1>
+            <p id="weight"></p>
+          </li>
+          <li>
+            <h1>毛色</h1>
+            <p id="color"></p>
+          </li>
+          <li>
+            <h1>耳（たれ耳・立ち耳）質問:耳のたれ耳、立ち耳は成長と共に変わる？</h1>
+            <p id="era"></p>
+          </li>
+          <li>
+            <h1>ごはん(品名・量)</h1>
+            <p id="meal"></p>
+          </li>
+          <li>
+            <h1>かかりつけの病院</h1>
+            <p id="doctor"></p>
+          </li>
+          <li>
+            <h1>病歴・アレルギー</h1>
+            <p id="allergy"></p>
+          </li>
+          <li>
+            <h1>お薬</h1>
+            <p id="medicine"></p>
+          </li>
+          <li>
+            <h1>サロン</h1>
+            <p id="salon"></p>
+          </li>
+          <li>
+            <h1>マイクロチップ番号</h1>
+            <p id="microchip_number"></p>
+          </li>
+          <li>
+            <h1>写真１：狂犬病予防注射済み票</h1>
+            <div style="width: 250px; height: auto; object-fit: cover;"><img style="width: 100%;"
+                src="" alt="" id="狂犬病予防注射済み票"></div>
+          </li>
+          <li>
+            <h1>写真２：混合ワクチン接種証明書</h1>
+            <div style="width: 250px; height: auto; object-fit: cover;">
+              <img style="width: 100%;" src="" alt="" id="混合ワクチン接種証明書">
+          </li>
+      </div>
+      </ul>
+      <!-- ----------pet_info-------------- -->
 
-                </div>
-                <div class="col-3"></div>
-                <div class="col-4 center">
-                    <!-- <button onclick="location.href=['./qrcode.html']">QRボタン</button> -->
-                </div>
-            </div>
-            <!-- <div class="space_32"></div>
-            <div class="top_button">
-                <button onclick="location.href=['./登録済み店舗.html']">店舗一覧</button>
-                <button>qrコード</button>
-            </div> -->
-            <ul class="center" id="pet_ul">
-                <!-- jsで作成 -->
-            </ul>
-            <div class="space_32"></div>
-            <div class="center">
-                <button id="pet_add_button" onclick="location.href=['./pet_form.html']">ペット追加</button>
-            </div>
-        </main>
-        <footer class="page-footer"></footer>
-        
-    </div>
-    <script type="module">
-        import { connect_firebase } from "../firebaseConfig.js"
-        import { make_sign_out_display } from  "../functions.js"
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-        import { getFirestore, collection, getDoc , doc, onSnapshot} from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
-        // firebaseと接続
-        const app = connect_firebase();
-        const auth = getAuth(app);
-        const db = getFirestore(app);
+      <div class="space_32"></div>
+      <div class="center">
+      </div>
+    </main>
+    <footer class="page-footer"></footer>
 
-       
-      </script>
+  </div>
+  <script type="module">
+    import { connect_firebase } from "../firebaseConfig.js"
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+    import { getFirestore, collection, getDoc, doc, onSnapshot } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+    // firebaseと接続
+    const app = connect_firebase();
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const p_img = document.getElementById('p_img');
+    const name = document.getElementById('name');
+    const 登録 = document.getElementById('登録');
+    const 注射 = document.getElementById('注射');
+    const birthday = document.getElementById('birthday');
+    const sex = document.getElementById('sex');
+    const 去勢 = document.getElementById('去勢');
+    const weight = document.getElementById('weight');
+    const color = document.getElementById('color');
+    const era = document.getElementById('era');
+    const meal = document.getElementById('meal');
+    const doctor = document.getElementById('doctor');
+    const allergy = document.getElementById('allergy');
+    const medicine = document.getElementById('medicine');
+    const salon = document.getElementById('salon');
+    const microchip_number = document.getElementById('microchip_number');
+    const 狂犬病予防注射済み票 = document.getElementById('狂犬病予防注射済み票');
+    const 混合ワクチン接種証明書 = document.getElementById('混合ワクチン接種証明書');
+
+
+    async function get_url_data(uid) {
+      let params = (new URL(document.location)).searchParams;
+      let petID = params.get('petID');
+      console.log("petID", petID);
+
+      const docRef = doc(db, 'users', uid, "pets", petID);
+      const docSnap = await getDoc(docRef);
+      // const shopName = docSnap.data()["名前"];
+      console.log(docSnap.data());
+      return open_data(docSnap.data())
+    }
+
+    function open_data(data) {
+      console.log(data["写真"]);
+      p_img.src = data["写真"];
+      name.textContent = data["名前"];
+      登録.textContent = data["犬の登録をし鑑札を受け取っていますか"];
+      注射.textContent = data["狂犬病予防注射を受け注射済み票を受け取っていますか"];
+      birthday.textContent = data["生年月日"];
+      sex.textContent = data["性別"];
+      去勢.textContent = data["去勢避妊"];
+      weight.textContent = data["体重"];
+      color.textContent = data["毛色"];
+      era.textContent = data["耳"];
+      meal.textContent = data["ごはん"];
+      doctor.textContent = data["かかりつけの病院"];
+      allergy.textContent = data["病歴アレルギー"];
+      medicine.textContent = data["お薬"];
+      salon.textContent = data["サロン"];
+      microchip_number.textContent = data["マイクロチップ番号"];
+      狂犬病予防注射済み票.src = data["狂犬病予防注射済み票"];
+      混合ワクチン接種証明書.src = data["混合ワクチン接種証明書"];
+    }
+
+    // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        const u_email = user.email;
+        console.log(uid, "状態:ログイン中");
+        return get_url_data(uid)
+      } else {
+        // User is signed out
+        console.log("状態:ログアウト");
+        make_sign_out_display();
+      }
+    });
+
+
+
+
+
+  </script>
 </body>
 
 </html>
