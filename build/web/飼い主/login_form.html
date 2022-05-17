@@ -54,12 +54,20 @@
     const app = connect_firebase();
     const auth = getAuth(app);
 
+    let params = (new URL(document.location)).searchParams;
+    let shop_id = params.get('add');
+    console.log("add", shop_id);
+
     // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
     onAuthStateChanged(auth, (user) => {
         if (user) {
             const uid = user.uid;
             console.log(uid,"状態:ログイン中");
-            window.location.href = './user_form.html';
+            if (shop_id) {
+                window.location.href = `./add_this_shop.html?shop_ID=${shop_id}`;
+            } else {
+                window.location.href = './user_form.html';
+            }
         } else {
             console.log("状態:ログアウト");
         }

@@ -13,13 +13,22 @@
 </head>
 
 <body>
-  <div class="none" id="prompt">ログインしてください</div>
+  <div class="center none" id="prompt" style="height: 800px;">
+    <div class="center" style="width: 400px;" >
+      <h1>ログインしてください</h1>
+      <img width="100%" src="../images/Smore_illust_12.png" alt="">
+      <p>ログインは<span id="login">こちら</span></p>
+    </div>
+  </div>
   <div class="none" id="info">ご来店ありがとうございます<p onclick="location.href=['./飼い主my_page.html']">mypageに戻る</p></div>
   <div id="big_container">
-    <header class="page-header center"> 
-      <h1>shop追加</h1>
-      <button id="sign_out">ログアウト</button>
-    </header>
+    <header class="page-header row">
+      <div class="col-4 center">
+          <button id="sign_out">ログアウト</button>
+      </div>
+      <h1 class="col-4 center">shop追加</h1>
+      <div class="col-4"></div>
+  </header>
     <main>
       <div class="center">
         <div class="space_32"></div>
@@ -49,6 +58,16 @@
     let user_id;
     let user_email;
 
+    
+    let params = (new URL(document.location)).searchParams;
+    let shop_id = params.get('shop_ID');
+    console.log("shop_ID", shop_id);
+    
+    const login = document.getElementById('login');
+    login.addEventListener('click' ,() => {
+      window.location.href = `./login_form.html?add=${shop_id}`;
+    });
+
     // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -64,10 +83,6 @@
 
     // 追加ボタンクリックでfirestore(shopsとusers)に配列を追加(timestamp)
     document.getElementById('add_shop').addEventListener('click', async () => {
-      let params = (new URL(document.location)).searchParams;
-      let shop_id = params.get('shop_ID');
-      console.log("shop_ID", shop_id);
-
       // -----shop側に追加の処理-----
       const docRef_tos_shop = doc(db, "shops", shop_id, "registration_user", user_id);
       const docSnap_shop = await getDoc(docRef_tos_shop);
