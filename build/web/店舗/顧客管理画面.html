@@ -37,35 +37,41 @@
         import { connect_firebase } from "../firebaseConfig.js"
         import { make_sign_out_display } from  "../functions.js"
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-        import { getFirestore, collection, getDoc , doc, onSnapshot, query, where} from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+        import { getFirestore, collection, getDocs ,getDoc, doc, onSnapshot, query, where} from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
         // firebaseと接続
         const app = connect_firebase();
         const auth = getAuth(app);
         const db = getFirestore(app);
+        const regist_user_list = []
 
         const ul = document.getElementById('shop_ul');
-        // ログインユーザーの"pets"データを取得
+        // userのデータをペットのデータを取得して表示する
         async function get_data(uid) {
-            // リアルタイム更新
-            const docRef = doc(db, "users", uid, "registration_shop", "henohenomohezi");
-            const docSnap = await getDoc(docRef);
-            // docの書き方
-            if (docSnap.exists()) {
-            const data = docSnap.data()["shops"];
-
-            data.forEach(async(element) => {
-                const _docRef = doc(db, "shops", element);
+            // 登録userを取得してリストに保管
+            const querySnapshot = await getDocs(collection(db, "shops", uid, "registration_user"));
+                querySnapshot.forEach((user) => {
+                regist_user_list.push(user.id)
+                console.log(regist_user_list);
+            });
+            // リストのuser_idを使ってユーザーのデータを取得
+            regist_user_list.forEach(async(user) => {
+                const _docRef = doc(db, "users", user);
                 const _docSnap = await getDoc(_docRef);
                 const data = _docSnap.data();
-
+                // その人が持っているユーザーのpet一覧を取得
+                const querySnapshot = await getDocs(collection(db, "users", user, "pets",));
+                querySnapshot.forEach((pet) => {
+                const pet_data = pet.data();
+                // 表示
                 const li = document.createElement('li');
-                li.textContent = data["shop_name"];
+                li.innerHTML = `<div class="flex_box m_auto" style="background-color: pink; height: 30px; width: 300px; margin-bottom: 10px;">
+                <p style="padding-left: 10px;">${data["名前"]}</p>:
+                <p style="padding-left: 20px;">${pet_data["名前"]}</p>
+                <p style="margin-left: auto;" onclick="location.href=['./user_info.html?user_ID=${uid}&pet_ID=${pet.id}']" >></p>
+                </div>`;
                 ul.appendChild(li)
+                });
             });
-            } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-            }
         }
 
     // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
