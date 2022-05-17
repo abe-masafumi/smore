@@ -20,7 +20,7 @@
             </div>
             <h1 class="col-4 center">my_page</h1>
             <div class="col-4 center">
-                <button onclick="location.href=['./qrcode.html']">QRボタン</button>
+                <!-- <button onclick="location.href=['./qrcode.html']">QRボタン</button> -->
             </div>
         </header>
         <main>
@@ -46,8 +46,11 @@
                 <!-- jsで作成 -->
             </ul>
             <div class="space_32"></div>
-            <div class="center">
-                <button id="pet_add_button" onclick="location.href=['./pet_form.html']">ペット追加</button>
+            <div style="margin: auto;">
+                <div class="flex_box" style="width: 250px; margin: auto;">
+                    <button id="pet_add_button" onclick="location.href=['./pet_form.html']"></button>
+                    <p style="padding-left: 10px; font-size: 18px;">新しくペットを登録する</p>
+                </div>
             </div>
         </main>
         <footer class="page-footer"></footer>
@@ -81,7 +84,7 @@
                     const data_list = s.data();
                 // // 処理 ペット一覧を作成
                 const child = document.createElement('li');
-                child.innerHTML = `<div class="row div1" style="margin-bottom: 15px;">
+                child.innerHTML = `<div class="row div1" style="margin-bottom: 15px;" onclick="location.href=['./pet_info.html?petID=${data_list["ID"]}']">
       <div class="col-4 center">
         <div class="img_box"><img src=${data_list["写真"]}></div>
       </div>
@@ -100,6 +103,7 @@
                 console.log("データを読み込めませんでした。",error);
             });
         }
+
 
     // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
         onAuthStateChanged(auth, (user) => {

@@ -14,13 +14,13 @@
     <div class="none" id="prompt">ログインしてください</div>
     <div id="big_container">
         <header class="page-header row"> 
-                <div class="center col-4">
+                <div class="center col-3">
                     <p onclick="location.href=['./飼い主my_page.html']">戻る</p>
                 </div>
-                <div class="col-4 center">
+                <div class="col-6 center">
                     <h1>登録済ショップ一覧</h1>
                 </div>
-                <div class="col-4 center">
+                <div class="col-3 center">
                 </div>
         </header>
         <main>
@@ -59,7 +59,7 @@
 
                     const li = document.createElement('li');
                     li.innerHTML = `<div class="flex_box m_auto" style="background-color: pink; height: 30px; width: 300px; margin-bottom: 10px;">
-                    <p style="padding-left: 10px;">${data["shop_name"]}</p>:
+                    <p style="padding-left: 10px;">${data["shop_name"]}</p>
                     <p style="margin-left: auto;" onclick="location.href=['./shop_ coupon.html?user_ID=${shopID}']" >></p>
                     </div>`;
                     ul.appendChild(li)

@@ -224,7 +224,8 @@
                 マイクロチップ番号: microchip_number,
                 狂犬病予防注射済み票: 狂犬病予防注射済み票_url,
                 混合ワクチン接種証明書: 混合ワクチン接種証明書url,
-                petID: newDoc,
+                // スマホでこの処理がされない
+                ID: newDoc,
             }
             console.log(data);
         try {
@@ -234,8 +235,6 @@
         console.error("Error adding document: ", e);
       }
     });
-
-
     </script>
 </body>
 </html>

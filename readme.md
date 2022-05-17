@@ -45,9 +45,15 @@ import { } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-SERVICE.js'
 [参考資料](https://zenn.dev/hiro__dev/scraps/bfe3ca1757ffae)
 [参考資料](https://qiita.com/karayok/items/0996c8f0ea219c284dbd)
 [できることとできないこと](https://zenn.dev/yucatio/articles/173f386c471398)
+[ドキュメントIDを先に取得](https://devsakaso.com/vue-firebase-get-doc-id-before-adding/)
 
 
 ### やること
+
+⭐️ firebase authの入力間違えじのエラーを表示したい。無反応になるため
+
+- ロード画面が欲しい
+
 - 関数処理をfunctionファイルにまとめる
 
 - qrcodeをアップロードする時の待機時間を管理(doc参考)
@@ -78,3 +84,11 @@ urlが変更するとqrcodeの読み取り後のサイトも変更しないと�
 ### err
 
 Error: FirebaseError: Expected type 'fc', but it was: a custom Rc object
+
+
+
+### style 
+
+fontを16pxに変更
+
+safariはaleatとconfirmが使えない
