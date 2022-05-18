@@ -8,7 +8,6 @@
     <title>smore</title>
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="stylesheet" href="../styles/common.css">
-    <!-- <style>html,body{overflow: hidden}</style> -->
 </head>
 
 <body>
@@ -111,8 +110,8 @@
         import { connect_firebase } from "../firebaseConfig.js"
         import { make_sign_out_display } from "../functions.js"
         import { getAuth, onAuthStateChanged } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-        import { collection, addDoc, getFirestore, doc, setDoc, getDoc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
-        import { getStorage, ref, uploadString, getDownloadURL, uploadBytes, uploadBytesResumable } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-storage.js";
+        import { collection, getFirestore, doc, setDoc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+        import { getStorage, ref, getDownloadURL, uploadBytes, uploadBytesResumable } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-storage.js";
 
         // firebaseと接続
         const app = connect_firebase();
@@ -234,13 +233,13 @@
             // pet_img
             const storageRef03 = ref(storage, "pets/" + newDoc + "/" + "混合ワクチン接種証明書url")
             const uploadTask03 = uploadBytesResumable(storageRef03, pet_img_file);
-            
+
             uploadTask03.on('state_changed',
-            (snapshot) => {
-                post_button.classList.add("uploading");
-                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                console.log('Upload is ' + progress + '% done', "03の画像");
-                img03_uploading.textContent = `アップロード中 ${progress}%`;
+                (snapshot) => {
+                    post_button.classList.add("uploading");
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log('Upload is ' + progress + '% done', "03の画像");
+                    img03_uploading.textContent = `アップロード中 ${progress}%`;
                     switch (snapshot.state) {
                         case 'paused':
                             console.log('Upload is paused', "03の画像");

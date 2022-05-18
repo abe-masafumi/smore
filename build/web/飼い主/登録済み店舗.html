@@ -8,21 +8,20 @@
     <title>smore</title>
     <link rel="stylesheet" href="../styles/common.css">
     <link rel="stylesheet" href="../styles/styles.css">
-    <style>html,body{overflow: hidden}</style>
 </head>
 
 <body>
     <div class="none" id="prompt">ログインしてください</div>
     <div id="big_container">
-        <header class="page-header row"> 
-                <div class="center col-3">
-                    <p onclick="location.href=['./飼い主my_page.html']">戻る</p>
-                </div>
-                <div class="col-6 center">
-                    <h1>登録済ショップ一覧</h1>
-                </div>
-                <div class="col-3 center">
-                </div>
+        <header class="page-header row">
+            <div class="center col-3">
+                <p onclick="location.href=['./飼い主my_page.html']">戻る</p>
+            </div>
+            <div class="col-6 center">
+                <h1>登録済ショップ一覧</h1>
+            </div>
+            <div class="col-3 center">
+            </div>
         </header>
         <main>
             <!-- ここは店舗名とQRコードボタンを配置 -->
@@ -36,7 +35,7 @@
     <script type="module">
         import { connect_firebase } from "../firebaseConfig.js"
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-        import { getFirestore, collection, getDocs ,getDoc, doc, onSnapshot, query, where} from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+        import { getFirestore, getDoc, doc} from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
         // firebaseと接続
         const app = connect_firebase();
         const auth = getAuth(app);
@@ -52,7 +51,7 @@
             if (shop_docSnap.exists()) {
                 const shop_list = shop_docSnap.data()["shops"];
                 console.log("Document data:", shop_list);
-                shop_list.forEach(async(shopID) => {
+                shop_list.forEach(async (shopID) => {
                     console.log(shopID);
                     const docRef = doc(db, "shops", shopID);
                     const docSnap = await getDoc(docRef);
@@ -64,26 +63,24 @@
                     <p style="margin-left: auto;" onclick="location.href=['./shop_ coupon.html?user_ID=${shopID}']" >></p>
                     </div>`;
                     ul.appendChild(li)
-            });
-                
-
+                });
             } else {
-            console.log("No such document!");
+                console.log("No such document!");
             }
         }
 
-    // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
+        // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
         onAuthStateChanged(auth, (user) => {
-          if (user) {
-              const uid = user.uid;
-              console.log(uid,"状態:ログイン中");
-            return get_data(uid)
-          } else {
-              console.log("状態:ログアウト");
-              make_sign_out_display()
-          }
+            if (user) {
+                const uid = user.uid;
+                console.log(uid, "状態:ログイン中");
+                return get_data(uid)
+            } else {
+                console.log("状態:ログアウト");
+                make_sign_out_display()
+            }
         });
-      </script>
+    </script>
 </body>
 
 </html>

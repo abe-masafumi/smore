@@ -8,7 +8,6 @@
     <title>smore</title>
     <link rel="stylesheet" href="../styles/common.css">
     <link rel="stylesheet" href="../styles/styles.css">
-    <style>html,body{overflow: hidden}</style>
 </head>
 
 <body>
@@ -20,27 +19,20 @@
             </div>
             <h1 class="col-4 center">my_page</h1>
             <div class="col-4 center">
-                <!-- <button onclick="location.href=['./qrcode.html']">QRボタン</button> -->
             </div>
         </header>
         <main>
             <div class="row text_center" style="height: 100px;">
                 <div class="sample col-8 m_auto" style="text-align: left; padding-left: 20px;">
                     <p class="text">
-                        user名<br/>
-                        <p id="user_name"></p>
+                        user名<br />
+                    <p id="user_name"></p>
                     </p>
                 </div>
                 <div class="col-4 center">
                     <button onclick="location.href=['./登録済み店舗.html']">店舗一覧</button>
-                    <!-- <button onclick="location.href=['./qrcode.html']">QRボタン</button> -->
                 </div>
             </div>
-            <!-- <div class="space_32"></div>
-            <div class="top_button">
-                <button onclick="location.href=['./登録済み店舗.html']">店舗一覧</button>
-                <button>qrコード</button>
-            </div> -->
             <ul class="center" id="pet_ul">
                 <!-- jsで作成 -->
             </ul>
@@ -53,13 +45,13 @@
             </div>
         </main>
         <footer class="page-footer"></footer>
-        
+
     </div>
     <script type="module">
         import { connect_firebase } from "../firebaseConfig.js"
-        import { make_sign_out_display } from  "../functions.js"
+        import { make_sign_out_display } from "../functions.js"
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-        import { getFirestore, collection, getDoc , doc, onSnapshot} from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+        import { getFirestore, collection, getDoc, doc, onSnapshot } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
         // firebaseと接続
         const app = connect_firebase();
         const auth = getAuth(app);
@@ -77,13 +69,13 @@
             // リアルタイム更新
             const petsRef = await collection(db, 'users', uid, 'pets');
             const snapShots = await onSnapshot(petsRef,
-            (snapshot) => {
-                snapshot.forEach((s) => {
-                    console.log(s.data());
-                    const data_list = s.data();
-                // // 処理 ペット一覧を作成
-                const child = document.createElement('li');
-                child.innerHTML = `<div class="row div1" style="margin-bottom: 15px;" onclick="location.href=['./pet_info.html?petID=${data_list["ID"]}']">
+                (snapshot) => {
+                    snapshot.forEach((s) => {
+                        console.log(s.data());
+                        const data_list = s.data();
+                        // // 処理 ペット一覧を作成
+                        const child = document.createElement('li');
+                        child.innerHTML = `<div class="row div1" style="margin-bottom: 15px;" onclick="location.href=['./pet_info.html?petID=${data_list["ID"]}']">
       <div class="col-4 center">
         <div class="img_box"><img src=${data_list["写真"]}></div>
       </div>
@@ -92,30 +84,28 @@
         <p>性別: <span>${data_list["性別"]}</span></p>
         <p>生年月日: <span>${data_list["生年月日"]}</span></p>
       </div>
-
     </div>`;
-                ul.appendChild(child);
+                        ul.appendChild(child);
 
-                })
-            },
-            (error) => {
-                console.log("データを読み込めませんでした。",error);
-            });
+                    })
+                },
+                (error) => {
+                    console.log("データを読み込めませんでした。", error);
+                });
         }
 
-
-    // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
+        // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
         onAuthStateChanged(auth, (user) => {
-          if (user) {
-              const uid = user.uid;
-              console.log(uid,"状態:ログイン中");
-            return get_data(uid)
-          } else {
-              console.log("状態:ログアウト");
-              make_sign_out_display()
-          }
+            if (user) {
+                const uid = user.uid;
+                console.log(uid, "状態:ログイン中");
+                return get_data(uid)
+            } else {
+                console.log("状態:ログアウト");
+                make_sign_out_display()
+            }
         });
-      </script>
+    </script>
 </body>
 
 </html>

@@ -8,7 +8,12 @@
     <title>smore</title>
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="stylesheet" href="../styles/common.css">
-    <style>html,body{overflow: hidden}</style>
+    <style>
+        html,
+        body {
+            overflow: hidden
+        }
+    </style>
 </head>
 
 <body>
@@ -19,10 +24,8 @@
 
     <main>
         <div class="center">
-
             <div class="form_container">
                 <div class="space_48"></div>
-
                 <form id="myform" class="m_auto">
                     <p>メールアドレス</p>
                     <input type="email" placeholder=" email" id="email" required style="font-size: 16px;">
@@ -31,11 +34,11 @@
                     <input type="password" placeholder=" pass" id="password" required style="font-size: 16px;">
                     <div class="space_32"></div>
                     <p><input type="checkbox" id="password_check">
-                   パスワードを表示する</p>
+                        パスワードを表示する</p>
                     <div class="space_48"></div>
                     <div class="text_center">
                         <input type="submit" value="ログイン">
-                    </div>    
+                    </div>
                 </form>
             </div>
             <div class="space_48"></div>
@@ -48,48 +51,48 @@
     <footer class="page-footer"></footer>
     <script src="../form_login_common.js"></script>
     <script type="module">
-    import { connect_firebase } from "../firebaseConfig.js"
-    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-    // firebaseと接続
-    const app = connect_firebase();
-    const auth = getAuth(app);
+        import { connect_firebase } from "../firebaseConfig.js"
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+        // firebaseと接続
+        const app = connect_firebase();
+        const auth = getAuth(app);
 
-    let params = (new URL(document.location)).searchParams;
-    let shop_id = params.get('add');
-    console.log("add", shop_id);
+        let params = (new URL(document.location)).searchParams;
+        let shop_id = params.get('add');
+        console.log("add", shop_id);
 
-    // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            const uid = user.uid;
-            console.log(uid,"状態:ログイン中");
-            if (shop_id) {
-                window.location.href = `./add_this_shop.html?shop_ID=${shop_id}`;
+        // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const uid = user.uid;
+                console.log(uid, "状態:ログイン中");
+                if (shop_id) {
+                    window.location.href = `./add_this_shop.html?shop_ID=${shop_id}`;
+                } else {
+                    window.location.href = './user_form.html';
+                }
             } else {
-                window.location.href = './user_form.html';
+                console.log("状態:ログアウト");
             }
-        } else {
-            console.log("状態:ログアウト");
-        }
-    });
-
-    // ログイン処理
-    document.getElementById("myform").addEventListener('submit',(e) => {
-        e.preventDefault();
-        const email = document.getElementById("email").value;
-        const pass = document.getElementById("password").value;
-        signInWithEmailAndPassword(auth, email, pass)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            console.log(user);
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorCode);
-            console.log(errorMessage);
         });
-    });
+
+        // ログイン処理
+        document.getElementById("myform").addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById("email").value;
+            const pass = document.getElementById("password").value;
+            signInWithEmailAndPassword(auth, email, pass)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    console.log(user);
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.log(errorCode);
+                    console.log(errorMessage);
+                });
+        });
     </script>
 </body>
 
