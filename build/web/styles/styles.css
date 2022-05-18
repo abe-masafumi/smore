@@ -142,3 +142,8 @@ button {
     border-radius:18px;
     overflow: hidden;
 }
+
+.uploading {
+    opacity: 0.4;
+    pointer-events: none;
+}

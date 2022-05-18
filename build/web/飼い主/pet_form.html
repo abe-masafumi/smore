@@ -86,12 +86,15 @@
                         <div class="space_48"></div>
                         <p>写真1:ペット写真</p>
                         <input type="file" accept='.jpeg, .png, .jpg' id="pet_img" required>
+                        <p id="img01_uploading"></p>
                         <div class="space_48"></div>
                         <p>写真2:狂犬病予防注射済み票</p>
                         <input type="file" accept='.jpeg, .png, .jpg' id="狂犬病予防注射済み票">
+                        <p id="img02_uploading"></p>
                         <div class="space_48"></div>
                         <p>写真3:混合ワクチン接種証明書</p>
                         <input type="file" accept='.jpeg, .png, .jpg' id="混合ワクチン接種証明書">
+                        <p id="img03_uploading"></p>
                         <div class="space_48"></div>
                         <div class="text_center">
                             <input type="submit" value="登録" id="post_button">
@@ -122,8 +125,8 @@
         let user_email;
         let newDoc;
         let pet_img_url;
-        let 狂犬病予防注射済み票_url;
-        let 混合ワクチン接種証明書url;
+        let 狂犬病予防注射済み票_url = "";
+        let 混合ワクチン接種証明書url = "";
 
         // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
         onAuthStateChanged(auth, async (user) => {
@@ -150,6 +153,11 @@
         let 狂犬病予防注射済み票_file;
         let 混合ワクチン接種証明書_file;
 
+        const post_button = document.getElementById('post_button');
+        const img01_uploading = document.getElementById('img01_uploading');
+        const img02_uploading = document.getElementById('img02_uploading');
+        const img03_uploading = document.getElementById('img03_uploading');
+
         const pet_img = document.getElementById("pet_img").addEventListener('change', (e) => {
             pet_img_file = e.target.files[0];
             // pet_img
@@ -157,8 +165,10 @@
             const uploadTask01 = uploadBytesResumable(storageRef01, pet_img_file);
             uploadTask01.on('state_changed',
                 (snapshot) => {
+                    post_button.classList.add("uploading");
                     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                     console.log('Upload is ' + progress + '% done', "01の画像");
+                    img01_uploading.textContent = `アップロード中 ${progress}%`;
                     switch (snapshot.state) {
                         case 'paused':
                             console.log('Upload is paused', "01の画像");
@@ -176,7 +186,8 @@
                     getDownloadURL(uploadTask01.snapshot.ref).then((downloadURL) => {
                         console.log('File available at', downloadURL);
                         pet_img_url = downloadURL;
-
+                        post_button.classList.remove('uploading')
+                        img01_uploading.textContent = "";
                     });
                 }
             );
@@ -188,8 +199,11 @@
             const uploadTask02 = uploadBytesResumable(storageRef02, pet_img_file);
             uploadTask02.on('state_changed',
                 (snapshot) => {
+                    post_button.classList.add("uploading");
                     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                     console.log('Upload is ' + progress + '% done', "02の画像");
+                    img02_uploading.textContent = `アップロード中 ${progress}%`;
+
                     switch (snapshot.state) {
                         case 'paused':
                             console.log('Upload is paused', "02の画像");
@@ -207,6 +221,9 @@
                     getDownloadURL(uploadTask02.snapshot.ref).then((downloadURL) => {
                         console.log('File available at', downloadURL);
                         狂犬病予防注射済み票_url = downloadURL;
+                        post_button.classList.remove('uploading')
+                        img02_uploading.textContent = "";
+
                     });
                 }
             );
@@ -217,10 +234,13 @@
             // pet_img
             const storageRef03 = ref(storage, "pets/" + newDoc + "/" + "混合ワクチン接種証明書url")
             const uploadTask03 = uploadBytesResumable(storageRef03, pet_img_file);
+            
             uploadTask03.on('state_changed',
-                (snapshot) => {
-                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    console.log('Upload is ' + progress + '% done', "03の画像");
+            (snapshot) => {
+                post_button.classList.add("uploading");
+                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                console.log('Upload is ' + progress + '% done', "03の画像");
+                img03_uploading.textContent = `アップロード中 ${progress}%`;
                     switch (snapshot.state) {
                         case 'paused':
                             console.log('Upload is paused', "03の画像");
@@ -238,6 +258,9 @@
                     getDownloadURL(uploadTask03.snapshot.ref).then((downloadURL) => {
                         console.log('File available at', downloadURL);
                         混合ワクチン接種証明書url = downloadURL;
+                        post_button.classList.remove('uploading')
+                        img03_uploading.textContent = "";
+
                     });
                 }
             );
