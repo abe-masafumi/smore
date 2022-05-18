@@ -55,7 +55,7 @@
     import { connect_firebase } from "../firebaseConfig.js"
     import { make_sign_out_display } from  "../functions.js"
     import { getAuth,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-    import { getFirestore, doc, setDoc, Timestamp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+    import { getFirestore, doc, setDoc, Timestamp,getDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
     import { getStorage, ref, uploadString, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-storage.js";
     // firebaseと接続
     const app = connect_firebase();
@@ -66,6 +66,19 @@
     let shop_id;
     let shop_email;
 
+    async function get_data(shop_id) {
+    const docRef = doc(db, "shops", shop_id);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+      window.location.href = './店舗管理画面.html';
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+    }
+  }
+
     // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
     onAuthStateChanged(auth, async (user) =>  {
     // ユーザーがログインしてる AND 店舗情報がすでに登録されていたら画面を店舗管理画面へ移動
@@ -74,20 +87,8 @@
         shop_id = await user.uid;
         shop_email = await user.email;
         console.log(shop_id,"状態:ログイン中");
-
-        // 未実装　すでに登録してたら画面遷移 いや待てよ！店舗複数持ちの人はいるのか？
-        // const querySnapshot = await getDocs(collection(db, "sss"));
-        // querySnapshot.forEach(doc => {
-        //     console.log(doc.id, " => ", doc.data());
-        // });
-        // console.log(querySnapshot);
-        // if (querySnapshot) {
-        //     window.location.href = './店舗管理画面.html';
-        // } else {
-        //     console.log("No such document!");
-        // }
+        return get_data(shop_id)
     } else {
-        // User is signed out
         console.log("状態:ログアウト");
         make_sign_out_display()
     }
