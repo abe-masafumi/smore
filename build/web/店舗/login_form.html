@@ -17,52 +17,74 @@
 </head>
 
 <body>
-    <header class="page-header center">
-        <h1>ログイン</h1>
-    </header>
-    <main>
-        <div class="center">
-
-            <div class="form_container">
-                <div class="space_48"></div>
-
-                <form id="myform" class="m_auto">
-                    <p>メールアドレス</p>
-                    <input type="email" placeholder=" email" id="email" style="font-size: 16px;">
-                    <div class="space_32"></div>
-                    <p>パスワード</p>
-                    <input type="password" placeholder=" password" id="password" style="font-size: 16px;">
-                    <div class="space_24"></div>
-                    <p><input type="checkbox" id="password_check">
-                        パスワードを表示する</p>
+    <div id="loading" class="center" style="height: 600px;">loading...</div>
+    <div class="none" id="wait">
+        <header class="page-header center">
+            <h1>ログイン</h1>
+        </header>
+        <main>
+            <div class="center">
+                <div class="form_container">
                     <div class="space_48"></div>
-                    <div class="text_center">
-                        <input type="submit" value="ログイン">
-                    </div>
-                </form>
+                    <form id="myform" class="m_auto">
+                        <p>メールアドレス</p>
+                        <input type="email" placeholder=" email" id="email" style="font-size: 16px;">
+                        <div class="space_32"></div>
+                        <p>パスワード</p>
+                        <input type="password" placeholder=" password" id="password" style="font-size: 16px;">
+                        <div class="space_24"></div>
+                        <p><input type="checkbox" id="password_check">
+                            パスワードを表示する</p>
+                        <div class="space_48"></div>
+                        <div class="text_center">
+                            <input type="submit" value="ログイン">
+                        </div>
+                    </form>
+                </div>
+                <div class="space_48"></div>
+                <!-- 登録してない人に登録画面へ遷移 -->
+                <p onclick="location.href=['./sign_up_form.html']">登録はこちら</p>
             </div>
-            <div class="space_48"></div>
-            <!-- 登録してない人に登録画面へ遷移 -->
-            <p onclick="location.href=['./sign_up_form.html']">登録はこちら</p>
-        </div>
-    </main>
-    <footer class="page-footer"></footer>
+        </main>
+        <footer class="page-footer"></footer>
+    </div>
     <script src="../form_login_common.js"></script>
     <script type="module">
         import { connect_firebase } from "../firebaseConfig.js"
         import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+
         // firebaseと接続
         const app = connect_firebase();
         const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        const loading = document.getElementById('loading');
+        const wait = document.getElementById('wait');
+
+        async function get_user_data(uid) {
+            const docRef = doc(db, "shops", uid);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                console.log("Document data:", docSnap.data());
+                window.location.href = './店舗管理画面.html';
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+                window.location.href = './shop_form.html';
+            }
+        }
 
         // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 const uid = user.uid;
                 console.log(uid, "状態:ログイン中");
-                window.location.href = './shop_form.html';
+                get_user_data(uid);
             } else {
                 console.log("状態:ログアウト");
+                wait.classList.remove('none');
+                loading.classList.add('none');
             }
         });
 
