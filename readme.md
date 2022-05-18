@@ -52,22 +52,13 @@ import { } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-SERVICE.js'
 
 ⭐️ firebase authの入力間違えじのエラーを表示したい。無反応になるため
 
-- ロード画面が欲しい
-
-- 関数処理をfunctionファイルにまとめる
-
-- qrcodeをアップロードする時の待機時間を管理(doc参考)
-
-- signin後にuser_formページに移動するが,すでに入力が終わっていればスキップ
 - その時の画面遷移が遅い
 
-- ログアウトボタン押すと一瞬ちらつく
+- kanさんのスプシと再度照らし合わせる
 
-- formを送信してる最中はロード画面にしたい
+- 画面遷移がちらつくところを修正
 
-- formタグで作成し直す
-
-- user_form すでに記入されていたら飛ばす
+- ログインしてくださいの画面を全体に組み込む
 
 [cloud vision](https://cloud.google.com/vision/docs/detect-labels-image-client-libraries?hl=ja#using_the_client_library)
 [参考資料](https://qiita.com/popy1017/items/78cd72cd6337973c3b65)
