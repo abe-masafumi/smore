@@ -8,22 +8,21 @@
     <title>smore</title>
     <link rel="stylesheet" href="../styles/common.css">
     <link rel="stylesheet" href="../styles/styles.css">
-    <style>html,body{overflow: hidden}</style>
 </head>
 
 <body>
     <div class="none" id="prompt">ログインしてください</div>
     <div id="big_container">
-        <header class="page-header row"> 
-                <div class="center col-4">
-                    <p onclick="location.href=['./店舗管理画面.html']">戻る</p>
-                </div>
-                <div class="col-4 center">
-                    <h1>顧客管理画面</h1>
-                </div>
-                <div class="col-4 center">
-                    <button id="sign_out" class="none">ログアウト</button>
-                </div>
+        <header class="page-header row">
+            <div class="center col-4">
+                <p onclick="location.href=['./店舗管理画面.html']">戻る</p>
+            </div>
+            <div class="col-4 center">
+                <h1>顧客管理画面</h1>
+            </div>
+            <div class="col-4 center">
+                <button id="sign_out" class="none">ログアウト</button>
+            </div>
         </header>
         <main>
             <!-- ここは店舗名とQRコードボタンを配置 -->
@@ -36,9 +35,9 @@
     </div>
     <script type="module">
         import { connect_firebase } from "../firebaseConfig.js"
-        import { make_sign_out_display } from  "../functions.js"
+        import { make_sign_out_display } from "../functions.js"
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-        import { getFirestore, collection, getDocs ,getDoc, doc, onSnapshot, query, where} from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+        import { getFirestore, collection, getDocs, getDoc, doc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
         // firebaseと接続
         const app = connect_firebase();
         const auth = getAuth(app);
@@ -50,43 +49,43 @@
         async function get_data(uid) {
             // 登録userを取得してリストに保管
             const querySnapshot = await getDocs(collection(db, "shops", uid, "registration_user"));
-                querySnapshot.forEach((user) => {
+            querySnapshot.forEach((user) => {
                 regist_user_list.push(user.id)
                 console.log(regist_user_list);
             });
             // リストのuser_idを使ってユーザーのデータを取得
-            regist_user_list.forEach(async(user) => {
+            regist_user_list.forEach(async (user) => {
                 const _docRef = doc(db, "users", user);
                 const _docSnap = await getDoc(_docRef);
                 const data = _docSnap.data();
                 // その人が持っているユーザーのpet一覧を取得
                 const querySnapshot = await getDocs(collection(db, "users", user, "pets",));
                 querySnapshot.forEach((pet) => {
-                const pet_data = pet.data();
-                // 表示
-                const li = document.createElement('li');
-                li.innerHTML = `<div class="flex_box m_auto" style="background-color: pink; height: 30px; width: 300px; margin-bottom: 10px;">
+                    const pet_data = pet.data();
+                    // 表示
+                    const li = document.createElement('li');
+                    li.innerHTML = `<div class="flex_box m_auto" style="background-color: pink; height: 30px; width: 300px; margin-bottom: 10px;">
                 <p style="padding-left: 10px;">${data["名前"]}</p>:
                 <p style="padding-left: 20px;">${pet_data["名前"]}</p>
                 <p style="margin-left: auto;" onclick="location.href=['./user_info.html?user_ID=${uid}&pet_ID=${pet.id}']" >></p>
                 </div>`;
-                ul.appendChild(li)
+                    ul.appendChild(li)
                 });
             });
         }
 
-    // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
+        // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
         onAuthStateChanged(auth, (user) => {
-          if (user) {
-              const uid = user.uid;
-              console.log(uid,"状態:ログイン中");
-            return get_data(uid)
-          } else {
-              console.log("状態:ログアウト");
-              make_sign_out_display()
-          }
+            if (user) {
+                const uid = user.uid;
+                console.log(uid, "状態:ログイン中");
+                return get_data(uid)
+            } else {
+                console.log("状態:ログアウト");
+                make_sign_out_display()
+            }
         });
-      </script>
+    </script>
 </body>
 
 </html>

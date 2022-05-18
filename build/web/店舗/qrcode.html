@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../styles/common.css">
   <link rel="stylesheet" href="../styles/styles.css">
-  <style>html,body{overflow: hidden}</style>
+  <style>
+    html,
+    body {
+      overflow: hidden
+    }
+  </style>
 
   <title>smore</title>
 </head>
-<body >
+
+<body>
   <div class="space_32"></div>
   <h1 class="text_center">店舗専用のQRコード</h1>
   <div class="center" style="height: 500px;">
@@ -19,7 +26,7 @@
   <script type="module">
     import { connect_firebase } from "../firebaseConfig.js"
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-    import { getFirestore, collection, getDoc , doc, onSnapshot} from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+    import { getFirestore, getDoc, doc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
     // firebaseと接続
     const app = connect_firebase();
@@ -38,14 +45,15 @@
     // ログインしてた時は
     onAuthStateChanged(auth, (user) => {
       if (user) {
-          const uid = user.uid;
-          console.log(uid,"状態:ログイン中");
+        const uid = user.uid;
+        console.log(uid, "状態:ログイン中");
         return get_data(uid)
       } else {
-          console.log("状態:ログアウト");
+        console.log("状態:ログアウト");
       }
     });
-    
+
   </script>
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <!-- Access-Control-Allow-Origin: * -->
   <meta charset="UTF-8">
@@ -8,90 +9,97 @@
   <title>smore</title>
   <link rel="stylesheet" href="../styles/common.css">
   <link rel="stylesheet" href="../styles/styles.css">
-  <style>html,body{overflow: hidden}</style>
+  <style>
+    html,
+    body {
+      overflow: hidden
+    }
+  </style>
 
 </head>
+
 <body>
   <header class="page-header center">
     <h1>新規登録画面</h1>
   </header>
   <main>
     <div class="center">
-      
+
       <div class="form_container">
-          <div class="space_48"></div>
-            <form id="myform" class="m_auto">
-              <p>メールアドレス</p>
-              <input type="email" placeholder=" email" id="email" style="font-size: 16px;">
-              <div class="space_32"></div>
-              <p>パスワード</p>
-              <input type="password" placeholder=" password" id="password01" style="font-size: 16px;">
-              <div class="space_24"></div>
-              <p><input type="checkbox" id="password_check01">
-                パスワードを表示する</p>
-              <div class="space_32"></div>
-              <p>パスワード再入力</p>
-              <input type="password" placeholder=" password" id="password02" style="font-size: 16px;">
-              <div class="space_24"></div>
-              <p><input type="checkbox" id="password_check02">
-                パスワードを表示する</p>
-              <div class="space_48"></div>
-              <div class="text_center">
-                <input type="submit" value="登録">
-              </div>
-            </form>
-        </div>
         <div class="space_48"></div>
+        <form id="myform" class="m_auto">
+          <p>メールアドレス</p>
+          <input type="email" placeholder=" email" id="email" style="font-size: 16px;">
+          <div class="space_32"></div>
+          <p>パスワード</p>
+          <input type="password" placeholder=" password" id="password01" style="font-size: 16px;">
+          <div class="space_24"></div>
+          <p><input type="checkbox" id="password_check01">
+            パスワードを表示する</p>
+          <div class="space_32"></div>
+          <p>パスワード再入力</p>
+          <input type="password" placeholder=" password" id="password02" style="font-size: 16px;">
+          <div class="space_24"></div>
+          <p><input type="checkbox" id="password_check02">
+            パスワードを表示する</p>
+          <div class="space_48"></div>
+          <div class="text_center">
+            <input type="submit" value="登録">
+          </div>
+        </form>
+      </div>
+      <div class="space_48"></div>
 
       <p onclick="location.href=['./login_form.html']">ログインはこちら</p>
     </div>
-</main>
-<footer class="page-footer"></footer>
-<script src="../form_sign_up_common.js"></script>
-<script type="module">
-  import { connect_firebase } from "../firebaseConfig.js"
-  import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-  // firebaseと接続
-  const app = connect_firebase();
-  const auth = getAuth(app);
+  </main>
+  <footer class="page-footer"></footer>
+  <script src="../form_sign_up_common.js"></script>
+  <script type="module">
+    import { connect_firebase } from "../firebaseConfig.js"
+    import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+    // firebaseと接続
+    const app = connect_firebase();
+    const auth = getAuth(app);
 
-  // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
+    // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
         const uid = user.uid;
         console.log(uid);
-        console.log(uid,"状態:ログイン中");
+        console.log(uid, "状態:ログイン中");
         window.location.href = './shop_form.html';
-    } else {
+      } else {
         // User is signed out
         console.log("状態:ログアウト");
-    }
-  });
+      }
+    });
 
-  // すでに登録されています。パスワードは６桁いるよ. とかの通知が欲しいカーも
-  // firebaseの設定を何回も使うのでページを分ける(できればログイン判定も全てのページで行うので別ページがいい)
-  // 新規登録  登録後自動的にログイン
-  document.getElementById("myform").addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = document.getElementById("email").value;
-    const pass01 = document.getElementById("password01").value;
-    const pass02 = document.getElementById("password02").value;
-    if (pass01 == pass02)  {
+    // すでに登録されています。パスワードは６桁いるよ. とかの通知が欲しいカーも
+    // firebaseの設定を何回も使うのでページを分ける(できればログイン判定も全てのページで行うので別ページがいい)
+    // 新規登録  登録後自動的にログイン
+    document.getElementById("myform").addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value;
+      const pass01 = document.getElementById("password01").value;
+      const pass02 = document.getElementById("password02").value;
+      if (pass01 == pass02) {
         await createUserWithEmailAndPassword(auth, email, pass01)
-        .then((userCredential) => {
+          .then((userCredential) => {
             const user = userCredential.user;
             console.log(user);
-        })
-        .catch((error) => {
+          })
+          .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.log(errorCode);
             console.log(errorMessage);
-        });
-    } else {
+          });
+      } else {
         alert("パスワードが一致しません");
-    }
-  });
-</script>
+      }
+    });
+  </script>
 </body>
+
 </html>

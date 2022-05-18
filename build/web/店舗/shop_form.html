@@ -8,7 +8,12 @@
     <title>smore</title>
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="stylesheet" href="../styles/common.css">
-    <style>html,body{overflow: hidden}</style>
+    <style>
+        html,
+        body {
+            overflow: hidden
+        }
+    </style>
 
     <script type="text/javascript" src="./qrcode.js"></script>
 </head>
@@ -28,7 +33,7 @@
                 <div id="form_container">
                     <div class="space_48"></div>
                     <form id="myform" class="m_auto">
-                        
+
                         <p>店舗名</p>
                         <input type="text" placeholder="店舗名" id="shopn_ame" required style="font-size: 16px;">
                         <div class="space_32"></div>
@@ -42,117 +47,118 @@
                             <input type="submit" value="登録" id="post_button">
                         </div>
                     </form>
-                    <!-- 隠しqrcode　消さないで！ -->
+                    <!-- 隠しqrcode 消さないで！ -->
                     <div id="qrcode" class="none"></div>
                 </div>
             </div>
         </main>
         <footer class="page-footer"></footer>
-        
+
     </div>
     <script type="module">
-    
-    import { connect_firebase } from "../firebaseConfig.js"
-    import { make_sign_out_display } from  "../functions.js"
-    import { getAuth,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-    import { getFirestore, doc, setDoc, Timestamp,getDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
-    import { getStorage, ref, uploadString, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-storage.js";
-    // firebaseと接続
-    const app = connect_firebase();
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-    const storage = getStorage(app);
 
-    let shop_id;
-    let shop_email;
+        import { connect_firebase } from "../firebaseConfig.js"
+        import { make_sign_out_display } from "../functions.js"
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+        import { getFirestore, doc, setDoc, Timestamp, getDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+        import { getStorage, ref, uploadString, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-storage.js";
+        // firebaseと接続
+        const app = connect_firebase();
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const storage = getStorage(app);
 
-    async function get_data(shop_id) {
-    const docRef = doc(db, "shops", shop_id);
-    const docSnap = await getDoc(docRef);
+        let shop_id;
+        let shop_email;
 
-    if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
-      window.location.href = './店舗管理画面.html';
-    } else {
-      // doc.data() will be undefined in this case
-      console.log("No such document!");
-    }
-  }
+        async function get_data(shop_id) {
+            const docRef = doc(db, "shops", shop_id);
+            const docSnap = await getDoc(docRef);
 
-    // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
-    onAuthStateChanged(auth, async (user) =>  {
-    // ユーザーがログインしてる AND 店舗情報がすでに登録されていたら画面を店舗管理画面へ移動
-    if (user) {
-        console.log(user);
-        shop_id = await user.uid;
-        shop_email = await user.email;
-        console.log(shop_id,"状態:ログイン中");
-        return get_data(shop_id)
-    } else {
-        console.log("状態:ログアウト");
-        make_sign_out_display()
-    }
-  });
+            if (docSnap.exists()) {
+                console.log("Document data:", docSnap.data());
+                window.location.href = './店舗管理画面.html';
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+        }
 
-   // qcode作成     
-  function saveCanvas(){
-    const qrcodetag = document.getElementById("qrcode")
-    var qrcode = new QRCode(qrcodetag, {
-        // デプロイ後確認🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗
-        text: `https://smore-832e4.web.app/飼い主/add_this_shop.html?shop_ID=${shop_id}`,
-        width: 128,
-        height: 128,
-        colorDark : "#000000",
-        colorLight : "#ffffff",
-        correctLevel : QRCode.CorrectLevel.H
-    });
-        var canvas = qrcodetag.firstElementChild;
-        let context = canvas.getContext('2d');
-        // base64エンコードされたデータを取得 「data:image/png;base64,iVBORw0k～」
-        var base64 = canvas.toDataURL("png");
-    return base64
-    }
+        // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
+        onAuthStateChanged(auth, async (user) => {
+            // ユーザーがログインしてる AND 店舗情報がすでに登録されていたら画面を店舗管理画面へ移動
+            if (user) {
+                console.log(user);
+                shop_id = await user.uid;
+                shop_email = await user.email;
+                console.log(shop_id, "状態:ログイン中");
+                return get_data(shop_id)
+            } else {
+                console.log("状態:ログアウト");
+                make_sign_out_display()
+            }
+        });
 
-    document.getElementById("myform").addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const file = saveCanvas()
-        const shopn_ame = document.getElementById("shopn_ame").value;
-        const address = document.getElementById("address").value;
-        const phone_no = document.getElementById("phone_no").value;
-        // ここでユーザー情報を取得した時点で、ユニークなIDを作成し、バーコードを作成、画像化,保存,バーコードURLをfirestoreに保存
-        try {
-            // qrcodeをfirestrageに保存
-            const storageRef = ref(storage, "shops/" + shop_id + "/" + "images/" + "QRcode/" );
-            await uploadString(storageRef, file,'data_url').then(async(snapshot) => {
-                console.log('Uploaded a blob or file!');
-                // 保存したqrcodeのurlを取得してfirestoreに一緒に保存
-                await getDownloadURL(storageRef)
-                .then(async(url) => {
-                    console.log("firesorageのqrcodeURL",url);
-                     // ドキュメントをユーザーIDにする 
-                    await setDoc(doc(db, "shops", shop_id), {
-                        address: address,
-                        email: shop_email,
-                        shop_id: shop_id,
-                        shop_name: shopn_ame,
-                        phone_nomber: phone_no,
-                        web:"",
-                        photo: "",
-                        sns: "",
-                        QRcode: url,
-                        date: Timestamp.fromDate(new Date()),
-                    });
-                })
-                .catch((error) => {
-                    // Handle any errors
-                    console.log("firestoreに書き込めませんでした",error);
-                });
+        // qcode作成     
+        function saveCanvas() {
+            const qrcodetag = document.getElementById("qrcode")
+            var qrcode = new QRCode(qrcodetag, {
+                // デプロイ後確認🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗
+                text: `https://smore-832e4.web.app/飼い主/add_this_shop.html?shop_ID=${shop_id}`,
+                width: 128,
+                height: 128,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
             });
-            window.location.href = './店舗管理画面.html';
-        } catch (e) {
-            console.error("Error adding document: ", e);
-      }
-    });
+            var canvas = qrcodetag.firstElementChild;
+            let context = canvas.getContext('2d');
+            // base64エンコードされたデータを取得 「data:image/png;base64,iVBORw0k～」
+            var base64 = canvas.toDataURL("png");
+            return base64
+        }
+
+        document.getElementById("myform").addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const file = saveCanvas()
+            const shopn_ame = document.getElementById("shopn_ame").value;
+            const address = document.getElementById("address").value;
+            const phone_no = document.getElementById("phone_no").value;
+            // ここでユーザー情報を取得した時点で、ユニークなIDを作成し、バーコードを作成、画像化,保存,バーコードURLをfirestoreに保存
+            try {
+                // qrcodeをfirestrageに保存
+                const storageRef = ref(storage, "shops/" + shop_id + "/" + "images/" + "QRcode/");
+                await uploadString(storageRef, file, 'data_url').then(async (snapshot) => {
+                    console.log('Uploaded a blob or file!');
+                    // 保存したqrcodeのurlを取得してfirestoreに一緒に保存
+                    await getDownloadURL(storageRef)
+                        .then(async (url) => {
+                            console.log("firesorageのqrcodeURL", url);
+                            // ドキュメントをユーザーIDにする 
+                            await setDoc(doc(db, "shops", shop_id), {
+                                address: address,
+                                email: shop_email,
+                                shop_id: shop_id,
+                                shop_name: shopn_ame,
+                                phone_nomber: phone_no,
+                                web: "",
+                                photo: "",
+                                sns: "",
+                                QRcode: url,
+                                date: Timestamp.fromDate(new Date()),
+                            });
+                        })
+                        .catch((error) => {
+                            // Handle any errors
+                            console.log("firestoreに書き込めませんでした", error);
+                        });
+                });
+                window.location.href = './店舗管理画面.html';
+            } catch (e) {
+                console.error("Error adding document: ", e);
+            }
+        });
     </script>
 </body>
+
 </html>
