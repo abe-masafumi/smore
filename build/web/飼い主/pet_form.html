@@ -13,11 +13,11 @@
 <body>
     <div class="center none" id="prompt" style="height: 800px;">
         <div class="center" style="width: 400px;">
-          <h1>ログインしてください</h1>
-          <img width="100%" src="../images/Smore_illust_12.png" alt="">
-          <p>ログインは<span id="login" onclick="location.href=['./login_form.html']">こちら</span></p>
+            <h1>ログインしてください</h1>
+            <img width="100%" src="../images/Smore_illust_12.png" alt="">
+            <p>ログインは<span id="login" onclick="location.href=['./login_form.html']">こちら</span></p>
         </div>
-      </div>
+    </div>
     <div id="big_container">
         <header class="page-header center">
             <h1>ペット情報登録</h1>
@@ -29,67 +29,89 @@
 
                     <form id="myform" class="m_auto">
                         <div class="space_32"></div>
-                        <p>ペットの名前</p>
-                        <input type="text" placeholder=" ペットの名前" id="pet_name" required style="font-size: 16px;">
+                        <p>ペットの名前<span class="sub">必須</span></p>
+                        <input type="text" placeholder=" たまちゃん" id="pet_name" required style="font-size: 16px;">
                         <div class="space_32"></div>
-                        <p>生年月日</p>
-                        <input type="text" placeholder=" 生年月日" id="birthday" required style="font-size: 16px;">
+                        <p>生年月日<span class="sub">必須</span></p>
+                        <div class="form-select-wrap">
+                            <select class="birthday-year" id="select_year" required>
+                            </select>
+                            / 
+                            <select class="birthday-month" id="select_month" required>
+                            </select>
+                            /
+                            <select class="birthday-day" id="select_day" required>
+                            </select>
+                        </div>
+                        <!-- <input type="text" placeholder=" 生年月日" id="birthday" required style="font-size: 16px;"> -->
                         <div class="space_32"></div>
-                        <p>性別 (男の子・女の子)<br>
-                            <input type="radio" name="sex" value="男"> 男
-                            <input type="radio" name="sex" value="女" required> 女
+                        <p>性別<span class="sub">必須</span><br>
+                            <lavel><input type="radio" name="sex" value="男"> 男</lavel>
+                            <lavel><input type="radio" name="sex" value="女" required> 女</lavel>
                         </p>
                         <div class="space_48"></div>
-                        <p>犬種</p>
-                        <input type="text" id="type" placeholder=" 犬種" required style="font-size: 16px;">
+                        <p>犬種<span class="sub">必須</span></p>
+                        <input type="text" id="type" placeholder=" トイプードル" required style="font-size: 16px;">
                         <div class="space_48"></div>
-                        <p>去勢・避妊（未・済)<br>
-                            <input type="radio" name="去勢" value="未" required> 未
-                            <input type="radio" name="去勢" value="済"> 済
+                        <p>去勢・避妊<span class="sub">必須</span><br>
+                            <label><input type="radio" name="去勢" value="未" required> 未</label>
+                            <label><input type="radio" name="去勢" value="済"> 済</label>
                         </p>
                         <div class="space_48"></div>
-                        <p>体重</p>
-                        <input type="number" id="weight" placeholder=" 体重" required style="font-size: 16px;">
+                        <!-- <p>体重</p>
+                        <labbel><input type="number" id="weight" placeholder=" 8" required style="font-size: 16px;">kg
+                        </labbel> -->
+                        <p>体重<span class="sub">必須</span></p>
+                        <div class="weight">
+                            <select class="weight01" id="weight01" required>
+                            </select>
+                            .
+                            <select class="weight02" id="weight02" required>
+                            </select>
+                            kg
+
+                        </div>
                         <div class="space_48"></div>
-                        <p>毛色</p>
-                        <input type="text" id="color" placeholder=" 毛色" required style="font-size: 16px;">
+                        <p>毛色<span class="sub">必須</span></p>
+                        <input type="text" id="color" placeholder=" ブラウン" required style="font-size: 16px;">
                         <div class="space_48"></div>
-                        <p>耳（たれ耳・立ち耳)<br>
-                            <input type="radio" name="耳" value="たれ耳" required> たれ耳
-                            <input type="radio" name="耳" value="立ち耳"> 立ち耳
+                        <p>耳<span class="sub">必須</span><br>
+                            <label><input type="radio" name="耳" value="たれ耳" required> たれ耳</label>
+                            <label><input type="radio" name="耳" value="立ち耳"> 立ち耳</label>
                         </p>
                         <div class="space_48"></div>
                         <p>ごはん(品名・量)</p>
-                        <input type="text" id="meal" placeholder=" ごはん" style="font-size: 16px;">
+                        <input type="text" id="meal" placeholder=" ミシュワン" style="font-size: 16px;">
                         <div class="space_48"></div>
                         <p>かかりつけの病院</p>
-                        <input type="text" id="doctor" placeholder=" かかりつけの病院" style="font-size: 16px;">
+                        <input type="text" id="doctor" placeholder=" 病院名" style="font-size: 16px;">
                         <div class="space_48"></div>
                         <p>病歴・アレルギー</p>
-                        <input type="text" id="allergy" placeholder=" 病歴・アレルギー" style="font-size: 16px;">
+                        <input type="text" id="allergy" placeholder=" ノミアレルギー性皮膚炎" style="font-size: 16px;">
                         <div class="space_48"></div>
                         <p>お薬</p>
-                        <input type="text" id="medicine" placeholder=" お薬" style="font-size: 16px;">
+                        <input type="text" id="medicine" placeholder=" マイフリーガード" style="font-size: 16px;">
                         <div class="space_48"></div>
                         <p>サロン</p>
-                        <input type="text" id="salon" placeholder=" サロン" style="font-size: 16px;">
+                        <input type="text" id="salon" placeholder=" サロン名" style="font-size: 16px;">
                         <div class="space_48"></div>
                         <p>マイクロチップ番号</p>
-                        <input type="text" id="microchip_number" placeholder=" マイクロチップ番号" style="font-size: 16px;">
+                        <input type="number" id="microchip_number" placeholder=" 392141111111111"
+                            style="font-size: 16px;">
                         <div class="space_48"></div>
-                        <p>犬の登録をし、鑑札を受け取っていますか？（はい、いいえ、分からない)<br>
-                            <input type="radio" name="登録" value="はい" required> はい
-                            <input type="radio" name="登録" value="いいえ"> いいえ
-                            <input type="radio" name="登録" value="分からない"> 分からない
+                        <p>犬の登録をし、鑑札を受け取って</br>いますか？<br>
+                            <label><input type="radio" name="登録" value="はい" required> はい</label>
+                            <label><input type="radio" name="登録" value="いいえ"> いいえ</label>
+                            <label><input type="radio" name="登録" value="分からない"> 分からない</label>
                         </p>
                         <div class="space_48"></div>
-                        <p>狂犬病予防注射を受け、注射済み票を受け取っていますか？（はい、いいえ、分からない<br>
-                            <input type="radio" name="注射" value="はい" required> はい
-                            <input type="radio" name="注射" value="いいえ"> いいえ
-                            <input type="radio" name="注射" value="分からない"> 分からない
+                        <p>狂犬病予防注射を受け、注射済み票を</br>受け取っていますか？<br>
+                            <label><input type="radio" name="注射" value="はい" required> はい</label>
+                            <label><input type="radio" name="注射" value="いいえ"> いいえ</label>
+                            <label><input type="radio" name="注射" value="分からない"> 分からない</label>
                         </p>
                         <div class="space_48"></div>
-                        <p>写真1:ペット写真</p>
+                        <p>写真1:ペット写真<span class="sub">必須</span></p>
                         <input type="file" accept='.jpeg, .png, .jpg' id="pet_img" required>
                         <p id="img01_uploading"></p>
                         <div class="space_48"></div>
@@ -111,6 +133,8 @@
         </main>
         <footer class="page-footer"></footer>
     </div>
+    <script src="../birthday.js"></script>
+    <script src="../体重.js"></script>
     <script type="module">
 
         import { connect_firebase } from "../firebaseConfig.js"
@@ -271,6 +295,40 @@
             );
         });
 
+        let select_year_value;
+        let select_month_value;
+        let select_day_value;
+        const select_year = document.getElementById('select_year')
+        select_year.addEventListener('change',() => {
+            console.log(select_year.value)
+            select_year_value = select_year.value
+        })
+        const select_month = document.getElementById('select_month')
+        select_month.addEventListener('change',() => {
+            console.log(select_month.value)
+            select_month_value = select_month.value
+        })
+        const select_day = document.getElementById('select_day')
+        select_day.addEventListener('change',() => {
+            console.log(select_day.value)
+            select_day_value = select_day.value
+        })
+
+        let weight01_value;
+        let weight02_value;
+        const weight01 = document.getElementById('weight01');
+        weight01.addEventListener('change', () => {
+            console.log(weight01.value)
+            weight01_value = weight01.value
+        });
+        const weight02 = document.getElementById('weight02');
+        weight02.addEventListener('change', () => {
+            console.log(weight02.value)
+            weight02_value = weight02.value
+        });
+
+
+
         // 登録
         const myform = document.getElementById("myform")
         myform.addEventListener('submit', async (e) => {
@@ -297,14 +355,16 @@
                 // });
 
                 const pet_name = document.getElementById("pet_name").value;
-                const birthday = document.getElementById("birthday").value;
+                // const birthday = document.getElementById("birthday").value;
+                const birthday = `${select_year_value}年${select_month_value}月${select_day_value}日`;
                 const sex = myform.elements.sex.value;
                 const 去勢 = myform.去勢.value;
                 const 耳 = myform.耳.value;
                 const 登録 = myform.登録.value;
                 const 注射 = myform.注射.value;
                 const type = document.getElementById("type").value;
-                const weight = document.getElementById("weight").value;
+                const weight = `${weight01_value}.${weight02_value}kg`;
+                // const weight = document.getElementById("weight").value;
                 const color = document.getElementById("color").value;
                 const meal = document.getElementById("meal").value;
                 const doctor = document.getElementById("doctor").value;
