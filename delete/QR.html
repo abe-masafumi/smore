@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript" src="./qrcode.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <div style="margin: 10px;">
+    <p>shop</p>
+    <div id="qrcode_shop"></div>
+  </div>
+
+  <div style="margin: 10px;">
+    <p>owner</p>
+    <div id="qrcode_owner"></div>
+  </div>
+  <script>
+    // qcode作成     
+    function saveCanvas01() {
+      const qrcodetag = document.getElementById("qrcode_shop")
+      var qrcode = new QRCode(qrcodetag, {
+        // デプロイ後確認🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗
+        text: `https://smore-832e4.web.app/飼い主/login_form.html`,
+        width: 128,
+        height: 128,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+      var canvas = qrcodetag.firstElementChild;
+      let context = canvas.getContext('2d');
+      // base64エンコードされたデータを取得 「data:image/png;base64,iVBORw0k～」
+      var base64 = canvas.toDataURL("png");
+      return base64
+    }
+
+    saveCanvas01()
+    function saveCanvas02() {
+      const qrcodetag = document.getElementById("qrcode_owner")
+      var qrcode = new QRCode(qrcodetag, {
+        // デプロイ後確認🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗
+        text: `https://smore-832e4.web.app/店舗/login_form.html`,
+        width: 128,
+        height: 128,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+      var canvas = qrcodetag.firstElementChild;
+      let context = canvas.getContext('2d');
+      // base64エンコードされたデータを取得 「data:image/png;base64,iVBORw0k～」
+      var base64 = canvas.toDataURL("png");
+      return base64
+    }
+    saveCanvas02()
+  </script>
+</body>
+
+</html>
