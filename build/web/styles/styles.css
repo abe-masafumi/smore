@@ -88,7 +88,7 @@ fieldset {
 
 /* ここから */
 body {
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 header {
@@ -151,7 +151,7 @@ button {
     width: 250px;
     height: 100px;
     background-color: pink;
-    border-radius:18px;
+    border-radius: 18px;
     overflow: hidden;
 }
 
@@ -165,38 +165,51 @@ button {
 }
 
 
-.form-select-wrap{
+.form-select-wrap {
     display: flex;
     max-width: 300px;
     align-items: center;
-  }
+}
 
-  .form-select-wrap > select{
+.form-select-wrap>select {
     padding: 8px 16px;
     margin-left: 10px;
     margin-right: 10px;
     border: 1px solid gray;
     border-radius: 4px;
     font-size: 14px;
-  }
-  .form-select-wrap > .birthday-year {
-      margin-left: 0px;
-  }
+}
 
-  .weight {
+.form-select-wrap>.birthday-year {
+    margin-left: 0px;
+}
+
+.weight {
     display: flex;
     max-width: 300px;
     align-items: center;
-  } 
+}
 
-  .weight > select{
+.weight>select {
     padding: 8px 16px;
     margin-left: 10px;
     margin-right: 10px;
     border: 1px solid gray;
     border-radius: 4px;
     font-size: 14px;
-  }
-  .weight > .weight01 {
-      margin-left: 0px;
-  }
+}
+
+.weight>.weight01 {
+    margin-left: 0px;
+}
+
+.sub {
+    width: 20px;
+    height: 12px;
+    color: red;
+    border: .5px solid gray;
+    font-size: 12px;
+    border-radius: 20px;
+    padding: 0 5px;
+    margin-left: 10px;
+}
