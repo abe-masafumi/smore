@@ -18,15 +18,22 @@
 </head>
 
 <body>
-  <div class="center none" id="prompt" style="height: 800px;">
-    <div class="center" style="width: 400px;">
+  <div class="center none" id="prompt" style="height: 600px;">
+    <div class="center">
       <h1>ログインしてください</h1>
       <img width="100%" src="../images/Smore_illust_12.png" alt="">
       <p>ログインは<span id="login">こちら</span></p>
     </div>
-  </div>
-  <div class="none" id="info">ご来店ありがとうございます<p onclick="location.href=['./飼い主my_page.html']">mypageに戻る</p>
-  </div>
+  </div> 
+  <div class="none center" style="height: 600px;" id="info">
+    <div class="center"> 
+      <p>ご来店ありがとうございます</p>
+      <div class="space_32"></div>
+      <img width="100%" src="../images/Smore_illust_2.png" alt="">
+      <div class="space_32"></div>
+      <p onclick="location.href=['./飼い主my_page.html']">mypageに戻る</p>
+    </div>
+  </div> 
   <div id="big_container">
     <header class="page-header row">
       <div class="col-4 center">
@@ -36,13 +43,16 @@
       <div class="col-4"></div>
     </header>
     <main>
-      <div class="center">
-        <div class="space_32"></div>
-        <p>店舗に来店しますか？</p>
-        <div class="space_32"></div>
-        <button id="add_shop">はい</button>
-        <div class="space_32"></div>
-        <p>キャンセル</p>
+      <div class="center" style="height: 500px;">
+        <div class="center">
+          <div class="space_32"></div>
+          <p>店舗に来店しますか？</p>
+          追加説明
+          <div class="space_32"></div>
+          <button id="add_shop">はい</button>
+          <div class="space_32"></div>
+          <p id="move_top_page">キャンセル</p>
+        </div>
       </div>
     </main>
     <footer class="page-footer"></footer>
@@ -131,6 +141,18 @@
       info.classList.remove("none");
       big_container.classList.add("none");
     });
+
+
+    const move_top_page = document.getElementById('move_top_page');
+    move_top_page.addEventListener('click',() => {
+      const info = confirm("来店せずにmypageに戻りますか？");
+      if (info) {
+        window.location.href = './飼い主my_page.html';
+      } else {
+        return
+      }
+    });
+
   </script>
 </body>
 

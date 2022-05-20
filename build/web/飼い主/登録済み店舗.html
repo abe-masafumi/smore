@@ -17,8 +17,8 @@
 </head>
 
 <body>
-    <div class="center none" id="prompt" style="height: 800px;">
-        <div class="center" style="width: 400px;">
+    <div class="center none" id="prompt" style="height: 600px;">
+        <div class="center">
             <h1>ログインしてください</h1>
             <img width="100%" src="../images/Smore_illust_12.png" alt="">
             <p>ログインは<span id="login" onclick="location.href=['./login_form.html']">こちら</span></p>
@@ -46,6 +46,7 @@
     </div>
     <script type="module">
         import { connect_firebase } from "../firebaseConfig.js"
+        import { make_sign_out_display } from "../functions.js"
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
         import { getFirestore, getDoc, doc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
         // firebaseと接続
@@ -78,6 +79,7 @@
                 });
             } else {
                 console.log("No such document!");
+                make_sign_out_display()
             }
         }
 
