@@ -187,10 +187,13 @@
         const img02_uploading = document.getElementById('img02_uploading');
         const img03_uploading = document.getElementById('img03_uploading');
 
-        const pet_img = document.getElementById("pet_img").addEventListener('change', (e) => {
+        const pet_img = document.getElementById("pet_img");
+        pet_img.addEventListener('change', (e) => {
+            console.log(e.target.files);
+
             pet_img_file = e.target.files[0];
             // pet_img
-            const storageRef01 = ref(storage, "pets/" + newDoc + "/" + "pet_img")
+            const storageRef01 = ref(storage, "pets/" + newDoc + "/" + "pet_img");
             const uploadTask01 = uploadBytesResumable(storageRef01, pet_img_file);
             uploadTask01.on('state_changed',
                 (snapshot) => {
@@ -221,11 +224,13 @@
                 }
             );
         });
-        const 狂犬病予防注射済み票 = document.getElementById("狂犬病予防注射済み票").addEventListener('change', (e) => {
+        const 狂犬病予防注射済み票 = document.getElementById("狂犬病予防注射済み票");
+        狂犬病予防注射済み票.addEventListener('change', (e) => {
+            console.log(e.target.files);
             狂犬病予防注射済み票_file = e.target.files[0];
             // 狂犬病予防注射済み票
-            const storageRef02 = ref(storage, "pets/" + newDoc + "/" + "狂犬病予防注射済み票_img")
-            const uploadTask02 = uploadBytesResumable(storageRef02, pet_img_file);
+            const storageRef02 = ref(storage, "pets/" + newDoc + "/" + "狂犬病予防注射済み票_img");
+            const uploadTask02 = uploadBytesResumable(storageRef02, 狂犬病予防注射済み票_file);
             uploadTask02.on('state_changed',
                 (snapshot) => {
                     post_button.classList.add("uploading");
@@ -258,11 +263,13 @@
             );
         });
 
-        const 混合ワクチン接種証明書 = document.getElementById("混合ワクチン接種証明書").addEventListener('change', (e) => {
+        const 混合ワクチン接種証明書 = document.getElementById("混合ワクチン接種証明書");
+        混合ワクチン接種証明書.addEventListener('change', (e) => {
+            console.log(e.target.files);
+
             混合ワクチン接種証明書_file = e.target.files[0];
-            // pet_img
-            const storageRef03 = ref(storage, "pets/" + newDoc + "/" + "混合ワクチン接種証明書url")
-            const uploadTask03 = uploadBytesResumable(storageRef03, pet_img_file);
+            const storageRef03 = ref(storage, "pets/" + newDoc + "/" + "混合ワクチン接種証明書url");
+            const uploadTask03 = uploadBytesResumable(storageRef03, 混合ワクチン接種証明書_file);
 
             uploadTask03.on('state_changed',
                 (snapshot) => {
@@ -372,11 +379,7 @@
                 const medicine = document.getElementById("medicine").value;
                 const salon = document.getElementById("salon").value;
                 const microchip_number = document.getElementById("microchip_number").value;
-                console.log({
-                    petname: pet_name, birthday: birthday, sex: sex, 去勢: 去勢, 耳: 耳, 登録: 登録, 注射: 注射,
-                    type: type, weight: weight, color: color, meal: meal, doctor: doctor, allergy: allergy, medicine: medicine,
-                    salon: salon, microchip_number: microchip_number
-                });
+
                 let data = {
                     写真: pet_img_url,
                     名前: pet_name,
