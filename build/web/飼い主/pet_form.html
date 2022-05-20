@@ -8,6 +8,12 @@
     <title>smore</title>
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="stylesheet" href="../styles/common.css">
+    <style>
+        body {
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+    </style>
 </head>
 
 <body>
@@ -36,7 +42,7 @@
                         <div class="form-select-wrap">
                             <select class="birthday-year" id="select_year" required>
                             </select>
-                            / 
+                            /
                             <select class="birthday-month" id="select_month" required>
                             </select>
                             /
@@ -306,17 +312,17 @@
         let select_month_value;
         let select_day_value;
         const select_year = document.getElementById('select_year')
-        select_year.addEventListener('change',() => {
+        select_year.addEventListener('change', () => {
             console.log(select_year.value)
             select_year_value = select_year.value
         })
         const select_month = document.getElementById('select_month')
-        select_month.addEventListener('change',() => {
+        select_month.addEventListener('change', () => {
             console.log(select_month.value)
             select_month_value = select_month.value
         })
         const select_day = document.getElementById('select_day')
-        select_day.addEventListener('change',() => {
+        select_day.addEventListener('change', () => {
             console.log(select_day.value)
             select_day_value = select_day.value
         })

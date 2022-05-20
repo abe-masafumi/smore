@@ -8,16 +8,22 @@
     <title>smore</title>
     <link rel="stylesheet" href="../styles/common.css">
     <link rel="stylesheet" href="../styles/styles.css">
+    <style>
+        body {
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+    </style>
 </head>
 
 <body>
     <div class="center none" id="prompt" style="height: 800px;">
         <div class="center" style="width: 400px;">
-          <h1>ログインしてください</h1>
-          <img width="100%" src="../images/Smore_illust_12.png" alt="">
-          <p>ログインは<span id="login" onclick="location.href=['./login_form.html']">こちら</span></p>
+            <h1>ログインしてください</h1>
+            <img width="100%" src="../images/Smore_illust_12.png" alt="">
+            <p>ログインは<span id="login" onclick="location.href=['./login_form.html']">こちら</span></p>
         </div>
-      </div>
+    </div>
     <div id="big_container">
         <header class="page-header row">
             <div class="col-4 center">
@@ -45,9 +51,11 @@
             <div class="space_32"></div>
             <div style="margin: auto;">
                 <div class="flex_box" style="width: 250px; margin: auto;">
-                    <button id="pet_add_button" onclick="location.href=['./pet_form.html']"></button>
-                    <p style="padding-left: 10px; font-size: 18px;">新しくペットを登録する</p>
+                    <button id="pet_add_button" onclick="location.href=['./pet_form.html']" style="font-size: 26px; text-align:center; line-height: 26px;">+</button>
+                    <p style="padding-left: 10px; font-size: 18px; margin: auto;">新しくペットを登録する</p>
                 </div>
+            <div class="space_32"></div>
+
             </div>
         </main>
         <footer class="page-footer"></footer>
