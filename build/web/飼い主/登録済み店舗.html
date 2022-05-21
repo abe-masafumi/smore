@@ -20,6 +20,7 @@
         </div>
     </div>
     <!-- ----end---- -->
+    <div id="no_list" class="none">店舗の登録がありません</div>
     <!-- 通常時の画面 -->
     <div id="big_container">
         <header class="page-header row">
@@ -30,6 +31,8 @@
                 <h1>登録済ショップ一覧</h1>
             </div>
             <div class="col-3 center">
+                <!-- このボタンは非表示 -->
+                <button class="none" id="sign_out">ログアウト</button>
             </div>
         </header>
         <main>
@@ -53,6 +56,7 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
+        const no_list = document.getElementById('no_list');
         const ul = document.getElementById('shop_ul');
         // userのデータをペットのデータを取得して表示する
         async function get_data(uid) {
@@ -61,6 +65,7 @@
             const shop_docSnap = await getDoc(shop_list_Ref);
 
             if (shop_docSnap.exists()) {
+                no_list.classList.add("none");
                 const shop_list = shop_docSnap.data()["shops"];
                 console.log("Document data:", shop_list);
                 shop_list.forEach(async (shopID) => {
@@ -78,7 +83,7 @@
                 });
             } else {
                 console.log("No such document!");
-                make_sign_out_display()
+                no_list.classList.remove("none");
             }
         }
 
@@ -87,10 +92,10 @@
             if (user) {
                 const uid = user.uid;
                 console.log(uid, "状態:ログイン中");
-                return get_data(uid)
+                return get_data(uid);
             } else {
                 console.log("状態:ログアウト");
-                make_sign_out_display()
+                make_sign_out_display();
             }
         });
     </script>

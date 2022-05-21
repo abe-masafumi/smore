@@ -110,7 +110,6 @@
                 });
             loading.classList.add('none');
             big_container.classList.remove('none');
-
         }
 
         // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
@@ -121,7 +120,8 @@
                 return get_data(uid)
             } else {
                 console.log("状態:ログアウト");
-                make_sign_out_display()
+                make_sign_out_display();
+                loading.classList.add('none');
             }
         });
     </script>
