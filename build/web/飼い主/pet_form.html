@@ -33,7 +33,7 @@
                     <form id="myform" class="m_auto">
                         <div class="space_32"></div>
                         <p>ペットの名前<span class="sub">必須</span></p>
-                        <input type="text" placeholder=" たまちゃん" id="pet_name" required style="font-size: 16px;">
+                        <input type="text" placeholder=" ぽち" id="pet_name" required style="font-size: 16px;">
                         <div class="space_32"></div>
                         <p>生年月日<span class="sub">必須</span></p>
                         <div class="form-select-wrap">
@@ -48,11 +48,11 @@
                         </div>
                         <div class="space_32"></div>
                         <p>性別<span class="sub">必須</span><br>
-                            <lavel><input type="radio" name="sex" value="男"> 男</lavel>
-                            <lavel><input type="radio" name="sex" value="女" required> 女</lavel>
+                            <lavel><input type="radio" name="sex" value="オス"> オス</lavel>
+                            <lavel><input type="radio" name="sex" value="メス" required> メス</lavel>
                         </p>
                         <div class="space_48"></div>
-                        <p>犬種<span class="sub">必須</span></p>
+                        <p>犬種 (分からない場合はミックスと記入してください)<span class="sub">必須</span></p>
                         <input type="text" id="type" placeholder=" トイプードル" required style="font-size: 16px;">
                         <div class="space_48"></div>
                         <p>去勢・避妊<span class="sub">必須</span><br>
@@ -79,32 +79,32 @@
                             <label><input type="radio" name="耳" value="立ち耳"> 立ち耳</label>
                         </p>
                         <div class="space_48"></div>
-                        <p>ごはん(品名・量)</p>
-                        <input type="text" id="meal" placeholder=" ミシュワン" style="font-size: 16px;">
+                        <p>ごはん(品名・一日の給餌量)</p>
+                        <label ><input type="text" id="meal" placeholder=" ミシュワン,200" style="font-size: 16px;"> g</label>
                         <div class="space_48"></div>
                         <p>かかりつけの病院</p>
                         <input type="text" id="doctor" placeholder=" 病院名" style="font-size: 16px;">
                         <div class="space_48"></div>
                         <p>病歴・アレルギー</p>
-                        <input type="text" id="allergy" placeholder=" ノミアレルギー性皮膚炎" style="font-size: 16px;">
+                        <input type="text" id="allergy" placeholder=" 皮膚炎,チキンアレルギー" style="font-size: 16px;">
                         <div class="space_48"></div>
-                        <p>お薬</p>
+                        <p>お薬 (現在服用中のお薬)</p>
                         <input type="text" id="medicine" placeholder=" マイフリーガード" style="font-size: 16px;">
                         <div class="space_48"></div>
                         <p>サロン</p>
                         <input type="text" id="salon" placeholder=" サロン名" style="font-size: 16px;">
                         <div class="space_48"></div>
-                        <p>マイクロチップ番号</p>
+                        <p>マイクロチップ番号 (15桁の数字)</p>
                         <input type="number" id="microchip_number" placeholder=" 392141111111111"
                             style="font-size: 16px;">
                         <div class="space_48"></div>
-                        <p>犬の登録をし、鑑札を受け取って</br>いますか？<br>
+                        <p>犬の登録をし、鑑札を受け取って</br>いますか？<span class="sub">必須</span><br>
                             <label><input type="radio" name="登録" value="はい" required> はい</label>
                             <label><input type="radio" name="登録" value="いいえ"> いいえ</label>
                             <label><input type="radio" name="登録" value="分からない"> 分からない</label>
                         </p>
                         <div class="space_48"></div>
-                        <p>狂犬病予防注射を受け、注射済み票を</br>受け取っていますか？<br>
+                        <p>狂犬病予防注射を受け、注射済み票を</br>受け取っていますか？<span class="sub">必須</span><br>
                             <label><input type="radio" name="注射" value="はい" required> はい</label>
                             <label><input type="radio" name="注射" value="いいえ"> いいえ</label>
                             <label><input type="radio" name="注射" value="分からない"> 分からない</label>
