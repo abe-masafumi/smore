@@ -15,7 +15,7 @@ function createOptionForElements(elem, val) {
 }
 
 //年の生成
-for(let i = 1920; i <= 2020; i++) {
+for(let i = 1995; i <= 2022; i++) {
   createOptionForElements(userBirthdayYear, i);
 }
 //月の生成
