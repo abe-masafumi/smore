@@ -126,7 +126,7 @@
       }
 
       // -----shop側に追加の処理-----
-      const docRef_to_user = doc(db, 'users', user_id, 'registration_shop', "henohenomohezi");
+      const docRef_to_user = doc(db, 'users', user_id, 'registration_shop', "Store-entry-history");
       console.log("dore");
       const docSnap_user = await getDoc(docRef_to_user);
       if (docSnap_user.exists()) {
