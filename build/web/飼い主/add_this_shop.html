@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-  <!-- Access-Control-Allow-Origin: * -->
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>smore</title>
   <link rel="stylesheet" href="../styles/common.css">
   <link rel="stylesheet" href="../styles/styles.css">
+  <!-- スクロールできなくするcss -->
   <style>
     html,
     body {
@@ -18,6 +18,7 @@
 </head>
 
 <body>
+  <!-- ログインしてないけどページを開いちゃった時の画面 -->
   <div class="center none" id="prompt" style="height: 600px;">
     <div class="center">
       <h1>ログインしてください</h1>
@@ -25,6 +26,8 @@
       <p>ログインは<span id="login">こちら</span></p>
     </div>
   </div> 
+  <!-- ----end---- -->
+  <!-- 店舗追加後の画面 -->
   <div class="none center" style="height: 600px;" id="info">
     <div class="center"> 
       <p>ご来店ありがとうございます</p>
@@ -34,6 +37,9 @@
       <p onclick="location.href=['./飼い主my_page.html']">mypageに戻る</p>
     </div>
   </div> 
+  <!-- ----end---- -->
+
+  <!-- 通常時の画面 -->
   <div id="big_container">
     <header class="page-header row">
       <div class="col-4 center">
@@ -55,9 +61,10 @@
         </div>
       </div>
     </main>
+    <!-- footerは使ってない -->
     <footer class="page-footer"></footer>
   </div>
-
+  <!-- ----end---- -->
   <script type="module">
     import { connect_firebase } from "../firebaseConfig.js"
     import { make_sign_out_display } from "../functions.js"

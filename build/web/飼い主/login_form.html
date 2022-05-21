@@ -8,6 +8,7 @@
     <title>smore</title>
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="stylesheet" href="../styles/common.css">
+    <!-- スクロールできなくするcss -->
     <style>
         html,
         body {
@@ -17,13 +18,13 @@
 </head>
 
 <body>
+    <!-- js読み込み時のroading画面 -->
     <div id="loading" class="center" style="height: 600px;">loading...</div>
+    <!-- 通常時の画面 -->
     <div class="none" id="wait">
-
         <header class="page-header center">
             <h1>ログイン</h1>
         </header>
-
         <main>
             <div class="center">
                 <div class="form_container">
@@ -44,15 +45,15 @@
                     </form>
                 </div>
                 <div class="space_48"></div>
-
                 <!-- 登録してない人に登録画面へ遷移 -->
                 <p onclick="location.href=['./sign_up_form.html']">登録はこちらから</p>
             </div>
         </main>
-
+        <!-- footerは使ってない -->
         <footer class="page-footer"></footer>
-
     </div>
+    <!-- ----end---- -->
+
     <script src="../form_login_common.js"></script>
     <script type="module">
         import { connect_firebase } from "../firebaseConfig.js"

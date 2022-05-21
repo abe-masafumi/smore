@@ -116,8 +116,8 @@ header {
 }
 
 #pet_add_button {
-    height: 35px;
-    width: 35px;
+    height: 30px;
+    width: 30px;
     border-radius: 50%;
 }
 
@@ -148,7 +148,7 @@ button {
 }
 
 .div1 {
-    width: 250px;
+    width: 300px;
     height: 100px;
     background-color: pink;
     border-radius: 18px;

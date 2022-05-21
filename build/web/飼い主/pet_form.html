@@ -8,15 +8,10 @@
     <title>smore</title>
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="stylesheet" href="../styles/common.css">
-    <style>
-        body {
-            overflow-x: hidden;
-            overflow-y: auto;
-        }
-    </style>
 </head>
 
 <body>
+    <!-- ログインしてないけどページを開いちゃった時の画面 -->
     <div class="center none" id="prompt" style="height: 600px;">
         <div class="center">
             <h1>ログインしてください</h1>
@@ -24,6 +19,8 @@
             <p>ログインは<span id="login" onclick="location.href=['./login_form.html']">こちら</span></p>
         </div>
     </div>
+    <!-- ----end---- -->
+    <!-- 通常時の画面 -->
     <div id="big_container">
         <header class="page-header center">
             <h1>ペット情報登録</h1>
@@ -49,7 +46,6 @@
                             <select class="birthday-day" id="select_day" required>
                             </select>
                         </div>
-                        <!-- <input type="text" placeholder=" 生年月日" id="birthday" required style="font-size: 16px;"> -->
                         <div class="space_32"></div>
                         <p>性別<span class="sub">必須</span><br>
                             <lavel><input type="radio" name="sex" value="男"> 男</lavel>
@@ -64,9 +60,6 @@
                             <label><input type="radio" name="去勢" value="済"> 済</label>
                         </p>
                         <div class="space_48"></div>
-                        <!-- <p>体重</p>
-                        <labbel><input type="number" id="weight" placeholder=" 8" required style="font-size: 16px;">kg
-                        </labbel> -->
                         <p>体重<span class="sub">必須</span></p>
                         <div class="weight">
                             <select class="weight01" id="weight01" required>
@@ -137,8 +130,11 @@
                 </div>
             </div>
         </main>
+        <!-- footerは使ってない -->
         <footer class="page-footer"></footer>
     </div>
+    <!-- ----end---- -->
+
     <script src="../birthday.js"></script>
     <script src="../体重.js"></script>
     <script type="module">

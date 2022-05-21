@@ -8,30 +8,29 @@
     <title>smore</title>
     <link rel="stylesheet" href="../styles/common.css">
     <link rel="stylesheet" href="../styles/styles.css">
-    <style>
-        body {
-            overflow-x: hidden;
-            overflow-y: auto;
-        }
-    </style>
 </head>
 
 <body>
-    <div class="center none" id="prompt" style="height: 800px;">
-        <div class="center" style="width: 400px;">
+    <!-- js読み込み時のroading画面 -->
+    <div id="loading" class="center" style="height: 600px;">loading...</div>
+    <!-- ----end---- -->
+    <!-- ログインしてないけどページを開いちゃった時の画面 -->
+    <div class="center none" id="prompt" style="height: 600px;">
+        <div class="center">
             <h1>ログインしてください</h1>
             <img width="100%" src="../images/Smore_illust_12.png" alt="">
             <p>ログインは<span id="login" onclick="location.href=['./login_form.html']">こちら</span></p>
         </div>
     </div>
-    <div id="big_container">
+    <!-- ----end---- -->
+    <!-- 通常時の画面 -->
+    <div id="big_container" class="none">
         <header class="page-header row">
             <div class="col-4 center">
                 <button id="sign_out">ログアウト</button>
             </div>
             <h1 class="col-4 center">my_page</h1>
-            <div class="col-4 center">
-            </div>
+            <div class="col-4 center"></div>
         </header>
         <main>
             <div class="row text_center" style="height: 100px;">
@@ -46,21 +45,22 @@
                 </div>
             </div>
             <ul class="center" id="pet_ul">
-                <!-- jsで作成 -->
+            <!-- jsで作成 -->
             </ul>
             <div class="space_32"></div>
             <div style="margin: auto;">
                 <div class="flex_box" style="width: 250px; margin: auto;">
-                    <button id="pet_add_button" onclick="location.href=['./pet_form.html']" style="font-size: 26px; text-align:center; line-height: 26px;">+</button>
+                    <button id="pet_add_button" onclick="location.href=['./pet_form.html']"
+                        style="font-size: 26px; text-align:center; line-height: 26px;">+</button>
                     <p style="padding-left: 10px; font-size: 18px; margin: auto;">新しくペットを登録する</p>
                 </div>
-            <div class="space_32"></div>
+                <div class="space_32"></div>
 
             </div>
         </main>
         <footer class="page-footer"></footer>
-
     </div>
+    <!-- ----end---- -->
     <script type="module">
         import { connect_firebase } from "../firebaseConfig.js"
         import { make_sign_out_display } from "../functions.js"
@@ -71,6 +71,8 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
+        const loading = document.getElementById('loading');
+        const big_container = document.getElementById('big_container');
         const shop_name = document.getElementById('user_name');
         const ul = document.getElementById('pet_ul');
         // ログインユーザーの"pets"データを取得
@@ -89,23 +91,26 @@
                         const data_list = s.data();
                         // // 処理 ペット一覧を作成
                         const child = document.createElement('li');
-                        child.innerHTML = `<div class="row div1" style="margin-bottom: 15px;" onclick="location.href=['./pet_info.html?petID=${data_list["ID"]}']">
-      <div class="col-4 center">
-        <div class="img_box"><img src=${data_list["写真"]}></div>
-      </div>
-      <div class="col-8 m_auto text-left" style="padding-left: 8px;">
-        <p>名前: <span>${data_list["名前"]}</span></p>
-        <p>性別: <span>${data_list["性別"]}</span></p>
-        <p>生年月日: <span>${data_list["生年月日"]}</span></p>
-      </div>
-    </div>`;
+                        child.innerHTML = `
+                        <div class="row div1" style="margin-bottom: 15px;" onclick="location.href=['./pet_info.html?petID=${data_list["ID"]}']">
+                        <div class="col-4 center">
+                            <div class="img_box"><img src=${data_list["写真"]}></div>
+                        </div>
+                        <div class="col-8 m_auto text-left" style="padding-left: 8px;">
+                            <p>名前: <span>${data_list["名前"]}</span></p>
+                            <p>性別: <span>${data_list["性別"]}</span></p>
+                            <p>生年月日: <span>${data_list["生年月日"]}</span></p>
+                        </div>
+                        </div>`;
                         ul.appendChild(child);
-
                     })
                 },
                 (error) => {
                     console.log("データを読み込めませんでした。", error);
                 });
+            loading.classList.add('none');
+            big_container.classList.remove('none');
+
         }
 
         // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される

@@ -8,10 +8,18 @@
     <title>smore</title>
     <link rel="stylesheet" href="../styles/common.css">
     <link rel="stylesheet" href="../styles/styles.css">
-    <style>html,body{overflow: hidden}</style>
+    <!-- スクロールできなくするcss -->
+    <style>
+        html,
+        body {
+            overflow: hidden
+        }
+    </style>
 
 </head>
+
 <body>
+    <!-- ログインしてないけどページを開いちゃった時の画面 -->
     <div class="center none" id="prompt" style="height: 600px;">
         <div class="center">
             <h1>ログインしてください</h1>
@@ -19,6 +27,8 @@
             <p>ログインは<span id="login" onclick="location.href=['./login_form.html']">こちら</span></p>
         </div>
     </div>
+    <!-- ----end---- -->
+    <!-- 通常時の画面 -->
     <div id="big_container">
         <header class="page-header row">
             <div class="col-4 center">
@@ -27,13 +37,13 @@
             <h1 class="col-4 center">店舗管理画面</h1>
             <div class="col-4"></div>
         </header>
-       
+
         <main>
             <div class="row text_center" style="height: 100px;">
                 <div class="sample col-5 m_auto" style="text-align: left; padding-left: 20px;">
                     <p class="text">
-                        店舗名<br/>
-                        <p id="shop_name"></p>
+                        店舗名<br />
+                    <p id="shop_name"></p>
                     </p>
                 </div>
                 <div class="col-3"></div>
@@ -44,21 +54,24 @@
             </div>
             <div class="center">
                 <div class="space_48"></div>
-                <button style="font-size: 20px; width: 200px; height: 50px;" onclick="location.href=['./顧客管理画面.html']">顧客管理</button>
+                <button style="font-size: 20px; width: 200px; height: 50px;"
+                    onclick="location.href=['./顧客管理画面.html']">顧客管理</button>
                 <div class="space_48"></div>
                 <button style="font-size: 20px; width: 200px; height: 50px;">クーポン発行</button>
                 <div class="space_48"></div>
                 <button style="font-size: 20px; width: 200px; height: 50px;">メッセージ</button>
             </div>
         </main>
+        <!-- footerは使ってない -->
         <footer class="page-footer"></footer>
     </div>
+    <!-- ----end---- -->
 </body>
 <script type="module">
-    
+
     import { connect_firebase } from "../firebaseConfig.js"
-    import { make_sign_out_display } from  "../functions.js"
-    import { getAuth,onAuthStateChanged} from " https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+    import { make_sign_out_display } from "../functions.js"
+    import { getAuth, onAuthStateChanged } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
     import { getFirestore, getDoc, doc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
     // firebaseと接続
@@ -67,7 +80,7 @@
     const db = getFirestore(app);
 
     const shop_name = document.getElementById('shop_name');
-    
+
     async function get_data(uid) {
         const docRef = await doc(db, 'shops', uid);
         const docSnap = await getDoc(docRef);
@@ -77,18 +90,19 @@
     }
 
     // ログインしてた時は
-    onAuthStateChanged(auth, async (user) =>  {
+    onAuthStateChanged(auth, async (user) => {
         // ユーザーがログインしてる AND 店舗情報がすでに登録されていたら画面を店舗管理画面へ移動
-    if (user) {
-        console.log(user);
-        const uid = user.uid;
-        console.log("状態:ログイン中");
-        return get_data(uid);
-    } else {
-        console.log("状態:ログアウト");
-        make_sign_out_display();
-    }
-  });
+        if (user) {
+            console.log(user);
+            const uid = user.uid;
+            console.log("状態:ログイン中");
+            return get_data(uid);
+        } else {
+            console.log("状態:ログアウト");
+            make_sign_out_display();
+        }
+    });
 
-    </script>
+</script>
+
 </html>

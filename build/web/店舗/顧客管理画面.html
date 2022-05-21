@@ -8,15 +8,10 @@
     <title>smore</title>
     <link rel="stylesheet" href="../styles/common.css">
     <link rel="stylesheet" href="../styles/styles.css">
-    <style>
-        body {
-            overflow-x: hidden;
-            overflow-y: auto;
-        }
-    </style>
 </head>
 
 <body>
+    <!-- ログインしてないけどページを開いちゃった時の画面 -->
     <div class="center none" id="prompt" style="height: 600px;">
         <div class="center">
             <h1>ログインしてください</h1>
@@ -24,6 +19,8 @@
             <p>ログインは<span id="login" onclick="location.href=['./login_form.html']">こちら</span></p>
         </div>
     </div>
+    <!-- ----end---- -->
+    <!-- 通常時の画面 -->
     <div id="big_container">
         <header class="page-header row">
             <div class="center col-4">
@@ -43,8 +40,10 @@
                 <!-- jsで作成 -->
             </ul>
         </main>
+        <!-- footerは使ってない -->
         <footer class="page-footer"></footer>
     </div>
+    <!-- ----end---- -->
     <script type="module">
         import { connect_firebase } from "../firebaseConfig.js"
         import { make_sign_out_display } from "../functions.js"

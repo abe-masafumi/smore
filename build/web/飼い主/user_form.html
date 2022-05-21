@@ -18,6 +18,7 @@
 </head>
 
 <body>
+  <!-- ログインしてないけどページを開いちゃった時の画面 -->
   <div class="center none" id="prompt" style="height: 600px;">
     <div class="center">
       <h1>ログインしてください</h1>
@@ -25,6 +26,8 @@
       <p>ログインは<span id="login" onclick="location.href=['./login_form.html']">こちら</span></p>
     </div>
   </div>
+  <!-- ----end---- -->
+  <!-- 通常時の画面 -->
   <div id="big_container">
     <header class="page-header row">
       <div class="col-4 center">
@@ -37,8 +40,8 @@
       <div class="center">
         <div class="form_container">
           <div class="space_48"></div>
-          <form id="myform" class="m_auto">
 
+          <form id="myform" class="m_auto">
             <p>名前</p>
             <input type="text" placeholder=" your_name" id="name" required style="font-size: 16px;">
             <div class="space_32"></div>
@@ -52,11 +55,13 @@
               <input type="submit" value="登録" id="post_button">
             </div>
           </form>
+          
         </div>
       </div>
     </main>
+    <!-- footerは使ってない -->
     <footer class="page-footer"></footer>
-
+    <!-- ----end---- -->
   </div>
   <script type="module">
     import { connect_firebase } from "../firebaseConfig.js"

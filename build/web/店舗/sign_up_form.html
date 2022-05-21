@@ -9,6 +9,7 @@
   <title>smore</title>
   <link rel="stylesheet" href="../styles/common.css">
   <link rel="stylesheet" href="../styles/styles.css">
+  <!-- スクロールできなくするcss -->
   <style>
     html,
     body {
@@ -19,14 +20,15 @@
 </head>
 
 <body>
+  <!-- 通常時の画面 -->
   <header class="page-header center">
     <h1>新規登録画面</h1>
   </header>
   <main>
     <div class="center">
-
       <div class="form_container">
         <div class="space_48"></div>
+
         <form id="myform" class="m_auto">
           <p>メールアドレス</p>
           <input type="email" placeholder=" email" id="email" style="font-size: 16px;">
@@ -47,13 +49,15 @@
             <input type="submit" value="登録">
           </div>
         </form>
+
       </div>
       <div class="space_48"></div>
-
       <p onclick="location.href=['./login_form.html']">ログインはこちら</p>
     </div>
   </main>
+  <!-- footerは使ってない -->
   <footer class="page-footer"></footer>
+  <!-- ----end---- -->
   <script src="../form_sign_up_common.js"></script>
   <script type="module">
     import { connect_firebase } from "../firebaseConfig.js"

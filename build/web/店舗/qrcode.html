@@ -7,29 +7,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../styles/common.css">
   <link rel="stylesheet" href="../styles/styles.css">
+  <!-- スクロールできなくするcss -->
   <style>
     html,
     body {
       overflow: hidden
     }
   </style>
-
   <title>smore</title>
 </head>
-
 <body>
+  <!-- ログインしてないけどページを開いちゃった時の画面 -->
   <div class="center none" id="prompt" style="height: 600px;">
     <div class="center">
-        <h1>ログインしてください</h1>
-        <img width="100%" src="../images/Smore_illust_12.png" alt="">
-        <p>ログインは<span id="login" onclick="location.href=['./login_form.html']">こちら</span></p>
+      <h1>ログインしてください</h1>
+      <img width="100%" src="../images/Smore_illust_12.png" alt="">
+      <p>ログインは<span id="login" onclick="location.href=['./login_form.html']">こちら</span></p>
     </div>
-</div>
+  </div>
+  <!-- ----end---- -->
   <div class="space_32"></div>
+  <!-- QRコードの表示 -->
   <h1 class="text_center">店舗専用のQRコード</h1>
   <div class="center" style="height: 500px;">
     <img src="" alt="qrcode" id="img">
   </div>
+  <!-- ----end---- -->
   <script type="module">
     import { connect_firebase } from "../firebaseConfig.js"
     import { make_sign_out_display } from "../functions.js"
