@@ -11,6 +11,8 @@
 </head>
 
 <body>
+  <!-- js読み込み時のroading画面 -->
+  <div id="loading" class="center" style="height: 600px;">loading...</div>
   <!-- ログインしてないけどページを開いちゃった時の画面 -->
   <div class="center none" id="prompt" style="height: 600px;">
     <div class="center">
@@ -21,7 +23,7 @@
   </div>
   <!-- ----end---- -->
   <!-- 通常時の画面 -->
-  <div id="big_container">
+  <div id="big_container" class="none">
     <header class="page-header row">
       <div class="col-4 center">
         <button onclick="location.href=['./飼い主my_page.html']">戻る</button>
@@ -134,6 +136,9 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
+    const loading = document.getElementById('loading');
+    const big_container = document.getElementById('big_container');
+
     const p_img = document.getElementById('p_img');
     const name = document.getElementById('name');
     const 犬種 = document.getElementById('犬種');
@@ -162,8 +167,9 @@
 
       const docRef = doc(db, 'users', uid, "pets", petID);
       const docSnap = await getDoc(docRef);
-      // const shopName = docSnap.data()["名前"];
       console.log(docSnap.data());
+      loading.classList.add('none');
+      big_container.classList.remove('none');
       return open_data(docSnap.data())
     }
 
