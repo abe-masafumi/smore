@@ -48,8 +48,8 @@
                         </div>
                         <div class="space_32"></div>
                         <p>性別<span class="sub">必須</span><br>
-                            <lavel><input type="radio" name="sex" value="オス"> オス</lavel>
-                            <lavel><input type="radio" name="sex" value="メス" required> メス</lavel>
+                            <lavel><input type="radio" name="sex" value="男の子"> 男の子</lavel>
+                            <lavel><input type="radio" name="sex" value="女の子" required> 女の子</lavel>
                         </p>
                         <div class="space_48"></div>
                         <p>犬種 (分からない場合はミックスと記入してください)<span class="sub">必須</span></p>
@@ -68,7 +68,6 @@
                             <select class="weight02" id="weight02" required>
                             </select>
                             kg
-
                         </div>
                         <div class="space_48"></div>
                         <p>毛色<span class="sub">必須</span></p>
@@ -372,7 +371,7 @@
                 const 登録 = myform.登録.value;
                 const 注射 = myform.注射.value;
                 const type = document.getElementById("type").value;
-                const weight = `${weight01_value}.${weight02_value}kg`;
+                const weight = `${weight01_value}.${weight02_value}`;
                 // const weight = document.getElementById("weight").value;
                 const color = document.getElementById("color").value;
                 const meal = document.getElementById("meal").value;

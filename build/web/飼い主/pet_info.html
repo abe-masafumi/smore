@@ -47,6 +47,7 @@
         <ul style="width: 100%;">
           <li style="width: 250px; height: auto; object-fit: cover;">
             <img style="width: 100%; height: auto;" src="" alt="" id="p_img">
+            <button data-name="edit_img01" data-type="text" class="edit_btn">編集ボタン</button>
           </li>
           <li>
             <h1>名前<button data-name="edit_name" data-type="text" class="edit_btn">編集ボタン</button></h1>
@@ -135,15 +136,18 @@
 
   </div>
   <!-- ----end---- -->
-  <script src="../edit.js"></script>
+
   <script type="module">
     import { connect_firebase } from "../firebaseConfig.js"
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
     import { getFirestore, collection, getDoc, doc, onSnapshot, updateDoc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+    import { getStorage, ref, getDownloadURL, uploadBytes, uploadBytesResumable } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-storage.js";
+
     // firebaseと接続
     const app = connect_firebase();
     const auth = getAuth(app);
     const db = getFirestore(app);
+    const storage = getStorage(app);
 
     const loading = document.getElementById('loading');
     const big_container = document.getElementById('big_container');
@@ -172,11 +176,22 @@
     const microchip_number = document.getElementById('microchip_number');
     const 狂犬病予防注射済み票 = document.getElementById('狂犬病予防注射済み票');
     const 混合ワクチン接種証明書 = document.getElementById('混合ワクチン接種証明書');
+    /**
+     * selectのoptionタグを生成するための関数
+     * @param {Element} elem 変更したいselectの要素
+     * @param {Number} val 表示される文字と値の数値
+     */
+    function createOptionForElements(elem, val) {
+      let option = document.createElement('option');
+      option.text = val;
+      option.value = val;
+      elem.appendChild(option);
+    }
 
     let petID;
     let user_id;
     let data;
-
+    
     function get_url_data(user_id) {
       let params = (new URL(document.location)).searchParams;
       petID = params.get('petID');
@@ -227,6 +242,11 @@
     const edit_btn = document.getElementsByClassName('edit_btn');
     let child;
     let edit_name;
+    let myform
+    let pet_img_url;
+    let pet_img_file;
+
+
 
     console.log(edit_btn[0].value);
     for (let i = 0; i < edit_btn.length; i++) {
@@ -247,38 +267,640 @@
                         <input type="submit" value="登録" id="post_button"> 
                         </form>`;
             modal.appendChild(child);
+            myform = document.getElementById('myform');
+            myform.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              const edit_value = document.getElementById('edit_value');
+              const washingtonRef = doc(db, "users", user_id, "pets", petID);
+              await updateDoc(washingtonRef, {
+                [edit_name]: edit_value.value
+              });
+              modal.classList.remove('active');
+              overlay.classList.remove('active');
+              child.remove();
+            });
             break;
-          case "radio":
-            console.log('radioボタンです');
+
+          case "edit_weight":
+            edit_name = "体重"
+            child = document.createElement('div');
+            child.innerHTML = `  
+            <form id="myform" class="m_auto">
+              <p>体重<span class="sub">必須</span></p>
+                        <div class="weight">
+                            <select class="weight01" id="weight01" required>
+                            </select>
+                            .
+                            <select class="weight02" id="weight02" required>
+                            </select>
+                            kg
+                        </div>
+                        <div class="space_32"></div>   
+
+                        <input type="submit" value="登録" id="post_button"> 
+
+                        </form>`;
+            modal.appendChild(child);
+
+            let weight01 = document.querySelector('.weight01');
+            let weight02 = document.querySelector('.weight02');
+
+            //年の生成
+            for (let i = 1; i <= 30; i++) {
+              createOptionForElements(weight01, i);
+            }
+            //月の生成
+            for (let i = 0; i <= 9; i++) {
+              createOptionForElements(weight02, i);
+            }
+            myform = document.getElementById('myform');
+            myform.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              console.log(weight01.value);
+              console.log(weight02.value);
+              const edit_value = `${weight01.value}.${weight02.value}`
+              const washingtonRef = doc(db, "users", user_id, "pets", petID);
+              await updateDoc(washingtonRef, {
+                [edit_name]: edit_value
+              });
+              modal.classList.remove('active');
+              overlay.classList.remove('active');
+              child.remove();
+            });
             break;
-          case ("select"):
-            console.log("selectボックスです");;
+          case "edit_birthday":
+            edit_name = "生年月日"
+            child = document.createElement('div');
+            child.innerHTML = `  
+            <form id="myform" class="m_auto">
+              <p>生年月日<span class="sub">必須</span></p>
+                        <div class="form-select-wrap">
+                            <select class="birthday-year" id="select_year" required>
+                            </select>
+                            /
+                            <select class="birthday-month" id="select_month" required>
+                            </select>
+                            /
+                            <select class="birthday-day" id="select_day" required>
+                            </select>
+                            </div>
+                        <div class="space_32"></div>   
+
+                        <input type="submit" value="登録" id="post_button"> 
+
+                        </form>`;
+            modal.appendChild(child);
+
+            let birthday_year = document.querySelector('.birthday-year');
+            let birthday_month = document.querySelector('.birthday-month');
+            let birthday_day = document.querySelector('.birthday-day');
+
+            //年の生成
+            for (let i = 1995; i <= 2022; i++) {
+              createOptionForElements(birthday_year, i);
+            }
+            //月の生成
+            for (let i = 1; i <= 12; i++) {
+              createOptionForElements(birthday_month, i);
+            }
+            //日の生成
+            for (let i = 1; i <= 31; i++) {
+              createOptionForElements(birthday_day, i);
+            }
+
+            myform = document.getElementById('myform');
+            myform.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              console.log(birthday_year.value);
+              console.log(birthday_month.value);
+              console.log(birthday_day.value);
+              const edit_value = `${birthday_year.value}年${birthday_month.value}月${birthday_day.value}日`
+              const washingtonRef = doc(db, "users", user_id, "pets", petID);
+              await updateDoc(washingtonRef, {
+                [edit_name]: edit_value
+              });
+              modal.classList.remove('active');
+              overlay.classList.remove('active');
+              child.remove();
+            });
             break;
+
+          case "edit_k":
+            edit_name = "去勢避妊"
+            child = document.createElement('div');
+            child.innerHTML = `             
+                        <form id="myform" class="m_auto">
+                          <p>去勢・避妊<span class="sub">必須</span><br>
+                            <label><input type="radio" name="去勢" value="未" required> 未</label>
+                            <label><input type="radio" name="去勢" value="済"> 済</label>
+                        </p>
+                        <div class="space_32"></div>   
+                        <input type="submit" value="登録" id="post_button"> 
+                        </form>`;
+            modal.appendChild(child);
+            myform = document.getElementById('myform');
+            myform.addEventListener('submit', async (e) => {
+              e.preventDefault();
+
+              const edit_value = myform.去勢.value;
+              const washingtonRef = doc(db, "users", user_id, "pets", petID);
+              await updateDoc(washingtonRef, {
+                [edit_name]: edit_value
+              });
+              modal.classList.remove('active');
+              overlay.classList.remove('active');
+              child.remove();
+            });
+            break;
+          case "edit_sex":
+            edit_name = "性別"
+            child = document.createElement('div');
+            child.innerHTML = `             
+                        <form id="myform" class="m_auto">
+                          <p>性別<span class="sub">必須</span><br>
+                            <lavel><input type="radio" name="sex" value="男の子"> 男の子</lavel>
+                            <lavel><input type="radio" name="sex" value="女の子" required> 女の子</lavel>
+                        </p>
+                        <div class="space_32"></div>   
+                        <input type="submit" value="登録" id="post_button"> 
+                        </form>`;
+            modal.appendChild(child);
+            myform = document.getElementById('myform');
+            myform.addEventListener('submit', async (e) => {
+              e.preventDefault();
+
+              const edit_value = myform.sex.value;
+              const washingtonRef = doc(db, "users", user_id, "pets", petID);
+              await updateDoc(washingtonRef, {
+                [edit_name]: edit_value
+              });
+              modal.classList.remove('active');
+              overlay.classList.remove('active');
+              child.remove();
+            });
+            break;
+
+          case "edit_type":
+            edit_name = "犬種"
+            child = document.createElement('div');
+            child.innerHTML = `             
+                        <form id="myform" class="m_auto">
+                          <p>犬種 (分からない場合はミックスと記入してください)<span class="sub">必須</span></p>
+                        <input type="text" id="edit_value" placeholder=" トイプードル" required style="font-size: 16px;">
+                        <div class="space_32"></div>   
+                        <input type="submit" value="登録" id="post_button"> 
+                        </form>`;
+            modal.appendChild(child);
+            myform = document.getElementById('myform');
+            myform.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              const edit_value = document.getElementById('edit_value');
+              const washingtonRef = doc(db, "users", user_id, "pets", petID);
+              await updateDoc(washingtonRef, {
+                [edit_name]: edit_value.value
+              });
+              modal.classList.remove('active');
+              overlay.classList.remove('active');
+              child.remove();
+            });
+            break;
+
+          case "edit_color":
+            edit_name = "毛色"
+            child = document.createElement('div');
+            child.innerHTML = `             
+                        <form id="myform" class="m_auto">
+                          <p>毛色<span class="sub">必須</span></p>
+                        <input type="text" id="edit_value" placeholder=" ブラウン" required style="font-size: 16px;">
+                        <div class="space_32"></div>   
+                        <input type="submit" value="登録" id="post_button"> 
+                        </form>`;
+            modal.appendChild(child);
+            myform = document.getElementById('myform');
+            myform.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              const edit_value = document.getElementById('edit_value');
+              const washingtonRef = doc(db, "users", user_id, "pets", petID);
+              await updateDoc(washingtonRef, {
+                [edit_name]: edit_value.value
+              });
+              modal.classList.remove('active');
+              overlay.classList.remove('active');
+              child.remove();
+            });
+            break;
+
+          case "edit_ear":
+            edit_name = "耳"
+            child = document.createElement('div');
+            child.innerHTML = `             
+                        <form id="myform" class="m_auto">
+                          <p>耳<span class="sub">必須</span><br>
+                            <label><input type="radio" name="耳" value="たれ耳" required> たれ耳</label>
+                            <label><input type="radio" name="耳" value="立ち耳"> 立ち耳</label>
+                        </p>
+                        <div class="space_32"></div>   
+                        <input type="submit" value="登録" id="post_button"> 
+                        </form>`;
+            modal.appendChild(child);
+            myform = document.getElementById('myform');
+            myform.addEventListener('submit', async (e) => {
+              e.preventDefault();
+
+              const edit_value = myform.耳.value;
+              const washingtonRef = doc(db, "users", user_id, "pets", petID);
+              await updateDoc(washingtonRef, {
+                [edit_name]: edit_value
+              });
+              modal.classList.remove('active');
+              overlay.classList.remove('active');
+              child.remove();
+            });
+            break;
+
+          case "edit_meal":
+            edit_name = "ごはん"
+            child = document.createElement('div');
+            child.innerHTML = `             
+                        <form id="myform" class="m_auto">
+                          <p>ごはん(品名・一日の給餌量)</p>
+                        <label ><input type="text" id="edit_value" placeholder=" ミシュワン,200" style="font-size: 16px;"> g</label>
+                        <div class="space_32"></div>   
+                        <input type="submit" value="登録" id="post_button"> 
+                        </form>`;
+            modal.appendChild(child);
+            myform = document.getElementById('myform');
+            myform.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              const edit_value = document.getElementById('edit_value');
+              const washingtonRef = doc(db, "users", user_id, "pets", petID);
+              await updateDoc(washingtonRef, {
+                [edit_name]: edit_value.value
+              });
+              modal.classList.remove('active');
+              overlay.classList.remove('active');
+              child.remove();
+            });
+            break;
+
+          case "edit_doctor":
+            edit_name = "かかりつけの病院"
+            child = document.createElement('div');
+            child.innerHTML = `             
+                        <form id="myform" class="m_auto">
+                          <p>かかりつけの病院</p>
+                        <input type="text" id="edit_value" placeholder=" 病院名" style="font-size: 16px;">
+                        <div class="space_32"></div>   
+                        <input type="submit" value="登録" id="post_button"> 
+                        </form>`;
+            modal.appendChild(child);
+            myform = document.getElementById('myform');
+            myform.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              const edit_value = document.getElementById('edit_value');
+              const washingtonRef = doc(db, "users", user_id, "pets", petID);
+              await updateDoc(washingtonRef, {
+                [edit_name]: edit_value.value
+              });
+              modal.classList.remove('active');
+              overlay.classList.remove('active');
+              child.remove();
+            });
+            break;
+          case "edit_allergy":
+            edit_name = "病歴アレルギー"
+            child = document.createElement('div');
+            child.innerHTML = `             
+                        <form id="myform" class="m_auto">
+                          <p>病歴・アレルギー</p>
+                        <input type="text" id="edit_value" placeholder=" 皮膚炎,チキンアレルギー" style="font-size: 16px;">
+                        <div class="space_32"></div>   
+                        <input type="submit" value="登録" id="post_button"> 
+                        </form>`;
+            modal.appendChild(child);
+            myform = document.getElementById('myform');
+            myform.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              const edit_value = document.getElementById('edit_value');
+              const washingtonRef = doc(db, "users", user_id, "pets", petID);
+              await updateDoc(washingtonRef, {
+                [edit_name]: edit_value.value
+              });
+              modal.classList.remove('active');
+              overlay.classList.remove('active');
+              child.remove();
+            });
+            break;
+          case "edit_medicine":
+            edit_name = "お薬"
+            child = document.createElement('div');
+            child.innerHTML = `             
+                        <form id="myform" class="m_auto">
+                          <p>お薬 (現在服用中のお薬)</p>
+                        <input type="text" id="edit_value" placeholder=" マイフリーガード" style="font-size: 16px;">
+                        <div class="space_32"></div>   
+                        <input type="submit" value="登録" id="post_button"> 
+                        </form>`;
+            modal.appendChild(child);
+            myform = document.getElementById('myform');
+            myform.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              const edit_value = document.getElementById('edit_value');
+              const washingtonRef = doc(db, "users", user_id, "pets", petID);
+              await updateDoc(washingtonRef, {
+                [edit_name]: edit_value.value
+              });
+              modal.classList.remove('active');
+              overlay.classList.remove('active');
+              child.remove();
+            });
+            break;
+          case "edit_salon":
+            edit_name = "サロン"
+            child = document.createElement('div');
+            child.innerHTML = `             
+                        <form id="myform" class="m_auto">
+                          <p>サロン</p>
+                        <input type="text" id="edit_value" placeholder=" サロン名" style="font-size: 16px;">
+                        <div class="space_32"></div>   
+                        <input type="submit" value="登録" id="post_button"> 
+                        </form>`;
+            modal.appendChild(child);
+            myform = document.getElementById('myform');
+            myform.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              const edit_value = document.getElementById('edit_value');
+              const washingtonRef = doc(db, "users", user_id, "pets", petID);
+              await updateDoc(washingtonRef, {
+                [edit_name]: edit_value.value
+              });
+              modal.classList.remove('active');
+              overlay.classList.remove('active');
+              child.remove();
+            });
+            break;
+          case "edit_microchip":
+            edit_name = "マイクロチップ番号"
+            child = document.createElement('div');
+            child.innerHTML = `             
+                        <form id="myform" class="m_auto">
+                          <p>マイクロチップ番号 (15桁の数字)</p>
+                        <input type="number" id="edit_value" placeholder=" 392141111111111"
+                            style="font-size: 16px;">
+                        <div class="space_32"></div>   
+                        <input type="submit" value="登録" id="post_button"> 
+                        </form>`;
+            modal.appendChild(child);
+            myform = document.getElementById('myform');
+            myform.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              const edit_value = document.getElementById('edit_value');
+              const washingtonRef = doc(db, "users", user_id, "pets", petID);
+              await updateDoc(washingtonRef, {
+                [edit_name]: edit_value.value
+              });
+              modal.classList.remove('active');
+              overlay.classList.remove('active');
+              child.remove();
+            });
+            break;
+          case "edit_Q1":
+            edit_name = "犬の登録をし鑑札を受け取っていますか"
+            child = document.createElement('div');
+            child.innerHTML = `             
+                        <form id="myform" class="m_auto">
+                          <p>犬の登録をし、鑑札を受け取って</br>いますか？<span class="sub">必須</span><br>
+                            <label><input type="radio" name="登録" value="はい" required> はい</label>
+                            <label><input type="radio" name="登録" value="いいえ"> いいえ</label>
+                            <label><input type="radio" name="登録" value="分からない"> 分からない</label>
+                        </p>
+                        <div class="space_32"></div>   
+                        <input type="submit" value="登録" id="post_button"> 
+                        </form>`;
+            modal.appendChild(child);
+            myform = document.getElementById('myform');
+            myform.addEventListener('submit', async (e) => {
+              e.preventDefault();
+
+              const edit_value = myform.登録.value;
+              const washingtonRef = doc(db, "users", user_id, "pets", petID);
+              await updateDoc(washingtonRef, {
+                [edit_name]: edit_value
+              });
+              modal.classList.remove('active');
+              overlay.classList.remove('active');
+              child.remove();
+            });
+            break;
+          case "edit_Q2":
+            edit_name = "狂犬病予防注射を受け注射済み票を受け取っていますか"
+            child = document.createElement('div');
+            child.innerHTML = `             
+                        <form id="myform" class="m_auto">
+                          <p>狂犬病予防注射を受け、注射済み票を</br>受け取っていますか？<span class="sub">必須</span><br>
+                            <label><input type="radio" name="注射" value="はい" required> はい</label>
+                            <label><input type="radio" name="注射" value="いいえ"> いいえ</label>
+                            <label><input type="radio" name="注射" value="分からない"> 分からない</label>
+                        </p>
+                        <div class="space_32"></div>   
+                        <input type="submit" value="登録" id="post_button"> 
+                        </form>`;
+            modal.appendChild(child);
+            myform = document.getElementById('myform');
+            myform.addEventListener('submit', async (e) => {
+              e.preventDefault();
+
+              const edit_value = myform.注射.value;
+              const washingtonRef = doc(db, "users", user_id, "pets", petID);
+              await updateDoc(washingtonRef, {
+                [edit_name]: edit_value
+              });
+              modal.classList.remove('active');
+              overlay.classList.remove('active');
+              child.remove();
+            });
+            break;
+          case "edit_img01":
+            edit_name = "写真"
+            child = document.createElement('div');
+            child.innerHTML = `             
+                        <form id="myform" class="m_auto">
+                          <p>写真1:ペット写真<span class="sub">必須</span></p>
+                        <input type="file" accept='.jpeg, .png, .jpg' id="pet_img" required>
+                        <p id="img01_uploading"></p>
+                        <div class="space_32"></div>   
+                        </form>`;
+            modal.appendChild(child);
+            const img01_uploading = document.getElementById('img01_uploading');
+            const pet_img = document.getElementById("pet_img");
+            pet_img.addEventListener('change', (e) => {
+              console.log(e.target.files);
+
+              pet_img_file = e.target.files[0];
+              // pet_img
+              const storageRef01 = ref(storage, "pets/" + petID + "/" + "pet_img");
+              const uploadTask01 = uploadBytesResumable(storageRef01, pet_img_file);
+              uploadTask01.on('state_changed',
+                (snapshot) => {
+                  const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                  console.log('Upload is ' + progress + '% done', "01の画像");
+                  img01_uploading.textContent = `アップロード中 ${progress}%`;
+                  switch (snapshot.state) {
+                    case 'paused':
+                      console.log('Upload is paused', "01の画像");
+                      break;
+                    case 'running':
+                      console.log('Upload is running', "01の画像");
+                      break;
+                  }
+                },
+                (error) => {
+                  // Handle unsuccessful uploads
+                  console.log("Handle unsuccessful uploads");
+                },
+                async() => {
+                  await getDownloadURL(uploadTask01.snapshot.ref).then((downloadURL) => {
+                    console.log('File available at', downloadURL);
+                     pet_img_url = downloadURL;
+                    img01_uploading.textContent = "";
+
+                  });
+                  const washingtonRef = doc(db, "users", user_id, "pets", petID);
+              updateDoc(washingtonRef, {
+                [edit_name]: pet_img_url
+              });
+                  modal.classList.remove('active');
+              overlay.classList.remove('active');
+              child.remove();
+                }
+              );
+            });
+
+            break;
+            case "edit_img02":
+            edit_name = "狂犬病予防注射済み票"
+            child = document.createElement('div');
+            child.innerHTML = `             
+                        <form id="myform" class="m_auto">
+                          <p>写真2:狂犬病予防注射済み票</p>
+                        <input type="file" accept='.jpeg, .png, .jpg' id="狂犬病予防注射済み票">
+                        <p id="img02_uploading"></p>
+                        <div class="space_32"></div>   
+                        </form>`;
+            modal.appendChild(child);
+            const img02_uploading = document.getElementById('img02_uploading');
+            const 狂犬病予防注射済み票 = document.getElementById("狂犬病予防注射済み票");
+            狂犬病予防注射済み票.addEventListener('change', (e) => {
+              console.log(e.target.files);
+
+              pet_img_file = e.target.files[0];
+              // pet_img
+              const storageRef02 = ref(storage, "pets/" + petID + "/" + "狂犬病予防注射済み票");
+              const uploadTask02 = uploadBytesResumable(storageRef02, pet_img_file);
+              uploadTask02.on('state_changed',
+                (snapshot) => {
+                  const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                  console.log('Upload is ' + progress + '% done', "02の画像");
+                  img02_uploading.textContent = `アップロード中 ${progress}%`;
+                  switch (snapshot.state) {
+                    case 'paused':
+                      console.log('Upload is paused', "01の画像");
+                      break;
+                    case 'running':
+                      console.log('Upload is running', "01の画像");
+                      break;
+                  }
+                },
+                (error) => {
+                  // Handle unsuccessful uploads
+                  console.log("Handle unsuccessful uploads");
+                },
+                async() => {
+                  await getDownloadURL(uploadTask02.snapshot.ref).then((downloadURL) => {
+                    console.log('File available at', downloadURL);
+                     pet_img_url = downloadURL;
+                    img02_uploading.textContent = "";
+
+                  });
+                  const washingtonRef = doc(db, "users", user_id, "pets", petID);
+              updateDoc(washingtonRef, {
+                [edit_name]: pet_img_url
+              });
+                  modal.classList.remove('active');
+              overlay.classList.remove('active');
+              child.remove();
+                }
+              );
+            });
+
+            break;
+            case "edit_img03":
+            edit_name = "混合ワクチン接種証明書"
+            child = document.createElement('div');
+            child.innerHTML = `             
+                        <form id="myform" class="m_auto">
+                          <p>写真3:混合ワクチン接種証明書</p>
+                        <input type="file" accept='.jpeg, .png, .jpg' id="混合ワクチン接種証明書">
+                        <p id="img03_uploading"></p>
+                        <div class="space_32"></div>   
+                        </form>`;
+            modal.appendChild(child);
+            const img03_uploading = document.getElementById('img03_uploading');
+            const 混合ワクチン接種証明書 = document.getElementById("混合ワクチン接種証明書");
+            混合ワクチン接種証明書.addEventListener('change', (e) => {
+              console.log(e.target.files);
+
+              pet_img_file = e.target.files[0];
+              // pet_img
+              const storageRef03 = ref(storage, "pets/" + petID + "/" + "狂犬病予防注射済み票");
+              const uploadTask03 = uploadBytesResumable(storageRef03, pet_img_file);
+              uploadTask03.on('state_changed',
+                (snapshot) => {
+                  const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                  console.log('Upload is ' + progress + '% done', "02の画像");
+                  img03_uploading.textContent = `アップロード中 ${progress}%`;
+                  switch (snapshot.state) {
+                    case 'paused':
+                      console.log('Upload is paused', "03の画像");
+                      break;
+                    case 'running':
+                      console.log('Upload is running', "03の画像");
+                      break;
+                  }
+                },
+                (error) => {
+                  // Handle unsuccessful uploads
+                  console.log("Handle unsuccessful uploads");
+                },
+                async() => {
+                  await getDownloadURL(uploadTask03.snapshot.ref).then((downloadURL) => {
+                    console.log('File available at', downloadURL);
+                     pet_img_url = downloadURL;
+                    img03_uploading.textContent = "";
+
+                  });
+                  const washingtonRef = doc(db, "users", user_id, "pets", petID);
+              updateDoc(washingtonRef, {
+                [edit_name]: pet_img_url
+              });
+                  modal.classList.remove('active');
+              overlay.classList.remove('active');
+              child.remove();
+                }
+              );
+            });
+
+            break;
+
           default:
             console.log("defailt");
         }
         modal.classList.add('active');
         overlay.classList.add('active');
 
-
-        const myform = document.getElementById('myform');
-        myform.addEventListener('submit', async (e) => {
-          e.preventDefault();
-          const edit_value = document.getElementById('edit_value');
-          console.log(edit_value.value);
-          // update_DB
-          console.log(user_id);
-          console.log(petID);
-          const washingtonRef = doc(db, "users", user_id, "pets", petID);
-          await updateDoc(washingtonRef, {
-            [edit_name]: edit_value.value
-          });
-          modal.classList.remove('active');
-          overlay.classList.remove('active');
-          child.remove();
-        });
       }, false);
     }
+
 
     // モダルの閉じるボタンをクリックしたら、モダルとオーバーレイのactiveクラスを外す
     closeBtn.addEventListener('click', function () {
@@ -292,11 +914,11 @@
       modal.classList.remove('active');
       overlay.classList.remove('active');
       child.remove();
-
-
     });
 
   </script>
+
+
 </body>
 
 </html>
