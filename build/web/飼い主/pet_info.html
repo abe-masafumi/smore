@@ -11,6 +11,15 @@
 </head>
 
 <body>
+  <!-- オーバーレイ -->
+  <div class="overlay"></div>
+
+
+  <!-- モーダルウィンドウ -->
+  <div class="modal">
+    <div class="close">&times</div>
+
+  </div>
   <!-- js読み込み時のroading画面 -->
   <div id="loading" class="center" style="height: 600px;">loading...</div>
   <!-- ログインしてないけどページを開いちゃった時の画面 -->
@@ -40,76 +49,76 @@
             <img style="width: 100%; height: auto;" src="" alt="" id="p_img">
           </li>
           <li>
-            <h1>名前</h1>
+            <h1>名前<button data-name="edit_name" data-type="text" class="edit_btn">編集ボタン</button></h1>
             <p id="name"></p>
           </li>
           <li>
-            <h1>生年月日</h1>
+            <h1>生年月日<button data-name="edit_birthday" class="edit_btn">編集ボタン</button></h1>
             <p id="birthday"></p>
           </li>
           <li>
-            <h1>性別 (男の子・女の子)</h1>
+            <h1>性別 (男の子・女の子)<button data-name="edit_sex" class="edit_btn">編集ボタン</button></h1>
             <p id="sex"></p>
           </li>
           <li>
-            <h1>犬種</h1>
+            <h1>犬種<button data-name="edit_type" class="edit_btn">編集ボタン</button></h1>
             <p id="犬種"></p>
           </li>
           <li>
-            <h1>去勢・避妊（未・済）</h1>
+            <h1>去勢・避妊（未・済）<button data-name="edit_k" class="edit_btn">編集ボタン</button></h1>
             <p id="去勢"></p>
           </li>
           <li>
-            <h1>体重</h1>
+            <h1>体重<button data-name="edit_weight" class="edit_btn">編集ボタン</button></h1>
             <p id="weight"></p>
           </li>
           <li>
-            <h1>毛色</h1>
+            <h1>毛色<button data-name="edit_color" class="edit_btn">編集ボタン</button></h1>
             <p id="color"></p>
           </li>
           <li>
-            <h1>耳（たれ耳・立ち耳</h1>
+            <h1>耳（たれ耳・立ち耳<button data-name="edit_ear" class="edit_btn">編集ボタン</button></h1>
             <p id="era"></p>
           </li>
           <li>
-            <h1>犬の登録をし、鑑札を受け取っていますか？（はい、いいえ、分からない）</h1>
+            <h1>犬の登録をし、鑑札を受け取っていますか？<button data-name="edit_Q1" class="edit_btn">編集ボタン</button></h1>
             <p id="登録"></p>
           </li>
           <li>
-            <h1>狂犬病予防注射を受け、注射済み票を受け取っていますか？（はい、いいえ、分からない）</h1>
+            <h1>狂犬病予防注射を受け、注射済み票を受け取っていますか？<button data-name="edit_Q2" class="edit_btn">編集ボタン</button></h1>
             <p id="注射"></p>
           </li>
           <li>
-            <h1>ごはん(品名・量)</h1>
+            <h1>ごはん(品名・量)<button data-name="edit_meal" class="edit_btn">編集ボタン</button></h1>
             <p id="meal"></p>
           </li>
           <li>
-            <h1>かかりつけの病院</h1>
+            <h1>かかりつけの病院<button data-name="edit_doctor" class="edit_btn">編集ボタン</button></h1>
             <p id="doctor"></p>
           </li>
           <li>
-            <h1>病歴・アレルギー</h1>
+            <h1>病歴・アレルギー<button data-name="edit_allergy" class="edit_btn">編集ボタン</button></h1>
             <p id="allergy"></p>
           </li>
           <li>
-            <h1>お薬</h1>
+            <h1>お薬<button data-name="edit_medicine" class="edit_btn">編集ボタン</button></h1>
             <p id="medicine"></p>
           </li>
           <li>
-            <h1>サロン</h1>
+            <h1>サロン<button data-name="edit_salon" class="edit_btn">編集ボタン</button></h1>
             <p id="salon"></p>
           </li>
           <li>
-            <h1>マイクロチップ番号</h1>
+            <h1>マイクロチップ番号<button data-name="edit_microchip" class="edit_btn">編集ボタン</button></h1>
             <p id="microchip_number"></p>
           </li>
           <li>
-            <h1>写真１：狂犬病予防注射済み票</h1>
+            <h1>写真１：狂犬病予防注射済み票<button data-name="edit_img02" class="edit_btn">編集ボタン</button></h1>
             <div style="width: 250px; height: auto; object-fit: cover;"><img style="width: 100%;" src="" alt=""
                 id="狂犬病予防注射済み票"></div>
           </li>
           <li>
-            <h1>写真２：混合ワクチン接種証明書</h1>
+            <h1>写真２：混合ワクチン接種証明書<button data-name="edit_img03" class="edit_btn">編集ボタン</button></h1>
             <div style="width: 250px; height: auto; object-fit: cover;">
               <img style="width: 100%;" src="" alt="" id="混合ワクチン接種証明書">
           </li>
@@ -126,11 +135,11 @@
 
   </div>
   <!-- ----end---- -->
-
+  <script src="../edit.js"></script>
   <script type="module">
     import { connect_firebase } from "../firebaseConfig.js"
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-    import { getFirestore, collection, getDoc, doc, onSnapshot } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+    import { getFirestore, collection, getDoc, doc, onSnapshot, updateDoc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
     // firebaseと接続
     const app = connect_firebase();
     const auth = getAuth(app);
@@ -138,6 +147,11 @@
 
     const loading = document.getElementById('loading');
     const big_container = document.getElementById('big_container');
+
+    // ボタン、モダル、モダルの閉じるボタン、オーバーレイを変数に格納
+    const modal = document.querySelector('.modal');
+    const closeBtn = document.querySelector('.close');
+    const overlay = document.querySelector('.overlay');
 
     const p_img = document.getElementById('p_img');
     const name = document.getElementById('name');
@@ -159,56 +173,129 @@
     const 狂犬病予防注射済み票 = document.getElementById('狂犬病予防注射済み票');
     const 混合ワクチン接種証明書 = document.getElementById('混合ワクチン接種証明書');
 
+    let petID;
+    let user_id;
+    let data;
 
-    async function get_url_data(uid) {
+    function get_url_data(user_id) {
       let params = (new URL(document.location)).searchParams;
-      let petID = params.get('petID');
+      petID = params.get('petID');
       console.log("petID", petID);
 
-      const docRef = doc(db, 'users', uid, "pets", petID);
-      const docSnap = await getDoc(docRef);
-      console.log(docSnap.data());
+      const docRef = doc(db, 'users', user_id, "pets", petID);
       loading.classList.add('none');
       big_container.classList.remove('none');
-      return open_data(docSnap.data())
-    }
-
-    function open_data(data) {
-      console.log(data["写真"]);
-      p_img.src = data["写真"];
-      name.textContent = data["名前"];
-      犬種.textContent = data["犬種"];
-      登録.textContent = data["犬の登録をし鑑札を受け取っていますか"];
-      注射.textContent = data["狂犬病予防注射を受け注射済み票を受け取っていますか"];
-      birthday.textContent = data["生年月日"];
-      sex.textContent = data["性別"];
-      去勢.textContent = data["去勢避妊"];
-      weight.textContent = data["体重"];
-      color.textContent = data["毛色"];
-      era.textContent = data["耳"];
-      meal.textContent = data["ごはん"];
-      doctor.textContent = data["かかりつけの病院"];
-      allergy.textContent = data["病歴アレルギー"];
-      medicine.textContent = data["お薬"];
-      salon.textContent = data["サロン"];
-      microchip_number.textContent = data["マイクロチップ番号"];
-      狂犬病予防注射済み票.src = data["狂犬病予防注射済み票"];
-      混合ワクチン接種証明書.src = data["混合ワクチン接種証明書"];
+      const unsub = onSnapshot(docRef, (doc) => {
+        data = doc.data();
+        console.log(data["写真"]);
+        p_img.src = data["写真"];
+        name.textContent = data["名前"];
+        犬種.textContent = data["犬種"];
+        登録.textContent = data["犬の登録をし鑑札を受け取っていますか"];
+        注射.textContent = data["狂犬病予防注射を受け注射済み票を受け取っていますか"];
+        birthday.textContent = data["生年月日"];
+        sex.textContent = data["性別"];
+        去勢.textContent = data["去勢避妊"];
+        weight.textContent = data["体重"];
+        color.textContent = data["毛色"];
+        era.textContent = data["耳"];
+        meal.textContent = data["ごはん"];
+        doctor.textContent = data["かかりつけの病院"];
+        allergy.textContent = data["病歴アレルギー"];
+        medicine.textContent = data["お薬"];
+        salon.textContent = data["サロン"];
+        microchip_number.textContent = data["マイクロチップ番号"];
+        狂犬病予防注射済み票.src = data["狂犬病予防注射済み票"];
+        混合ワクチン接種証明書.src = data["混合ワクチン接種証明書"];
+      });
     }
 
     // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        const uid = user.uid;
+        user_id = user.uid;
         const u_email = user.email;
-        console.log(uid, "状態:ログイン中");
-        return get_url_data(uid)
+        console.log(user_id, "状態:ログイン中");
+        return get_url_data(user_id)
       } else {
         // User is signed out
         console.log("状態:ログアウト");
         make_sign_out_display();
       }
     });
+
+    const edit_btn = document.getElementsByClassName('edit_btn');
+    let child;
+    let edit_name;
+
+    console.log(edit_btn[0].value);
+    for (let i = 0; i < edit_btn.length; i++) {
+      edit_btn[i].addEventListener('click', function (e) {
+
+        const tag_name = e.currentTarget.dataset['name'];
+
+        switch (tag_name) {
+          case "edit_name":
+            edit_name = "名前"
+            child = document.createElement('div');
+            child.innerHTML = `             
+                        <form id="myform" class="m_auto">
+                        <div class="space_32"></div>
+                        <p>ペットの名前<span class="sub">必須</span></p>
+                        <input type="text" placeholder=" ぽち" id="edit_value" required style="font-size: 16px;">
+                        <div class="space_32"></div>   
+                        <input type="submit" value="登録" id="post_button"> 
+                        </form>`;
+            modal.appendChild(child);
+            break;
+          case "radio":
+            console.log('radioボタンです');
+            break;
+          case ("select"):
+            console.log("selectボックスです");;
+            break;
+          default:
+            console.log("defailt");
+        }
+        modal.classList.add('active');
+        overlay.classList.add('active');
+
+
+        const myform = document.getElementById('myform');
+        myform.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const edit_value = document.getElementById('edit_value');
+          console.log(edit_value.value);
+          // update_DB
+          console.log(user_id);
+          console.log(petID);
+          const washingtonRef = doc(db, "users", user_id, "pets", petID);
+          await updateDoc(washingtonRef, {
+            [edit_name]: edit_value.value
+          });
+          modal.classList.remove('active');
+          overlay.classList.remove('active');
+          child.remove();
+        });
+      }, false);
+    }
+
+    // モダルの閉じるボタンをクリックしたら、モダルとオーバーレイのactiveクラスを外す
+    closeBtn.addEventListener('click', function () {
+      modal.classList.remove('active');
+      overlay.classList.remove('active');
+      child.remove();
+    });
+
+    // オーバーレイをクリックしたら、モダルとオーバーレイのactiveクラスを外す
+    overlay.addEventListener('click', function () {
+      modal.classList.remove('active');
+      overlay.classList.remove('active');
+      child.remove();
+
+
+    });
+
   </script>
 </body>
 
