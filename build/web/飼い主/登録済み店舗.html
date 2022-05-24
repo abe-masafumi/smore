@@ -63,8 +63,9 @@
         const ul = document.getElementById('shop_ul');
         // userのデータをペットのデータを取得して表示する
         async function get_data(uid) {
+
             // 登録shopを取得してリストに保管
-            const shop_list_Ref = doc(db, "users", uid, "registration_shop", "henohenomohezi");
+            const shop_list_Ref = doc(db, "users", uid, "registration_shop", "Store-entry-history");
             const shop_docSnap = await getDoc(shop_list_Ref);
 
             if (shop_docSnap.exists()) {
@@ -78,7 +79,7 @@
                     const data = docSnap.data();
 
                     const li = document.createElement('li');
-                    li.innerHTML = `<div class="flex_box m_auto" style="background-color: pink; height: 30px; width: 300px; margin-bottom: 10px;">
+                    li.innerHTML = `<div class="flex_box m_auto div2">
                     <p style="padding-left: 10px;">${data["shop_name"]}</p>
                     <p style="margin-left: auto;" onclick="location.href=['./shop_ coupon.html?user_ID=${shopID}']" >></p>
                     </div>`;
