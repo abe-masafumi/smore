@@ -191,7 +191,7 @@
     let petID;
     let user_id;
     let data;
-    
+
     function get_url_data(user_id) {
       let params = (new URL(document.location)).searchParams;
       petID = params.get('petID');
@@ -385,6 +385,128 @@
             });
             break;
 
+            case "edit_type":
+            edit_name = "犬種"
+            child = document.createElement('div');
+            child.innerHTML = `  
+            <form id="myform" class="m_auto">
+               <p>犬種 (分からない場合はミックスと記入してください)<span class="sub">必須</span></p>
+                        <div class="type01">
+                            <select name="genre" id="genre">
+                                <option disabled selected>五十音順で選択</option>
+                                <option value="ミックス犬">ミックス犬</option>
+                                <option value="あ行">あ行</option>
+                                <option value="か行">か行</option>
+                                <option value="さ行">さ行</option>
+                                <option value="た行">た行</option>
+                                <option value="な行">な行</option>
+                                <option value="は行">は行</option>
+                                <option value="ま行">ま行</option>
+                                <option value="や行">や行</option>
+                                <option value="ら行">ら行</option>
+                                <option value="わ行">わ行</option>
+                                <option value="その他">その他</option>
+                              </select>
+                        </div>
+                        </br>
+                          <div class="type02">
+                              <select name="food-name" id="food-name" disabled>
+                                <option selected>犬種を選択</option>
+                              </select>
+                          </div>
+                          <div class="space_32"></div>   
+
+                        <input type="submit" value="登録" id="post_button"> 
+
+                        </form>`;
+            modal.appendChild(child);
+
+            //料理ジャンルの値と、それに対応するメニュー一覧を格納しておく -- [1]
+            const foodMenu =
+            {
+              "ミックス犬": ["ミックス犬 5kg未満", "ミックス犬 10kg未満", "ミックス犬 25kg未満", "ミックス犬 25kg以上"],
+              "あ行": ["アーフェンピンシャー", "アイリッシュウォータースパニエル", "アイリッシュウルフハウンド", "アイリッシュセッター", "アイリッシュテリア", "秋田犬", "アイリッシュレッドアンドホワイトセター", "小豆柴", "アナトリアンシェパード", "アフガンハウンド", "アメリカンアキタ", "アメリカンウォータースパニエル", "アメリカンエスキモードッグ", "アメリカンコッカースパニエル", "アメリカンスタッフォードシャーテリア", "アラスカンマラミュート",
+                "イタリアングレーハウンド", "イビザンハウンド", "イングリッシュコッカースパニエル", "イングリッシュスプリンガースパニエル", "イングリッシュセッター", "イングリッシュポインター", "イングリッシュマスティフ",
+                "ウィペット", "ウエストハイランドホワイトテリア", "ウェルシュシープドッグ", "ウェルシュスプリンガースパニエル", "ウェルシュテリア",
+                "エアデールテリア", "エストレラマウンテンドッグ",
+                "オーストラリアンキャトルドッグ", "オーストラリアンケルピー", "オーストラリアンシェパード", "オーストラリアンシルキーテリア", "オーストラリアンテリア", "オールドイングリッシュシープドッグ"],
+              "か行": ["甲斐犬", "カーリーコーテッドレトリバー", "カニンヘンダックスフンド", "カレリアンベアドッグ",
+                "キースホンド", "紀州犬", "キャバチワ", "キャバプー", "キャバリア", "キングチャールズスパニエル"
+                , "クーバース", "クランバースパニエル", "グレイハウンド", "グレートデン", "グレートピレニーズ", "クロアチアンシープドッグ", "クロムフォルレンダー"
+                , "ケアンテリア", "ケリーブルーテリア"
+                , "コーイケルホンディエ", "コーギー(ウェルシュコーギーカーディガン)", "コーギー(ウェルシュコーギーペンブローク)", "ゴードンセッター", "ゴールデンドゥードル", "ゴールデンレトリバー", "コッカークス", "コッカプー", "コトン・ド・テュレアール", "コモンドール"],
+              "さ行": ["サーロスウルフドッグ", "サモエド", "サルーキ"
+                , "シーズー", "シープー", "シーポメ", "シーリハムテリア", "シェットランドシープドッグ", "シェパード種", "柴犬", "シベリアンハスキー", "シャーペイ", "ジャーマンシェパード", "ジャーマンショートヘアードポインター", "ジャーマンスパニエル", "ジャーマンハンティングテリア", "ジャーマンピンシャー", "ジャーマンワイアーヘアードポインター", "ジャイアントシュナウザー", "ジャックラッセルテリア", "シュナウザー種", "シュナプー", "シュナマル", "シーリハムテリア"
+                , "スカイテリア", "スキッパーキ", "スコティッシュテリア", "スタッフォードシャーブルテリア", "スタンダードダックスフンド", "スタンダードプードル", "スパニッシュマスティフ"
+                , "セントバーナード"
+                , "ソフトコーテッド・ウィートンテリア"],
+              "た行": ["タイニープードル", "ダップー", "ダルメシアン"
+                , "チベタンスパニエル", "チベタンテリア", "チベタンマスティフ", "チャイニーズクレステッドドッグ", "チャウチャウ", "チワズー", "チワックス", "チワパグ", "チワピン", "チワプー", "チワブル", "チワマル", "チワワ"
+                , "狆", "ティーカッププードル"
+                , "トイプードル", "トイマンチェスターテリア", "ドーベルマン", "ドゴアルヘンティーノ", "土佐犬.四国犬", "土佐闘犬"],
+              "な行": ["ナポリタンマスティフ"
+                , "日本スピッツ", "日本テリア", "ニューファンドランド"
+                , "ノーフォークテリア", "ノーリッチテリア"],
+              "は行": ["ハバニーズ", "バーニーズマウンテンドッグ", "パグ", "パグズー", "バセットハウンド", "バセンジー", "パピキー", "パピチワ", "パピヨン", "ハリア", "パーソンラッセルテリア"
+                , "ビアデッドコリー", "ビーグル", "ビションフリーゼ", "ピットブル", "ピンプー"
+                , "ファラオハウンド", "プーリー", "プチバセットグリフォンバンデーン", "プチブラバンソン", "フラットコーテッドレトリバー", "ブラッドハウンド", "ブリタニースパニエル", "ブリュッセルグリフォン", "ブルドッグ", "ブルマスティフ", "フレンチブルドッグ"
+                , "ペキチー", "ペキックス", "ペキニーズ", "ペキプー", "ベドリントンテリア", "ベルジアングリフォン", "ベルジアングローネンダール", "ベルジアンタービュレン", "ベルジアンマリノア"
+                , "ボーダーコリー", "ボーダーテリア", "ポーチュギーズウォータードッグ", "ボクサー犬", "ボストンテリア", "北海道犬", "ポメキー", "ポメ柴", "ポメチワ", "ポメックス", "ポメパグ", "ポメプー", "ポメマル", "ポメヨン", "ポメラニアン", "ポリッシュローランドシープドッグ", "ボルゾイ", "ボルドーマスティフ", "ボロニーズ", "ホワイトシェパード", "ポンスキー"],
+              "ま行": ["豆柴", "マルーキー", "マルシーズ", "マルチーズ", "マルックス", "マルパピ", "マルプー"
+                , "ミニチュアシベリアンハスキー", "ミニチュアシュナウザー", "ミニチュアダックスフンド", "ミニチュアピンシャー", "ミニチュアプードル", "ミニチュアブルテリア"],
+              "や行": ["ヨークシャテリア"
+                , "ヨーチー", "ヨープー"],
+              "ら行": ["ラサアプソ"
+                , "ラフコリー", "ラブラドールレトリバー", "ラブラドゥードル"
+                , "レークランドテリア", "レオンベルガー"
+                , "ロットワイラー"],
+              "わ行": ["ワイマラナー"
+                , "ワイヤーフォックステリア"],
+              "その他": ["その他"]
+            };
+
+            //選択されたジャンルを受け取って処理をする -- [4]
+
+            let option;
+
+            const selectFoodName = document.getElementById('food-name'); //2つめのセレクトボックスを取得し
+            function setMenuOptions(selectedGenre) {
+              selectFoodName.innerHTML = '';
+              selectFoodName.disabled = false; //選択可能な状態にする
+
+              //選択されたジャンルのメニュー一覧に対して処理をする
+              foodMenu[selectedGenre].forEach((menu) => {
+                option = document.createElement('option'); //option要素を新しく作る
+                option.value = menu; //option要素の値に、メニューを識別できる番号を指定する
+                option.innerHTML = menu; //ユーザー向けの表示としてメニュー名を指定する
+                selectFoodName.appendChild(option); //セレクトボックスにoption要素を追加する
+              });
+            }
+
+            //ジャンルを選ぶためのセレクトボックスを指定 -- [2]
+            const genreSelect = document.getElementById('genre');
+
+            //なんらかのジャンルが選択されたら（change）、処理を行う -- [3]
+            genreSelect.addEventListener('change', (e) => {
+
+              setMenuOptions(e.target.value);  //選択された料理ジャンルを引数として関数に渡す
+              //※e.target.valueはgenreSelectで選択された値
+            })
+
+            myform = document.getElementById('myform');
+            myform.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              console.log(genreSelect.value);
+              const washingtonRef = doc(db, "users", user_id, "pets", petID);
+              await updateDoc(washingtonRef, {
+                [edit_name]: selectFoodName.value
+              });
+              modal.classList.remove('active');
+              overlay.classList.remove('active');
+              child.remove();
+            });
+            break;
+
           case "edit_k":
             edit_name = "去勢避妊"
             child = document.createElement('div');
@@ -440,30 +562,30 @@
             });
             break;
 
-          case "edit_type":
-            edit_name = "犬種"
-            child = document.createElement('div');
-            child.innerHTML = `             
-                        <form id="myform" class="m_auto">
-                          <p>犬種 (分からない場合はミックスと記入してください)<span class="sub">必須</span></p>
-                        <input type="text" id="edit_value" placeholder=" トイプードル" required style="font-size: 16px;">
-                        <div class="space_32"></div>   
-                        <input type="submit" value="登録" id="post_button"> 
-                        </form>`;
-            modal.appendChild(child);
-            myform = document.getElementById('myform');
-            myform.addEventListener('submit', async (e) => {
-              e.preventDefault();
-              const edit_value = document.getElementById('edit_value');
-              const washingtonRef = doc(db, "users", user_id, "pets", petID);
-              await updateDoc(washingtonRef, {
-                [edit_name]: edit_value.value
-              });
-              modal.classList.remove('active');
-              overlay.classList.remove('active');
-              child.remove();
-            });
-            break;
+          // case "edit_type":
+          //   edit_name = "犬種"
+          //   child = document.createElement('div');
+          //   child.innerHTML = `             
+          //               <form id="myform" class="m_auto">
+          //                 <p>犬種 (分からない場合はミックスと記入してください)<span class="sub">必須</span></p>
+          //               <input type="text" id="edit_value" placeholder=" トイプードル" required style="font-size: 16px;">
+          //               <div class="space_32"></div>   
+          //               <input type="submit" value="登録" id="post_button"> 
+          //               </form>`;
+          //   modal.appendChild(child);
+          //   myform = document.getElementById('myform');
+          //   myform.addEventListener('submit', async (e) => {
+          //     e.preventDefault();
+          //     const edit_value = document.getElementById('edit_value');
+          //     const washingtonRef = doc(db, "users", user_id, "pets", petID);
+          //     await updateDoc(washingtonRef, {
+          //       [edit_name]: edit_value.value
+          //     });
+          //     modal.classList.remove('active');
+          //     overlay.classList.remove('active');
+          //     child.remove();
+          //   });
+          //   break;
 
           case "edit_color":
             edit_name = "毛色"
@@ -758,26 +880,26 @@
                   // Handle unsuccessful uploads
                   console.log("Handle unsuccessful uploads");
                 },
-                async() => {
+                async () => {
                   await getDownloadURL(uploadTask01.snapshot.ref).then((downloadURL) => {
                     console.log('File available at', downloadURL);
-                     pet_img_url = downloadURL;
+                    pet_img_url = downloadURL;
                     img01_uploading.textContent = "";
 
                   });
                   const washingtonRef = doc(db, "users", user_id, "pets", petID);
-              updateDoc(washingtonRef, {
-                [edit_name]: pet_img_url
-              });
+                  updateDoc(washingtonRef, {
+                    [edit_name]: pet_img_url
+                  });
                   modal.classList.remove('active');
-              overlay.classList.remove('active');
-              child.remove();
+                  overlay.classList.remove('active');
+                  child.remove();
                 }
               );
             });
 
             break;
-            case "edit_img02":
+          case "edit_img02":
             edit_name = "狂犬病予防注射済み票"
             child = document.createElement('div');
             child.innerHTML = `             
@@ -815,26 +937,26 @@
                   // Handle unsuccessful uploads
                   console.log("Handle unsuccessful uploads");
                 },
-                async() => {
+                async () => {
                   await getDownloadURL(uploadTask02.snapshot.ref).then((downloadURL) => {
                     console.log('File available at', downloadURL);
-                     pet_img_url = downloadURL;
+                    pet_img_url = downloadURL;
                     img02_uploading.textContent = "";
 
                   });
                   const washingtonRef = doc(db, "users", user_id, "pets", petID);
-              updateDoc(washingtonRef, {
-                [edit_name]: pet_img_url
-              });
+                  updateDoc(washingtonRef, {
+                    [edit_name]: pet_img_url
+                  });
                   modal.classList.remove('active');
-              overlay.classList.remove('active');
-              child.remove();
+                  overlay.classList.remove('active');
+                  child.remove();
                 }
               );
             });
 
             break;
-            case "edit_img03":
+          case "edit_img03":
             edit_name = "混合ワクチン接種証明書"
             child = document.createElement('div');
             child.innerHTML = `             
@@ -872,20 +994,20 @@
                   // Handle unsuccessful uploads
                   console.log("Handle unsuccessful uploads");
                 },
-                async() => {
+                async () => {
                   await getDownloadURL(uploadTask03.snapshot.ref).then((downloadURL) => {
                     console.log('File available at', downloadURL);
-                     pet_img_url = downloadURL;
+                    pet_img_url = downloadURL;
                     img03_uploading.textContent = "";
 
                   });
                   const washingtonRef = doc(db, "users", user_id, "pets", petID);
-              updateDoc(washingtonRef, {
-                [edit_name]: pet_img_url
-              });
+                  updateDoc(washingtonRef, {
+                    [edit_name]: pet_img_url
+                  });
                   modal.classList.remove('active');
-              overlay.classList.remove('active');
-              child.remove();
+                  overlay.classList.remove('active');
+                  child.remove();
                 }
               );
             });

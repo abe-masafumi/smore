@@ -184,13 +184,18 @@ button {
     margin-left: 0px;
 }
 
-.weight {
+.weight,
+.type01,
+.type02  {
     display: flex;
     max-width: 300px;
     align-items: center;
 }
 
-.weight>select {
+
+.weight>select,
+.type01>select,
+.type02>select {
     padding: 8px 16px;
     margin-left: 10px;
     margin-right: 10px;
@@ -199,9 +204,12 @@ button {
     font-size: 14px;
 }
 
-.weight>.weight01 {
+.weight>.weight01,
+.type01>select,
+.type02>select {
     margin-left: 0px;
 }
+
 
 .sub {
     width: 20px;
