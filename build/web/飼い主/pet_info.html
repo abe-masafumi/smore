@@ -913,46 +913,50 @@
             const img02_uploading = document.getElementById('img02_uploading');
             const 狂犬病予防注射済み票 = document.getElementById("狂犬病予防注射済み票");
             狂犬病予防注射済み票.addEventListener('change', (e) => {
-              console.log(e.target.files);
-
-              pet_img_file = e.target.files[0];
-              // pet_img
-              const storageRef02 = ref(storage, "pets/" + petID + "/" + "狂犬病予防注射済み票");
-              const uploadTask02 = uploadBytesResumable(storageRef02, pet_img_file);
-              uploadTask02.on('state_changed',
-                (snapshot) => {
-                  const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                  console.log('Upload is ' + progress + '% done', "02の画像");
-                  img02_uploading.textContent = `アップロード中 ${progress}%`;
-                  switch (snapshot.state) {
-                    case 'paused':
-                      console.log('Upload is paused', "01の画像");
-                      break;
-                    case 'running':
-                      console.log('Upload is running', "01の画像");
-                      break;
+              const change_info01 = confirm("この写真を使用しますか？");
+              if (change_info01) {
+                console.log(e.target.files);
+  
+                pet_img_file = e.target.files[0];
+                // pet_img
+                const storageRef02 = ref(storage, "pets/" + petID + "/" + "狂犬病予防注射済み票");
+                const uploadTask02 = uploadBytesResumable(storageRef02, pet_img_file);
+                uploadTask02.on('state_changed',
+                  (snapshot) => {
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log('Upload is ' + progress + '% done', "02の画像");
+                    img02_uploading.textContent = `アップロード中 ${progress}%`;
+                    switch (snapshot.state) {
+                      case 'paused':
+                        console.log('Upload is paused', "01の画像");
+                        break;
+                      case 'running':
+                        console.log('Upload is running', "01の画像");
+                        break;
+                    }
+                  },
+                  (error) => {
+                    // Handle unsuccessful uploads
+                    console.log("Handle unsuccessful uploads");
+                  },
+                  async () => {
+                    await getDownloadURL(uploadTask02.snapshot.ref).then((downloadURL) => {
+                      console.log('File available at', downloadURL);
+                      pet_img_url = downloadURL;
+                      img02_uploading.textContent = "";
+  
+                    });
+                    const washingtonRef = doc(db, "users", user_id, "pets", petID);
+                    updateDoc(washingtonRef, {
+                      [edit_name]: pet_img_url
+                    });
+                    modal.classList.remove('active');
+                    overlay.classList.remove('active');
+                    child.remove();
                   }
-                },
-                (error) => {
-                  // Handle unsuccessful uploads
-                  console.log("Handle unsuccessful uploads");
-                },
-                async () => {
-                  await getDownloadURL(uploadTask02.snapshot.ref).then((downloadURL) => {
-                    console.log('File available at', downloadURL);
-                    pet_img_url = downloadURL;
-                    img02_uploading.textContent = "";
+                );
 
-                  });
-                  const washingtonRef = doc(db, "users", user_id, "pets", petID);
-                  updateDoc(washingtonRef, {
-                    [edit_name]: pet_img_url
-                  });
-                  modal.classList.remove('active');
-                  overlay.classList.remove('active');
-                  child.remove();
-                }
-              );
+              }
             });
 
             break;
@@ -970,46 +974,50 @@
             const img03_uploading = document.getElementById('img03_uploading');
             const 混合ワクチン接種証明書 = document.getElementById("混合ワクチン接種証明書");
             混合ワクチン接種証明書.addEventListener('change', (e) => {
-              console.log(e.target.files);
-
-              pet_img_file = e.target.files[0];
-              // pet_img
-              const storageRef03 = ref(storage, "pets/" + petID + "/" + "狂犬病予防注射済み票");
-              const uploadTask03 = uploadBytesResumable(storageRef03, pet_img_file);
-              uploadTask03.on('state_changed',
-                (snapshot) => {
-                  const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                  console.log('Upload is ' + progress + '% done', "02の画像");
-                  img03_uploading.textContent = `アップロード中 ${progress}%`;
-                  switch (snapshot.state) {
-                    case 'paused':
-                      console.log('Upload is paused', "03の画像");
-                      break;
-                    case 'running':
-                      console.log('Upload is running', "03の画像");
-                      break;
+              const change_info02 = confirm("この写真を使用しますか？");
+              if (change_info02) {
+                console.log(e.target.files);
+  
+                pet_img_file = e.target.files[0];
+                // pet_img
+                const storageRef03 = ref(storage, "pets/" + petID + "/" + "狂犬病予防注射済み票");
+                const uploadTask03 = uploadBytesResumable(storageRef03, pet_img_file);
+                uploadTask03.on('state_changed',
+                  (snapshot) => {
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log('Upload is ' + progress + '% done', "02の画像");
+                    img03_uploading.textContent = `アップロード中 ${progress}%`;
+                    switch (snapshot.state) {
+                      case 'paused':
+                        console.log('Upload is paused', "03の画像");
+                        break;
+                      case 'running':
+                        console.log('Upload is running', "03の画像");
+                        break;
+                    }
+                  },
+                  (error) => {
+                    // Handle unsuccessful uploads
+                    console.log("Handle unsuccessful uploads");
+                  },
+                  async () => {
+                    await getDownloadURL(uploadTask03.snapshot.ref).then((downloadURL) => {
+                      console.log('File available at', downloadURL);
+                      pet_img_url = downloadURL;
+                      img03_uploading.textContent = "";
+  
+                    });
+                    const washingtonRef = doc(db, "users", user_id, "pets", petID);
+                    updateDoc(washingtonRef, {
+                      [edit_name]: pet_img_url
+                    });
+                    modal.classList.remove('active');
+                    overlay.classList.remove('active');
+                    child.remove();
                   }
-                },
-                (error) => {
-                  // Handle unsuccessful uploads
-                  console.log("Handle unsuccessful uploads");
-                },
-                async () => {
-                  await getDownloadURL(uploadTask03.snapshot.ref).then((downloadURL) => {
-                    console.log('File available at', downloadURL);
-                    pet_img_url = downloadURL;
-                    img03_uploading.textContent = "";
+                );
 
-                  });
-                  const washingtonRef = doc(db, "users", user_id, "pets", petID);
-                  updateDoc(washingtonRef, {
-                    [edit_name]: pet_img_url
-                  });
-                  modal.classList.remove('active');
-                  overlay.classList.remove('active');
-                  child.remove();
-                }
-              );
+              }
             });
 
             break;

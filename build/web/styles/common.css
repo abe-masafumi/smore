@@ -170,16 +170,16 @@
 /* ---写真中央揃え--- */
 
 .img_box {
-    background-color: pink;
+    background-color: black;
     text-align: center;
     border-radius: 50%;
-    width: 75px;
-    height: 75px;
+    width: 85px;
+    height: 85px;
     overflow: hidden;
 }
 
 .img_box img {
-    width: 100%;
+    width: 110%;
     height: auto;
     object-fit: cover;
 }
