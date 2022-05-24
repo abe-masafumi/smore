@@ -53,7 +53,28 @@
                         </p>
                         <div class="space_48"></div>
                         <p>犬種 (分からない場合はミックスと記入してください)<span class="sub">必須</span></p>
-                        <input type="text" id="type" placeholder=" トイプードル" required style="font-size: 16px;">
+                        <select name="genre" id="genre">
+                            <option disabled selected>五十音順で選択</option>
+                            <option value="ミックス犬">ミックス犬</option>
+                            <option value="あ行">あ行</option>
+                            <option value="か行">か行</option>
+                            <option value="さ行">さ行</option>
+                            <option value="た行">た行</option>
+                            <option value="な行">な行</option>
+                            <option value="は行">は行</option>
+                            <option value="ま行">ま行</option>
+                            <option value="や行">や行</option>
+                            <option value="ら行">ら行</option>
+                            <option value="わ行">わ行</option>
+                            <option value="その他">その他</option>
+                          </select>
+                        </br>
+                          <select name="food-name" id="food-name" disabled>
+                            <option selected>犬種を選択</option>
+                          </select>
+
+                        <!-- <p>犬種 (分からない場合はミックスと記入してください)<span class="sub">必須</span></p>
+                        <input type="text" id="type" placeholder=" トイプードル" required style="font-size: 16px;"> -->
                         <div class="space_48"></div>
                         <p>去勢・避妊<span class="sub">必須</span><br>
                             <label><input type="radio" name="去勢" value="未" required> 未</label>
@@ -133,7 +154,7 @@
         <footer class="page-footer"></footer>
     </div>
     <!-- ----end---- -->
-
+    <script src="../dog_type.js"></script>
     <script src="../birthday.js"></script>
     <script src="../体重.js"></script>
     <script type="module">
@@ -370,7 +391,7 @@
                 const 耳 = myform.耳.value;
                 const 登録 = myform.登録.value;
                 const 注射 = myform.注射.value;
-                const type = document.getElementById("type").value;
+                const type = document.getElementById("food-name").value;
                 const weight = `${weight01_value}.${weight02_value}`;
                 // const weight = document.getElementById("weight").value;
                 const color = document.getElementById("color").value;
