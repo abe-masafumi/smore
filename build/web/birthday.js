@@ -30,23 +30,23 @@ for(let i = 1; i <= 31; i++) {
 /**
  * 日付を変更する関数
  */
-function changeTheDay() {
-  //日付の要素を削除
-  userBirthdayDay.innerHTML = '';
+// function changeTheDay() {
+//   //日付の要素を削除
+//   // userBirthdayDay.innerHTML = '';
 
-  //選択された年月の最終日を計算
-  let lastDayOfTheMonth = new Date(userBirthdayYear.value, userBirthdayMonth.value, 0).getDate();
+//   //選択された年月の最終日を計算
+//   let lastDayOfTheMonth = new Date(userBirthdayYear.value, userBirthdayMonth.value, 0).getDate();
 
-  //選択された年月の日付を生成
-  for(let i = 1; i <= lastDayOfTheMonth; i++) {
-    createOptionForElements(userBirthdayDay, i);
-  }
-}
+//   //選択された年月の日付を生成
+//   for(let i = 1; i <= lastDayOfTheMonth; i++) {
+//     createOptionForElements(userBirthdayDay, i);
+//   }
+// }
 
-userBirthdayYear.addEventListener('change', function() {
-  changeTheDay();
-});
+// userBirthdayYear.addEventListener('change', function() {
+//   changeTheDay();
+// });
 
-userBirthdayMonth.addEventListener('change', function() {
-  changeTheDay();
-});
+// userBirthdayMonth.addEventListener('change', function() {
+//   changeTheDay();
+// });
