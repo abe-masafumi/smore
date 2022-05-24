@@ -186,7 +186,8 @@ button {
 
 .weight,
 .type01,
-.type02  {
+.type02,
+.shop-type  {
     display: flex;
     max-width: 300px;
     align-items: center;

@@ -50,6 +50,28 @@
                         <div class="space_32"></div>
                         <p>連絡先(店舗)</p>
                         <input type="tel" placeholder=" 連絡先" id="phone_no" required style="font-size: 16px;">
+                        <div class="space_32"></div>
+                        <p>店舗形態</p>
+                        <div class="type01">
+                            <select name="shop-type" id="shop-type" required>
+                                <option value="" selected>選択</option>
+                                <option value="ドッグラン">ドッグラン</option>
+                                <option value="ドッグカフェ">ドッグカフェ</option>
+                                <option value="猫カフェ">猫カフェ</option>
+                                <option value="キッチンカー">キッチンカー</option>
+                                <option value="イベント">イベント</option>
+                                <option value="ペットサロン">ペットサロン</option>
+                                <option value="動物病院">動物病院</option>
+                                <option value="物販">物販</option>
+                                <option value="ペットと泊まれる宿">ペットと泊まれる宿</option>
+                                <option value="ペットと入れる飲食店">ペットと入れる飲食店</option>
+                                <option value="ペットトレーナー">ペットトレーナー</option>
+                                <option value="ペットシッター">ペットシッター</option>
+                                <option value="保護動物団体">保護動物団体</option>
+                                <option value="ブリーダー">ブリーダー</option>
+                                <option value="ペットショップ(正体販売)">ペットショップ(正体販売)</option>
+                              </select>
+                        </div>
                         <div class="space_48"></div>
                         <div class="text_center">
                             <input type="submit" value="登録" id="post_button">
@@ -132,6 +154,7 @@
             const shopn_ame = document.getElementById("shopn_ame").value;
             const address = document.getElementById("address").value;
             const phone_no = document.getElementById("phone_no").value;
+            const shop_type = document.getElementById("shop-type").value;
             // ここでユーザー情報を取得した時点で、ユニークなIDを作成し、バーコードを作成、画像化,保存,バーコードURLをfirestoreに保存
             try {
                 // qrcodeをfirestrageに保存
@@ -149,9 +172,7 @@
                                 shop_id: shop_id,
                                 shop_name: shopn_ame,
                                 phone_nomber: phone_no,
-                                web: "",
-                                photo: "",
-                                sns: "",
+                                shop_type: shop_type,
                                 QRcode: url,
                                 date: Timestamp.fromDate(new Date()),
                             });
