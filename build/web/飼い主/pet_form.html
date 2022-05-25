@@ -71,14 +71,14 @@
                                 <option value="ら行">ら行</option>
                                 <option value="わ行">わ行</option>
                                 <option value="その他">その他</option>
-                              </select>
+                            </select>
                         </div>
                         </br>
-                          <div class="type02">
-                              <select name="food-name" id="food-name" disabled>
+                        <div class="type02">
+                            <select name="food-name" id="food-name" disabled>
                                 <option selected>犬種を選択</option>
-                              </select>
-                          </div>
+                            </select>
+                        </div>
 
                         <!-- <p>犬種 (分からない場合はミックスと記入してください)<span class="sub">必須</span></p>
                         <input type="text" id="type" placeholder=" トイプードル" required style="font-size: 16px;"> -->
@@ -109,7 +109,7 @@
                         </p>
                         <div class="space_48"></div>
                         <p>ごはん(品名・一日の給餌量)</p>
-                        <label ><input type="text" id="meal" placeholder=" ミシュワン,200" style="font-size: 16px;"> g</label>
+                        <label><input type="text" id="meal" placeholder=" ミシュワン,200" style="font-size: 16px;"> g</label>
                         <div class="space_48"></div>
                         <p>かかりつけの病院</p>
                         <input type="text" id="doctor" placeholder=" 病院名" style="font-size: 16px;">
@@ -243,7 +243,7 @@
                 },
                 (error) => {
                     // Handle unsuccessful uploads
-                    console.log("Handle unsuccessful uploads");
+                    console.log("Handle unsuccessful uploads",error);
                 },
                 () => {
                     getDownloadURL(uploadTask01.snapshot.ref).then((downloadURL) => {
@@ -280,7 +280,7 @@
                 },
                 (error) => {
                     // Handle unsuccessful uploads
-                    console.log("Handle unsuccessful uploads");
+                    console.log("Handle unsuccessful uploads",error);
                 },
                 () => {
                     getDownloadURL(uploadTask02.snapshot.ref).then((downloadURL) => {
@@ -299,7 +299,7 @@
             console.log(e.target.files);
 
             混合ワクチン接種証明書_file = e.target.files[0];
-            const storageRef03 = ref(storage, "pets/" + newDoc + "/" + "混合ワクチン接種証明書url");
+            const storageRef03 = ref(storage, "pets/" + newDoc + "/" + "混合ワクチン接種証明書_img");
             const uploadTask03 = uploadBytesResumable(storageRef03, 混合ワクチン接種証明書_file);
 
             uploadTask03.on('state_changed',
@@ -319,7 +319,7 @@
                 },
                 (error) => {
                     // Handle unsuccessful uploads
-                    console.log("Handle unsuccessful uploads");
+                    console.log("Handle unsuccessful uploads",error);
                 },
                 () => {
                     getDownloadURL(uploadTask03.snapshot.ref).then((downloadURL) => {
@@ -340,24 +340,24 @@
         const select_year = document.getElementById('select_year')
         select_year.addEventListener('change', () => {
             console.log(select_year.value)
-        console.log(select_day_value);
+            console.log(select_day_value);
 
             select_year_value = select_year.value
-        console.log(select_day_value);
+            console.log(select_day_value);
 
         })
         const select_month = document.getElementById('select_month')
         select_month.addEventListener('change', () => {
             console.log(select_month.value)
             select_month_value = select_month.value
-        console.log(select_day_value);
+            console.log(select_day_value);
 
         })
         const select_day = document.getElementById('select_day')
         select_day.addEventListener('change', () => {
             console.log(select_day.value)
             select_day_value = select_day.value
-        console.log(select_day_value);
+            console.log(select_day_value);
 
         })
         console.log(select_day_value);
@@ -449,12 +449,8 @@
                     user_id: user_id,
                 }
                 console.log(data);
-                try {
-                    await setDoc(doc(db, 'users', user_id, 'pets', newDoc), data) // memosのドキュメントにobjを追加
-                    window.location.href = './飼い主my_page.html';
-                } catch (e) {
-                    console.error("Error adding document: ", e);
-                }
+                await setDoc(doc(db, 'users', user_id, 'pets', newDoc), data) // memosのドキュメントにobjを追加
+                window.location.href = './飼い主my_page.html';
             } catch (e) {
                 console.error("Error adding document: ", e);
             }

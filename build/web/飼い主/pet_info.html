@@ -919,7 +919,7 @@
   
                 pet_img_file = e.target.files[0];
                 // pet_img
-                const storageRef02 = ref(storage, "pets/" + petID + "/" + "狂犬病予防注射済み票");
+                const storageRef02 = ref(storage, "pets/" + petID + "/" + "狂犬病予防注射済み票_img");
                 const uploadTask02 = uploadBytesResumable(storageRef02, pet_img_file);
                 uploadTask02.on('state_changed',
                   (snapshot) => {
@@ -980,7 +980,7 @@
   
                 pet_img_file = e.target.files[0];
                 // pet_img
-                const storageRef03 = ref(storage, "pets/" + petID + "/" + "狂犬病予防注射済み票");
+                const storageRef03 = ref(storage, "pets/" + petID + "/" + "混合ワクチン接種証明書_img");
                 const uploadTask03 = uploadBytesResumable(storageRef03, pet_img_file);
                 uploadTask03.on('state_changed',
                   (snapshot) => {
