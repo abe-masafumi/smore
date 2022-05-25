@@ -244,6 +244,7 @@
                 (error) => {
                     // Handle unsuccessful uploads
                     console.log("Handle unsuccessful uploads",error);
+                    alert('書き込みに失敗したか、権限がありません。');
                 },
                 () => {
                     getDownloadURL(uploadTask01.snapshot.ref).then((downloadURL) => {
@@ -281,6 +282,7 @@
                 (error) => {
                     // Handle unsuccessful uploads
                     console.log("Handle unsuccessful uploads",error);
+                    alert('書き込みに失敗したか、権限がありません。');
                 },
                 () => {
                     getDownloadURL(uploadTask02.snapshot.ref).then((downloadURL) => {
@@ -320,6 +322,7 @@
                 (error) => {
                     // Handle unsuccessful uploads
                     console.log("Handle unsuccessful uploads",error);
+                    alert('書き込みに失敗したか、権限がありません。');
                 },
                 () => {
                     getDownloadURL(uploadTask03.snapshot.ref).then((downloadURL) => {
@@ -453,6 +456,7 @@
                 window.location.href = './飼い主my_page.html';
             } catch (e) {
                 console.error("Error adding document: ", e);
+                alert('書き込みに失敗したか、権限がありません。');
             }
         });
 
