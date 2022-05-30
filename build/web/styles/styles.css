@@ -127,24 +127,28 @@ header {
     border-radius: 50%;
 }
 
-input[type="text"] {
-    width: 220px;
+.input_width {
+    width: 250px;
+    font-size: 16px;
+}
+
+/* input[type="text"] {
+    width: 300px;
 }
 
 input[type="tel"] {
-    width: 220px;
+    width: 300px;
 }
+
+input[type="password"] {
+    width: 300px;
+} */
 
 label {
     margin: 0 5px;
 }
 
-input[type="submit"] {
-    border-radius: 100vh;
-    width: 140px;
-    height: 40px;
-    background-color: rgb(100, 151, 182);
-}
+
 
 button {
     border-radius: 100vh;
@@ -342,4 +346,11 @@ textarea:focus {
 input[type=radio] {
 height: auto;
 width: auto;
+}
+
+input[type="submit"] {
+    border-radius: 100vh;
+    width: 140px;
+    height: 40px;
+    background-color: rgb(100, 151, 182);
 }

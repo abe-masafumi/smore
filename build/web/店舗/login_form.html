@@ -30,12 +30,12 @@
             <div class="center">
                 <div class="form_container">
                     <div class="space_48"></div>
-                    <form id="myform" class="m_auto">
+                    <form id="myform" class="m_auto" style="width: 250px;">
                         <p>メールアドレス</p>
-                        <input type="email" placeholder=" email" id="email" style="font-size: 16px;">
+                        <input type="email" placeholder=" email" id="email" class="input_width">
                         <div class="space_32"></div>
                         <p>パスワード</p>
-                        <input type="password" placeholder=" password" id="password" style="font-size: 16px;">
+                        <input type="password" placeholder=" password" id="password" class="input_width">
                         <div class="space_24"></div>
                         <p><input type="checkbox" id="password_check">
                             パスワードを表示する</p>
@@ -108,7 +108,10 @@
                     const errorMessage = error.message;
                     console.log(errorCode);
                     console.log(errorMessage);
-                    alert('メールアドレスとパスワードが一致しません。もう一度やり直してください')
+                    // 　メールの登録失敗
+                    if (errorCode == "auth/invalid-email") alert("メールアドレスを正しく入力してください。");
+                    // passwordの登録失敗
+                    if (errorCode == "auth/weak-password") alert("パスワードを正しく入力してください。");
                 });
         });
     </script>

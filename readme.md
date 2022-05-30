@@ -143,6 +143,8 @@ import { } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-SERVICE.js'
 
 - Inputのに未入力時のエラーを確実に出したい
 
+<!-- - 入力formが狭い -->
+
 
 
 [cloud vision](https://cloud.google.com/vision/docs/detect-labels-image-client-libraries?hl=ja#using_the_client_library)
