@@ -21,7 +21,7 @@
     <!-- js読み込み時のroading画面 -->
     <div id="loading" class="center" style="height: 600px;">loading...</div>
     <!-- ----end---- -->
-    <!-- 通常時の画面 -->
+    <!-- 通常時の画面 loadingが終わるまで待機-->
     <div class="none" id="wait">
         <header class="page-header center">
             <h1>ログイン</h1>
@@ -67,15 +67,15 @@
         const loading = document.getElementById('loading');
         const wait = document.getElementById('wait');
 
+        // shop_formが記入されているかで処理を分ける
         async function get_user_data(uid) {
             const docRef = doc(db, "shops", uid);
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
-                console.log("Document data:", docSnap.data());
+                // console.log("Document data:", docSnap.data());
                 window.location.href = './店舗管理画面.html';
             } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document!");
+                // console.log("shop_formが未記入です");
                 window.location.href = './shop_form.html';
             }
         }
@@ -109,7 +109,6 @@
                     console.log(errorCode);
                     console.log(errorMessage);
                     alert('メールアドレスとパスワードが一致しません。もう一度やり直してください')
-
                 });
         });
     </script>

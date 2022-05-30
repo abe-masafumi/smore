@@ -78,7 +78,7 @@
         const shop_name = document.getElementById('user_name');
         const ul = document.getElementById('pet_ul');
         // ログインユーザーの"pets"データを取得
-        async function get_data(uid) {
+        async function get_data(uid) {//この中を変更から　ユーザー表示
             const docRef = await doc(db, 'users', uid);
             const docSnap = await getDoc(docRef);
             const shopName = docSnap.data()["名前"];

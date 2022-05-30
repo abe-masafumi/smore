@@ -1,5 +1,8 @@
 ## smore
 
+### firebase cli
+
+[zenn](https://zenn.dev/captain_blue/articles/firebase-command-memo)
 
 ### firebaseへのhosting
 
@@ -123,6 +126,22 @@ import { } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-SERVICE.js'
 - noseIDのlineqrcodeをどこかに入れる
 
 - kanさんからロゴをもらって組み込み
+
+- セキュリティーで引っかかった時のエラー通知どうしよう
+
+- 利用規約をsign_upに入れる
+
+- footerを作る！
+
+- 入力formで変な文字が入力されないようにする
+
+- 電話番こうのバリデーションをかける(文字数)
+
+- 登録はこちら（新規登録の方は）
+
+- ペット情報登録ページで登録も取るボタン
+
+- Inputのに未入力時のエラーを確実に出したい
 
 
 
