@@ -41,15 +41,15 @@
             <div class="center">
                 <div id="form_container">
                     <div class="space_48"></div>
-                    <form id="myform" class="m_auto">
+                    <form id="myform" class="m_auto" style="width: 250px;">
                         <p>店舗名</p>
-                        <input type="text" placeholder=" 店舗名" id="shopn_ame" required style="font-size: 16px;">
+                        <input type="text" placeholder=" 店舗名" id="shopn_ame" required class="input_width">
                         <div class="space_32"></div>
                         <p>住所(店舗)</p>
-                        <input type="text" placeholder=" 住所" id="address" required style="font-size: 16px;">
+                        <input type="text" placeholder=" 住所" id="address" required class="input_width">
                         <div class="space_32"></div>
                         <p>連絡先(店舗)</p>
-                        <input type="tel" placeholder=" 連絡先" id="phone_no" required style="font-size: 16px;">
+                        <input type="tel" placeholder=" 連絡先" id="phone_no" required class="input_width">
                         <div class="space_32"></div>
                         <p>店舗形態</p>
                         <div class="type01">
@@ -70,7 +70,7 @@
                                 <option value="保護動物団体">保護動物団体</option>
                                 <option value="ブリーダー">ブリーダー</option>
                                 <option value="ペットショップ(正体販売)">ペットショップ(正体販売)</option>
-                              </select>
+                            </select>
                         </div>
                         <div class="space_48"></div>
                         <div class="text_center">
@@ -155,6 +155,10 @@
             const address = document.getElementById("address").value;
             const phone_no = document.getElementById("phone_no").value;
             const shop_type = document.getElementById("shop-type").value;
+            if (!phone_no.match(/^(0{1}\d{9,14})$/)) {
+                alert('市外局番が正しくありません');
+                return
+            }
             // ここでユーザー情報を取得した時点で、ユニークなIDを作成し、バーコードを作成、画像化,保存,バーコードURLをfirestoreに保存
             try {
                 // qrcodeをfirestrageに保存
