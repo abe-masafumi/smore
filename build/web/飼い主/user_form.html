@@ -112,9 +112,9 @@
       const name = document.getElementById("name").value;
       const address = document.getElementById("address").value;
       const phone_number = document.getElementById("phone_number").value;
-      // 市外局番含めた番号のチェック
+      // 電話番号のチェック
       if (!phone_number.match(/^(0{1}\d{9,14})$/)) {
-        alert('市外局番が正しくありません');
+        alert('電話番号が正しくありません');
         return 
       }
 

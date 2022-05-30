@@ -155,8 +155,9 @@
             const address = document.getElementById("address").value;
             const phone_no = document.getElementById("phone_no").value;
             const shop_type = document.getElementById("shop-type").value;
-            if (!phone_no.match(/^(0{1}\d{9,14})$/)) {
-                alert('市外局番が正しくありません');
+            // 電話番号のチェック
+            if (!phone_number.match(/^(0{1}\d{9,14})$/)) {
+                alert('電話番号が正しくありません');
                 return
             }
             // ここでユーザー情報を取得した時点で、ユニークなIDを作成し、バーコードを作成、画像化,保存,バーコードURLをfirestoreに保存
