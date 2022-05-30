@@ -30,10 +30,10 @@
             <div class="center">
                 <div class="form_container" id="form_container">
 
-                    <form id="myform" class="m_auto">
+                    <form id="myform" class="m_auto" style="width: 250px;">
                         <div class="space_32"></div>
                         <p>ペットの名前<span class="sub">必須</span></p>
-                        <input type="text" placeholder=" ぽち" id="pet_name" required style="font-size: 16px;">
+                        <input type="text" placeholder=" ぽち" id="pet_name" required class="input_width">
                         <div class="space_32"></div>
                         <p>生年月日<span class="sub">必須</span></p>
                         <div class="form-select-wrap">
@@ -51,11 +51,13 @@
                         </div>
                         <div class="space_32"></div>
                         <p>性別<span class="sub">必須</span><br>
-                            <lavel><input type="radio" name="sex" value="男の子"> 男の子</lavel>
-                            <lavel><input type="radio" name="sex" value="女の子" required> 女の子</lavel>
+                            <div style="display: flex; justify-content: space-evenly;">
+                                <lavel><input type="radio" name="sex" value="男の子"> 男の子</lavel>
+                                <lavel><input type="radio" name="sex" value="女の子" required> 女の子</lavel>
+                            </div> 
                         </p>
-                        <div class="space_48"></div>
-                        <p>犬種 (分からない場合はミックスと記入してください)<span class="sub">必須</span></p>
+                        <div class="space_32"></div>
+                        <p>犬種<span class="sub">必須</span><p style="font-size: 12px;">※不明な場合はミックスと記入してください</p>
                         <div class="type01">
                             <select name="genre" id="genre">
                                 <option disabled selected>五十音順で選択</option>
@@ -75,78 +77,86 @@
                         </div>
                         </br>
                         <div class="type02">
-                            <select name="food-name" id="food-name" disabled>
+                            <select name="food-name" id="food-name" style="width: 250px;" disabled>
                                 <option selected>犬種を選択</option>
                             </select>
                         </div>
 
                         <!-- <p>犬種 (分からない場合はミックスと記入してください)<span class="sub">必須</span></p>
                         <input type="text" id="type" placeholder=" トイプードル" required style="font-size: 16px;"> -->
-                        <div class="space_48"></div>
+                        <div class="space_32"></div>
                         <p>去勢・避妊<span class="sub">必須</span><br>
-                            <label><input type="radio" name="去勢" value="未" required> 未</label>
-                            <label><input type="radio" name="去勢" value="済"> 済</label>
+                            <div style="display: flex; justify-content: space-evenly;">
+                                <label><input type="radio" name="去勢" value="未" required> 未</label>
+                                <label><input type="radio" name="去勢" value="済"> 済</label>
+                            </div>
                         </p>
-                        <div class="space_48"></div>
+                        <div class="space_32"></div>
                         <p>体重<span class="sub">必須</span></p>
                         <div class="weight">
                             <select class="weight01" id="weight01" required>
                                 <option value="" selected>選択</option>
                             </select>
-                            .
+                            <p style="padding-left: 5px; font-size: 36px;">.</p>
                             <select class="weight02" id="weight02" required>
                                 <option value="" selected>選択</option>
                             </select>
                             kg
                         </div>
-                        <div class="space_48"></div>
+                        <div class="space_32"></div>
                         <p>毛色<span class="sub">必須</span></p>
-                        <input type="text" id="color" placeholder=" ブラウン" required style="font-size: 16px;">
-                        <div class="space_48"></div>
+                        <input type="text" id="color" placeholder=" ブラウン" required class="input_width">
+                        <div class="space_32"></div>
                         <p>耳<span class="sub">必須</span><br>
-                            <label><input type="radio" name="耳" value="たれ耳" required> たれ耳</label>
-                            <label><input type="radio" name="耳" value="立ち耳"> 立ち耳</label>
+                            <div style="display: flex; justify-content: space-evenly;">
+                                <label><input type="radio" name="耳" value="たれ耳" required> たれ耳</label>
+                                <label><input type="radio" name="耳" value="立ち耳"> 立ち耳</label>
+                            </div>
                         </p>
-                        <div class="space_48"></div>
+                        <div class="space_32"></div>
                         <p>ごはん(品名・一日の給餌量)</p>
-                        <label><input type="text" id="meal" placeholder=" ミシュワン,200" style="font-size: 16px;"> g</label>
-                        <div class="space_48"></div>
+                        <input type="text" id="meal" placeholder=" ミシュワン,200" style="width: 234px; font-size: 16px;"> g
+                        <div class="space_32"></div>
                         <p>かかりつけの病院</p>
-                        <input type="text" id="doctor" placeholder=" 病院名" style="font-size: 16px;">
-                        <div class="space_48"></div>
+                        <input type="text" id="doctor" placeholder=" 病院名" class="input_width">
+                        <div class="space_32"></div>
                         <p>病歴・アレルギー</p>
-                        <input type="text" id="allergy" placeholder=" 皮膚炎,チキンアレルギー" style="font-size: 16px;">
-                        <div class="space_48"></div>
+                        <input type="text" id="allergy" placeholder=" 皮膚炎,チキンアレルギー" class="input_width">
+                        <div class="space_32"></div>
                         <p>お薬 (現在服用中のお薬)</p>
-                        <input type="text" id="medicine" placeholder=" マイフリーガード" style="font-size: 16px;">
-                        <div class="space_48"></div>
+                        <input type="text" id="medicine" placeholder=" マイフリーガード" class="input_width">
+                        <div class="space_32"></div>
                         <p>サロン</p>
-                        <input type="text" id="salon" placeholder=" サロン名" style="font-size: 16px;">
-                        <div class="space_48"></div>
+                        <input type="text" id="salon" placeholder=" サロン名" class="input_width">
+                        <div class="space_32"></div>
                         <p>マイクロチップ番号 (15桁の数字)</p>
-                        <input type="number" id="microchip_number" placeholder=" 392141111111111"
-                            style="font-size: 16px;">
-                        <div class="space_48"></div>
-                        <p>犬の登録をし、鑑札を受け取って</br>いますか？<span class="sub">必須</span><br>
-                            <label><input type="radio" name="登録" value="はい" required> はい</label>
-                            <label><input type="radio" name="登録" value="いいえ"> いいえ</label>
-                            <label><input type="radio" name="登録" value="分からない"> 分からない</label>
+                        <input type="number" id="microchip_number" placeholder=" 392141234567891"
+                        class="input_width"  min="15" max="15">
+                        <div class="space_32"></div>
+                        <p>犬の登録をし、鑑札を受け取って<br>いますか？<span class="sub">必須</span><br>
+                            <div style="display: flex; justify-content: space-evenly;">
+                                <label><input type="radio" name="登録" value="はい" required> はい</label>
+                                <label><input type="radio" name="登録" value="いいえ"> いいえ</label>
+                                <label><input type="radio" name="登録" value="不明"> 不明</label>
+                            </div>
                         </p>
-                        <div class="space_48"></div>
-                        <p>狂犬病予防注射を受け、注射済み票を</br>受け取っていますか？<span class="sub">必須</span><br>
-                            <label><input type="radio" name="注射" value="はい" required> はい</label>
-                            <label><input type="radio" name="注射" value="いいえ"> いいえ</label>
-                            <label><input type="radio" name="注射" value="分からない"> 分からない</label>
+                        <div class="space_32"></div>
+                        <p>狂犬病予防注射済票を受け取って<br>いますか？<span class="sub">必須</span><br>
+                            <div style="display: flex; justify-content: space-evenly;">
+                                <label><input type="radio" name="注射" value="はい" required> はい</label>
+                                <label><input type="radio" name="注射" value="いいえ"> いいえ</label>
+                                <label><input type="radio" name="注射" value="不明"> 不明</label>
+                            </div>
                         </p>
-                        <div class="space_48"></div>
+                        <div class="space_32"></div>
                         <p>写真1:ペット写真<span class="sub">必須</span></p>
                         <input type="file" accept='.jpeg, .png, .jpg' id="pet_img" required>
                         <p id="img01_uploading"></p>
-                        <div class="space_48"></div>
+                        <div class="space_32"></div>
                         <p>写真2:狂犬病予防注射済み票</p>
                         <input type="file" accept='.jpeg, .png, .jpg' id="狂犬病予防注射済み票">
                         <p id="img02_uploading"></p>
-                        <div class="space_48"></div>
+                        <div class="space_32"></div>
                         <p>写真3:混合ワクチン接種証明書</p>
                         <input type="file" accept='.jpeg, .png, .jpg' id="混合ワクチン接種証明書">
                         <p id="img03_uploading"></p>

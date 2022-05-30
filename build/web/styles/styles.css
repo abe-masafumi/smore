@@ -200,7 +200,7 @@ button {
 }
 
 .form-select-wrap>select {
-    padding: 8px 16px;
+    padding: 8px 7px;
     margin-left: 10px;
     margin-right: 10px;
     border: 1px solid gray;
@@ -236,7 +236,7 @@ button {
 .weight>.weight01,
 .type01>select,
 .type02>select {
-    margin-left: 0px;
+    margin: 0px;
 }
 
 
