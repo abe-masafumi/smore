@@ -33,34 +33,35 @@
                     <form id="myform" class="m_auto" style="width: 250px;">
                         <div class="space_32"></div>
                         <p>ペットの名前<span class="sub">必須</span></p>
-                        <input type="text" placeholder=" ぽち" id="pet_name" required class="input_width">
+                        <input type="text" placeholder=" ぽち" id="pet_name" class="input_width">
                         <div class="space_32"></div>
                         <p>生年月日<span class="sub">必須</span></p>
                         <div class="form-select-wrap">
-                            <select class="birthday-year" id="select_year" required>
+                            <select class="birthday-year" id="select_year">
                                 <option value="" selected>選択</option>
                             </select>
                             /
-                            <select class="birthday-month" id="select_month" required>
+                            <select class="birthday-month" id="select_month">
                                 <option value="" selected>選択</option>
                             </select>
                             /
-                            <select class="birthday-day" id="select_day" required>
+                            <select class="birthday-day" id="select_day">
                                 <option value="" selected>選択</option>
                             </select>
                         </div>
                         <div class="space_32"></div>
                         <p>性別<span class="sub">必須</span><br>
-                            <div style="display: flex; justify-content: space-evenly;">
-                                <lavel><input type="radio" name="sex" value="男の子"> 男の子</lavel>
-                                <lavel><input type="radio" name="sex" value="女の子" required> 女の子</lavel>
-                            </div> 
+                        <div style="display: flex; justify-content: space-evenly;">
+                            <lavel><input type="radio" name="sex" value="男の子"> 男の子</lavel>
+                            <lavel><input type="radio" name="sex" value="女の子"> 女の子</lavel>
+                        </div>
                         </p>
                         <div class="space_32"></div>
-                        <p>犬種<span class="sub">必須</span><p style="font-size: 12px;">※不明な場合はミックスと記入してください</p>
+                        <p>犬種<span class="sub">必須</span>
+                        <p style="font-size: 12px;">※不明な場合はミックスと記入してください</p>
                         <div class="type01">
                             <select name="genre" id="genre">
-                                <option disabled selected>五十音順で選択</option>
+                                <option value="" disabled selected>五十音順で選択</option>
                                 <option value="ミックス犬">ミックス犬</option>
                                 <option value="あ行">あ行</option>
                                 <option value="か行">か行</option>
@@ -78,40 +79,38 @@
                         </br>
                         <div class="type02">
                             <select name="food-name" id="food-name" style="width: 250px;" disabled>
-                                <option selected>犬種を選択</option>
+                                <option value="" selected>犬種を選択</option>
                             </select>
                         </div>
 
-                        <!-- <p>犬種 (分からない場合はミックスと記入してください)<span class="sub">必須</span></p>
-                        <input type="text" id="type" placeholder=" トイプードル" required style="font-size: 16px;"> -->
                         <div class="space_32"></div>
                         <p>去勢・避妊<span class="sub">必須</span><br>
-                            <div style="display: flex; justify-content: space-evenly;">
-                                <label><input type="radio" name="去勢" value="未" required> 未</label>
-                                <label><input type="radio" name="去勢" value="済"> 済</label>
-                            </div>
+                        <div style="display: flex; justify-content: space-evenly;">
+                            <label><input type="radio" name="去勢" value="未"> 未</label>
+                            <label><input type="radio" name="去勢" value="済"> 済</label>
+                        </div>
                         </p>
                         <div class="space_32"></div>
                         <p>体重<span class="sub">必須</span></p>
                         <div class="weight">
-                            <select class="weight01" id="weight01" required>
+                            <select class="weight01" id="weight01">
                                 <option value="" selected>選択</option>
                             </select>
                             <p style="padding-left: 5px; font-size: 36px;">.</p>
-                            <select class="weight02" id="weight02" required>
-                                <option value="" selected>選択</option>
+                            <select class="weight02" id="weight02">
+                                <option value="0" selected>0</option>
                             </select>
                             kg
                         </div>
                         <div class="space_32"></div>
                         <p>毛色<span class="sub">必須</span></p>
-                        <input type="text" id="color" placeholder=" ブラウン" required class="input_width">
+                        <input type="text" id="color" placeholder=" ブラウン" class="input_width">
                         <div class="space_32"></div>
                         <p>耳<span class="sub">必須</span><br>
-                            <div style="display: flex; justify-content: space-evenly;">
-                                <label><input type="radio" name="耳" value="たれ耳" required> たれ耳</label>
-                                <label><input type="radio" name="耳" value="立ち耳"> 立ち耳</label>
-                            </div>
+                        <div style="display: flex; justify-content: space-evenly;">
+                            <label><input type="radio" name="耳" value="たれ耳"> たれ耳</label>
+                            <label><input type="radio" name="耳" value="立ち耳"> 立ち耳</label>
+                        </div>
                         </p>
                         <div class="space_32"></div>
                         <p>ごはん(品名・一日の給餌量)</p>
@@ -130,23 +129,23 @@
                         <input type="text" id="salon" placeholder=" サロン名" class="input_width">
                         <div class="space_32"></div>
                         <p>マイクロチップ番号 (15桁の数字)</p>
-                        <input type="number" id="microchip_number" placeholder=" 392141234567891"
-                        class="input_width"  min="15" max="15">
+                        <input type="number" id="microchip_number" placeholder=" 392141234567891" class="input_width"
+                            min="15" max="15">
                         <div class="space_32"></div>
                         <p>犬の登録をし、鑑札を受け取って<br>いますか？<span class="sub">必須</span><br>
-                            <div style="display: flex; justify-content: space-evenly;">
-                                <label><input type="radio" name="登録" value="はい" required> はい</label>
-                                <label><input type="radio" name="登録" value="いいえ"> いいえ</label>
-                                <label><input type="radio" name="登録" value="不明"> 不明</label>
-                            </div>
+                        <div style="display: flex; justify-content: space-evenly;">
+                            <label><input type="radio" name="登録" value="はい"> はい</label>
+                            <label><input type="radio" name="登録" value="いいえ"> いいえ</label>
+                            <label><input type="radio" name="登録" value="不明"> 不明</label>
+                        </div>
                         </p>
                         <div class="space_32"></div>
                         <p>狂犬病予防注射済票を受け取って<br>いますか？<span class="sub">必須</span><br>
-                            <div style="display: flex; justify-content: space-evenly;">
-                                <label><input type="radio" name="注射" value="はい" required> はい</label>
-                                <label><input type="radio" name="注射" value="いいえ"> いいえ</label>
-                                <label><input type="radio" name="注射" value="不明"> 不明</label>
-                            </div>
+                        <div style="display: flex; justify-content: space-evenly;">
+                            <label><input type="radio" name="注射" value="はい"> はい</label>
+                            <label><input type="radio" name="注射" value="いいえ"> いいえ</label>
+                            <label><input type="radio" name="注射" value="不明"> 不明</label>
+                        </div>
                         </p>
                         <div class="space_32"></div>
                         <p>写真1:ペット写真<span class="sub">必須</span></p>
@@ -194,7 +193,7 @@
         let user_id;
         let user_email;
         let newDoc;
-        let pet_img_url;
+        let pet_img_url = "";
         let 狂犬病予防注射済み票_url = "";
         let 混合ワクチン接種証明書url = "";
 
@@ -252,7 +251,7 @@
                 },
                 (error) => {
                     // Handle unsuccessful uploads
-                    console.log("Handle unsuccessful uploads",error);
+                    console.log("Handle unsuccessful uploads", error);
                     alert('書き込みに失敗したか、権限がありません。');
                 },
                 () => {
@@ -290,7 +289,7 @@
                 },
                 (error) => {
                     // Handle unsuccessful uploads
-                    console.log("Handle unsuccessful uploads",error);
+                    console.log("Handle unsuccessful uploads", error);
                     alert('書き込みに失敗したか、権限がありません。');
                 },
                 () => {
@@ -330,7 +329,7 @@
                 },
                 (error) => {
                     // Handle unsuccessful uploads
-                    console.log("Handle unsuccessful uploads",error);
+                    console.log("Handle unsuccessful uploads", error);
                     alert('書き込みに失敗したか、権限がありません。');
                 },
                 () => {
@@ -345,48 +344,43 @@
             );
         });
 
-        let select_year_value;
-        let select_month_value;
-        let select_day_value;
-        console.log(select_day_value);
         const select_year = document.getElementById('select_year')
+        let select_year_value = select_year.value;
         select_year.addEventListener('change', () => {
             console.log(select_year.value)
-            console.log(select_day_value);
 
             select_year_value = select_year.value
-            console.log(select_day_value);
 
         })
         const select_month = document.getElementById('select_month')
+        let select_month_value = select_month.value;
         select_month.addEventListener('change', () => {
             console.log(select_month.value)
             select_month_value = select_month.value
-            console.log(select_day_value);
 
         })
         const select_day = document.getElementById('select_day')
+        let select_day_value = select_day.value;
         select_day.addEventListener('change', () => {
             console.log(select_day.value)
             select_day_value = select_day.value
-            console.log(select_day_value);
 
         })
-        console.log(select_day_value);
 
-        let weight01_value;
-        let weight02_value;
+
+
         const weight01 = document.getElementById('weight01');
+        let weight01_value = weight01.value;
         weight01.addEventListener('change', () => {
             console.log(weight01.value)
             weight01_value = weight01.value
         });
         const weight02 = document.getElementById('weight02');
+        let weight02_value = weight02.value;
         weight02.addEventListener('change', () => {
             console.log(weight02.value)
             weight02_value = weight02.value
         });
-        console.log(select_day_value);
 
 
 
@@ -394,46 +388,47 @@
         const myform = document.getElementById("myform")
         myform.addEventListener('submit', async (e) => {
             e.preventDefault();
+
+
+            const pet_name = document.getElementById("pet_name").value;
+            const birthday = `${select_year_value}年${select_month_value}月${select_day_value}日`;
+            const sex = myform.elements.sex.value;
+            const 去勢 = myform.去勢.value;
+            const 耳 = myform.耳.value;
+            const 登録 = myform.登録.value;
+            const 注射 = myform.注射.value;
+            const type = document.getElementById("food-name").value;
+            const weight = `${weight01_value}.${weight02_value}`;
+            const color = document.getElementById("color").value;
+            const meal = document.getElementById("meal").value;
+            const doctor = document.getElementById("doctor").value;
+            const allergy = document.getElementById("allergy").value;
+            const medicine = document.getElementById("medicine").value;
+            const salon = document.getElementById("salon").value;
+            const microchip_number = document.getElementById("microchip_number").value;
+            // input テキスト、チェックボックスが空だった時のエラー処理
+            console.log(weight01_value)
+            console.log(weight02_value)
+            const repu_arr01 = [pet_name, sex, 去勢, color, 耳, 登録, 注射];
+            const messagebox01 = ["ペット名が入力されていません", "性別が選択されていません", "去勢、避妊が選択されていません", "毛色が入力されていません", "耳の種類が選択されていません","鑑札の受け取り項目が選択されていません", "狂犬病予防注射票の受け取り項目が選択されていません"]
+            for (let i = 0; i < repu_arr01.length; i++) {
+                if (repu_arr01[i] == "") {
+                    alert(messagebox01[i])
+                    return
+                }
+            }
+            // input セレクトが空だった時のエラー処理
+            const repu_arr02 = [select_year_value, select_month_value, select_day_value, weight01_value];
+            const messagebox02 = ["生年月日が正しく入力されていません", "生年月日が正しく入力されていません", "生年月日が正しく入力されていません", "生年月日が正しく入力されていません"]
+            for (let i = 0; i < repu_arr02.length; i++) {
+                if (repu_arr02[i] == "") {
+                    alert(messagebox02[i])
+                    return
+                }
+            }
+
             try {
-                // const pet_imgref = ref(storage, "pets/" + newDoc + "/" + "pet_img");
-                // await uploadBytes(pet_imgref, pet_img_file).then(async(snapshot) => {
-                //     console.log('Uploaded a blob or file!');
-                //     // 保存したqrcodeのurlを取得してfirestoreに一緒に保存
-                //     pet_img_url = await getDownloadURL(pet_imgref);
-                // });
 
-                // const 狂犬病予防注射済み票ref = ref(storage, "pets/" + newDoc + "/" + "狂犬病予防注射済み票_img");
-                // await uploadBytes(狂犬病予防注射済み票ref, 狂犬病予防注射済み票_file).then(async(snapshot) => {
-                //     console.log('Uploaded a blob or file!');
-                //     // 保存したqrcodeのurlを取得してfirestoreに一緒に保存
-                //     狂犬病予防注射済み票_url = await getDownloadURL(狂犬病予防注射済み票ref);
-                // });
-                // const 混合ワクチン接種証明書ref = ref(storage, "pets/" + newDoc + "/" + "混合ワクチン接種証明書_img");
-                // await uploadBytes(混合ワクチン接種証明書ref, 混合ワクチン接種証明書_file).then(async(snapshot) => {
-                //     console.log('Uploaded a blob or file!');
-                //     // 保存したqrcodeのurlを取得してfirestoreに一緒に保存
-                //     混合ワクチン接種証明書url = await getDownloadURL(混合ワクチン接種証明書ref);
-                // });
-
-                const pet_name = document.getElementById("pet_name").value;
-                // const birthday = document.getElementById("birthday").value;
-                const birthday = `${select_year_value}年${select_month_value}月${select_day_value}日`;
-                const sex = myform.elements.sex.value;
-                const 去勢 = myform.去勢.value;
-                const 耳 = myform.耳.value;
-                const 登録 = myform.登録.value;
-                const 注射 = myform.注射.value;
-                const type = document.getElementById("food-name").value;
-                const weight = `${weight01_value}.${weight02_value}`;
-                // const weight = document.getElementById("weight").value;
-                const color = document.getElementById("color").value;
-                const meal = document.getElementById("meal").value;
-                const doctor = document.getElementById("doctor").value;
-                const allergy = document.getElementById("allergy").value;
-                const medicine = document.getElementById("medicine").value;
-                const salon = document.getElementById("salon").value;
-                const microchip_number = document.getElementById("microchip_number").value;
-                console.log(select_day_value);
 
                 let data = {
                     写真: pet_img_url,

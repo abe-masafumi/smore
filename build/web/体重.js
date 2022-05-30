@@ -18,6 +18,6 @@ for(let i = 1; i <= 30; i++) {
   createOptionForElements(weight01, i);
 }
 //月の生成
-for(let i = 0; i <= 9; i++) {
+for(let i = 1; i <= 9; i++) {
   createOptionForElements(weight02, i);
 }
