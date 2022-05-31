@@ -123,9 +123,12 @@
                     console.log(errorCode);
                     console.log(errorMessage);
                     // 　メールの登録失敗
-                    if (errorCode == "auth/invalid-email") alert("メールアドレスを正しく入力してください。");
+                    if (errorCode == "auth/invalid-email") alert("メールアドレスを正しく入力してください");
                     // passwordの登録失敗
-                    if (errorCode == "auth/weak-password") alert("パスワードを正しく入力してください。");
+                    if (errorCode == "auth/weak-password") alert("パスワードを正しく入力してください");
+                    // 登録されていないメールアドレスとパスワードのセット
+                    if (errorCode == "auth/user-not-found") alert("登録されていません。\nもう一度確認してください");
+
                 });
         });
     </script>
