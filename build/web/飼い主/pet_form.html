@@ -22,9 +22,17 @@
     <!-- ----end---- -->
     <!-- 通常時の画面 -->
     <div id="big_container">
-        <header class="page-header center">
-            <h1>ペット情報登録</h1>
-            <button id="sign_out" class="none">ログアウト</button>
+        <header class="page-header row">
+            <div class="center col-3">
+                <p onclick="location.href=['./飼い主my_page.html']">戻る</p>
+            </div>
+            <div class="col-6 center">
+                <h1>ペット情報登録</h1>
+            </div>
+            <div class="col-3 center">
+                <!-- このボタンは非表示 -->
+                <button class="none" id="sign_out">ログアウト</button>
+            </div>
         </header>
         <main>
             <div class="center">

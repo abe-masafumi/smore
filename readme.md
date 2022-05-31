@@ -55,7 +55,7 @@ import { } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-SERVICE.js'
 
 <!-- - 動画を入れる（なし） -->
 
-⭐️ firebase authの入力間違えじのエラーを表示したい。無反応になるため
+<!-- ⭐️ firebase authの入力間違えじのエラーを表示したい。無反応になるため -->
 
 <!-- - その時の画面遷移が遅い -->
 
@@ -111,7 +111,7 @@ import { } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-SERVICE.js'
 
 <!-- - 狂犬病必須が抜けてる -->
 
-- signup時の入力ミスのエラー通知
+<!-- - signup時の入力ミスのエラー通知 -->
 
 <!-- - 質問:耳のたれ耳、立ち耳は成長と共に変わる？(編集できる) -->
 
@@ -119,7 +119,7 @@ import { } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-SERVICE.js'
 
 - pet_fprmの順番変更
 
-- firestoreのルールを変更
+<!-- - firestoreのルールを変更 -->
 
 - firebaseのアカウントをkanさんに引き継ぐ
 
@@ -133,15 +133,15 @@ import { } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-SERVICE.js'
 
 - footerを作る！
 
-- 入力formで変な文字が入力されないようにする
+<!-- - 入力formで変な文字が入力されないようにする -->
 
-- 電話番こうのバリデーションをかける(文字数)
+<!-- - 電話番号のバリデーションをかける(文字数) -->
 
-- 登録はこちら（新規登録の方は）
+<!-- - 登録はこちら（新規登録の方は） -->
 
 - ペット情報登録ページで登録も取るボタン
 
-- Inputのに未入力時のエラーを確実に出したい
+<!-- - Inputのに未入力時のエラーを確実に出したい -->
 
 <!-- - 入力formが狭い -->
 
