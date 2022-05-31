@@ -26,12 +26,21 @@
     </div>
   </div>
   <!-- ----end---- -->
-  <div class="space_32"></div>
-  <button class="none" id="sign_out">ログアウト</button>
   <!-- QRコードの表示 -->
-  <h1 class="text_center">店舗専用のQRコード</h1>
+  <header class="page-header row">
+    <div class="center col-3">
+        <!-- <p onclick="location.href=['./店舗管理画面.html']">戻る</p> -->
+        <div class="icon_box" onclick="location.href=['./店舗管理画面.html']"><img src="../images/home.png" alt=""></div>
+    </div>
+    <div class="col-6 center">
+        <h1>店舗専用のQRコード</h1>
+    </div>
+    <div class="col-3 center">
+        <button id="sign_out" class="none">ログアウト</button>
+    </div>
+</header>
   <div class="center" style="height: 500px;">
-    <img src="" alt="qrcode" id="img">
+    <img src="" alt="qrcode" id="img" style="height: 250px;">
   </div>
   <!-- ----end---- -->
   <script type="module">

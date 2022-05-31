@@ -24,7 +24,8 @@
     <div id="big_container">
         <header class="page-header row">
             <div class="center col-3">
-                <p onclick="location.href=['./飼い主my_page.html']">戻る</p>
+                <!-- <p onclick="location.href=['./飼い主my_page.html']">戻る</p> -->
+                <div id="bock_to_mypage" class="icon_box"><img src="../images/close.png" alt=""></div>
             </div>
             <div class="col-6 center">
                 <h1>ペット情報登録</h1>
@@ -197,7 +198,6 @@
         const db = getFirestore(app);
         const storage = getStorage(app);
 
-
         let user_id;
         let user_email;
         let newDoc;
@@ -306,7 +306,6 @@
                         狂犬病予防注射済み票_url = downloadURL;
                         post_button.classList.remove('uploading')
                         img02_uploading.textContent = "";
-
                     });
                 }
             );
@@ -346,7 +345,6 @@
                         混合ワクチン接種証明書url = downloadURL;
                         post_button.classList.remove('uploading')
                         img03_uploading.textContent = "";
-
                     });
                 }
             );
@@ -356,26 +354,20 @@
         let select_year_value = select_year.value;
         select_year.addEventListener('change', () => {
             console.log(select_year.value)
-
             select_year_value = select_year.value
-
         })
         const select_month = document.getElementById('select_month')
         let select_month_value = select_month.value;
         select_month.addEventListener('change', () => {
             console.log(select_month.value)
             select_month_value = select_month.value
-
         })
         const select_day = document.getElementById('select_day')
         let select_day_value = select_day.value;
         select_day.addEventListener('change', () => {
             console.log(select_day.value)
             select_day_value = select_day.value
-
         })
-
-
 
         const weight01 = document.getElementById('weight01');
         let weight01_value = weight01.value;
@@ -390,13 +382,10 @@
             weight02_value = weight02.value
         });
 
-
-
         // 登録
         const myform = document.getElementById("myform")
         myform.addEventListener('submit', async (e) => {
             e.preventDefault();
-
 
             const pet_name = document.getElementById("pet_name").value;
             const birthday = `${select_year_value}年${select_month_value}月${select_day_value}日`;
@@ -427,7 +416,7 @@
             }
             // input セレクトが空だった時のエラー処理
             const repu_arr02 = [select_year_value, select_month_value, select_day_value, weight01_value];
-            const messagebox02 = ["生年月日が正しく入力されていません", "生年月日が正しく入力されていません", "生年月日が正しく入力されていません", "生年月日が正しく入力されていません"]
+            const messagebox02 = ["生年月日が正しく入力されていません(年)", "生年月日が正しく入力されていません(月)", "生年月日が正しく入力されていません(日)", "体重が正しく入力されていません"]
             for (let i = 0; i < repu_arr02.length; i++) {
                 if (repu_arr02[i] == "") {
                     alert(messagebox02[i])
@@ -436,8 +425,6 @@
             }
 
             try {
-
-
                 let data = {
                     写真: pet_img_url,
                     名前: pet_name,
@@ -471,6 +458,16 @@
                 alert('書き込みに失敗したか、権限がありません。');
             }
         });
+
+        const bock_to_mypage = document.getElementById('bock_to_mypage');
+        bock_to_mypage.addEventListener('click',() => {
+            const back_info = confirm('入力を中止しますか？');
+            if (back_info) {
+                window.location.href = './飼い主my_page.html';
+            } else {
+                return
+            }
+        })
 
     </script>
 </body>

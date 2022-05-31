@@ -25,18 +25,18 @@
       <img width="100%" src="../images/Smore_illust_12.png" alt="">
       <p>ログインは<span id="login">こちら</span></p>
     </div>
-  </div> 
+  </div>
   <!-- ----end---- -->
   <!-- 店舗追加後の画面 -->
   <div class="none center" style="height: 600px;" id="info">
-    <div class="center"> 
-      <p>ご来店ありがとうございます</p>
+    <div class="center">
+      <h1>ご来店ありがとうございます</h1>
       <div class="space_32"></div>
       <img width="100%" src="../images/Smore_illust_2.png" alt="">
       <div class="space_32"></div>
-      <p onclick="location.href=['./飼い主my_page.html']">mypageに戻る</p>
+      <p onclick="location.href=['./飼い主my_page.html']" ><span style="color: #7828FD;">mypage</span>に戻る</p>
     </div>
-  </div> 
+  </div>
   <!-- ----end---- -->
 
   <!-- 通常時の画面 -->
@@ -151,7 +151,7 @@
 
 
     const move_top_page = document.getElementById('move_top_page');
-    move_top_page.addEventListener('click',() => {
+    move_top_page.addEventListener('click', () => {
       const info = confirm("来店せずにmypageに戻りますか？");
       if (info) {
         window.location.href = './飼い主my_page.html';
