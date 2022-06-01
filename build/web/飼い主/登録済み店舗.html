@@ -48,6 +48,10 @@
                 <!-- jsで作成 -->
             </ul>
         </main>
+        <!-- 未実装のため、メッセージ -->
+        <div class="m_auto"  style="width: 90%; background-color: rgb(241, 250, 185);">
+            <div class="text_center">今後お店からお得な情報が届く<br>機能を拡充予定です。</div>
+        </div>
         <!-- footerは使ってない -->
         <footer class="page-footer"></footer>
     </div>
@@ -81,10 +85,10 @@
                     const docSnap = await getDoc(docRef);
                     const data = docSnap.data();
                     const li = document.createElement('li');
-                    li.innerHTML = `<div class="flex_box m_auto div2">
-                    <p style="padding-left: 10px;">${data["shop_name"]}</p>
-                    <p style="margin-left: auto;" onclick="location.href=['./shop_ coupon.html?user_ID=${shopID}']" >></p>
-                    </div>`;
+                    li.innerHTML = `    <div class="flex_box m_auto div2" onclick="location.href=['./shop_ coupon.html?user_ID=${shopID}']">
+      <p class="m_auto">shop name</p>
+      <!-- <p onclick="location.href=['./shop_ coupon.html?user_ID=${shopID}']" ></p> -->
+    </div>`;
                     ul.appendChild(li)
                 });
             } else {
