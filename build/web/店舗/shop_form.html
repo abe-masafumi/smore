@@ -42,18 +42,18 @@
                 <div id="form_container">
                     <div class="space_48"></div>
                     <form id="myform" class="m_auto" style="width: 250px;">
-                        <p>店舗名</p>
-                        <input type="text" placeholder=" 店舗名" id="shopn_ame" required class="input_width">
+                        <p>店舗名<span class="sub">必須</span></p>
+                        <input type="text" placeholder=" 店舗名" id="shopn_ame" class="input_width">
                         <div class="space_32"></div>
-                        <p>住所(店舗)</p>
-                        <input type="text" placeholder=" 住所" id="address" required class="input_width">
+                        <p>住所(店舗)<span class="sub">必須</span></p>
+                        <input type="text" placeholder=" 住所" id="address" class="input_width">
                         <div class="space_32"></div>
-                        <p>連絡先(店舗)</p>
-                        <input type="tel" placeholder=" 連絡先" id="phone_no" required class="input_width">
+                        <p>連絡先(店舗)<span class="sub">必須</span></p>
+                        <input type="tel" placeholder=" 連絡先" id="phone_no" class="input_width">
                         <div class="space_32"></div>
-                        <p>店舗形態</p>
+                        <p>店舗形態<span class="sub">必須</span></p>
                         <div class="type01">
-                            <select name="shop-type" id="shop-type" required>
+                            <select name="shop-type" id="shop-type">
                                 <option value="" selected>選択</option>
                                 <option value="ドッグラン">ドッグラン</option>
                                 <option value="ドッグカフェ">ドッグカフェ</option>
@@ -69,7 +69,7 @@
                                 <option value="ペットシッター">ペットシッター</option>
                                 <option value="保護動物団体">保護動物団体</option>
                                 <option value="ブリーダー">ブリーダー</option>
-                                <option value="ペットショップ(正体販売)">ペットショップ(正体販売)</option>
+                                <option value="ペットショップ(生体)">ペットショップ(正体販売)</option>
                             </select>
                         </div>
                         <div class="space_48"></div>
@@ -155,6 +155,17 @@
             const address = document.getElementById("address").value;
             const phone_no = document.getElementById("phone_no").value;
             const shop_type = document.getElementById("shop-type").value;
+
+            // 入力チェック
+            const value_arr = [shopn_ame, address, phone_no, shop_type];
+            const message_arr = ["店舗名が入力されていません", "メールアドレスが入力されていません", "電話番号が入力されていません", "店舗形態が選択されていません"]
+
+            for (let i = 0; i < value_arr.length; i++) {
+                if (value_arr[i] == "") {
+                    alert(message_arr[i])
+                    return
+                }
+            }
             // 電話番号のチェック
             if (!phone_no.match(/^(0{1}\d{9,14})$/)) {
                 alert('電話番号が正しくありません');

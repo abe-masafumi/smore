@@ -42,21 +42,22 @@
           <div class="space_48"></div>
 
           <form id="myform" class="m_auto" style="width: 250px;">
-            <p>名前</p>
-            <input type="text" placeholder=" your_name" id="name" required class="input_width">
+            <p>名前<span class="sub">必須</span></p>
+            <input type="text" placeholder=" 記入例 犬飼 鼻子" id="name" class="input_width">
             <div class="space_32"></div>
-            <p>住所</p>
-            <input type="text" placeholder=" adress" id="address" required class="input_width">
+            <p>住所<span class="sub">必須</span></p>
+            <input type="text" placeholder=" 市町村区まで" id="address" class="input_width">
             <div class="space_32"></div>
-            <p>電話番号</p>
-            <input type="tel" placeholder=" 08012345678" id="phone_number" required class="input_width">
+            <p>電話番号<span class="sub">必須</span></p>
+            <input type="tel" placeholder=" 08012345678" id="phone_number" class="input_width">
             <div class="space_48"></div>
             <div class="text_center">
               <input type="submit" value="登録" id="post_button">
             </div>
           </form>
-          
         </div>
+        <div class="space_48"></div>
+        <p>飼い主情報は わんこが迷子になった際 連絡をとる<br>ために必要な情報です。飼い主情報が発見者に開示<br>されることはございません。運営会社株式会社</p>
       </div>
     </main>
     <!-- footerは使ってない -->
@@ -112,6 +113,19 @@
       const name = document.getElementById("name").value;
       const address = document.getElementById("address").value;
       const phone_number = document.getElementById("phone_number").value;
+
+      // 入力チェック
+      const value_arr = [name, address, phone_number];
+      const message_arr = ["名前が入力されていません","メールアドレスが入力されていません","電話番号が入力されていません"]
+
+      for (let i = 0; i < value_arr.length; i++) {
+                if (value_arr[i] == "") {
+                    alert(message_arr[i])
+                    return
+                }
+            }
+
+
       // 電話番号のチェック
       if (!phone_number.match(/^(0{1}\d{9,14})$/)) {
         alert('電話番号が正しくありません');
