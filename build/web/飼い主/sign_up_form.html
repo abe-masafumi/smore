@@ -46,11 +46,12 @@
             <input type="submit" value="登録">
           </div>
         </form>
-        
+
       </div>
       <div class="space_48"></div>
 
-      <p>ログインは<span style="color: #7828FD;" onclick="location.href=['./login_form.html']">こちら</span></p>
+      <!-- <p>ログインは<span style="color: #7828FD;" onclick="location.href=['./login_form.html']">こちら</span></p> -->
+      <p>ログインは<a href="./login_form.html">こちら</a></p>
     </div>
   </main>
   <!-- footerは使ってない -->
@@ -99,9 +100,12 @@
             console.log(errorCode);
             console.log(errorMessage);
             // 　メールの登録失敗
-            if (errorCode == "auth/invalid-email") alert("メールアドレスを正しく入力してください。");
+            if (errorCode == "auth/invalid-email") alert("メールアドレスを正しく入力してください");
             // passwordの登録失敗
-            if (errorCode == "auth/weak-password") alert("パスワードを正しく入力してください。");
+            if (errorCode == "auth/weak-password") alert("パスワードを正しく入力してください");
+            // すでに登録されている場合
+            if (errorCode == "auth/email-already-in-use") alert("このメールアドレスはすでに登録されています");
+
           });
       } else {
         alert("パスワードが一致しません");
