@@ -123,7 +123,7 @@ import { } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-SERVICE.js'
 
 - firebaseのアカウントをkanさんに引き継ぐ
 
-- noseIDのlineqrcodeをどこかに入れる
+- noseIDのlineqrcodeをどこかに入れる (footer)
 
 - kanさんからロゴをもらって組み込み
 
@@ -144,6 +144,15 @@ import { } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-SERVICE.js'
 <!-- - Inputのに未入力時のエラーを確実に出したい -->
 
 <!-- - 入力formが狭い -->
+
+- loginではif (errorCode == "auth/invalid-email")がいらない
+
+- ログアウトとかをfooterにまとめる
+
+⭐️ 顧客管理の登録されたuserを押した時の画面を作る
+
+- user_form , shop_formのエラー処理
+
 
 
 
