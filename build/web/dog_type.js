@@ -47,16 +47,16 @@ const foodMenu =
 let option;
 
 function setMenuOptions(selectedGenre) {
-    const selectFoodName = document.getElementById('food-name'); //2つめのセレクトボックスを取得し
-    selectFoodName.innerHTML = '';
-    selectFoodName.disabled = false; //選択可能な状態にする
+    const selectdogName = document.getElementById('dog_type'); //2つめのセレクトボックスを取得し
+    selectdogName.innerHTML = '';
+    selectdogName.disabled = false; //選択可能な状態にする
 
     //選択されたジャンルのメニュー一覧に対して処理をする
     foodMenu[selectedGenre].forEach((menu) => {
         option = document.createElement('option'); //option要素を新しく作る
         option.value = menu; //option要素の値に、メニューを識別できる番号を指定する
         option.innerHTML = menu; //ユーザー向けの表示としてメニュー名を指定する
-        selectFoodName.appendChild(option); //セレクトボックスにoption要素を追加する
+        selectdogName.appendChild(option); //セレクトボックスにoption要素を追加する
     });
 }
 

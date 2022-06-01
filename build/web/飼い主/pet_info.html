@@ -65,12 +65,12 @@
             <p id="sex"></p>
           </li>
           <li>
-            <h1>犬種<button data-name="edit_type" class="edit_btn">編集ボタン</button></h1>
-            <p id="犬種"></p>
-          </li>
-          <li>
             <h1>去勢・避妊（未・済）<button data-name="edit_k" class="edit_btn">編集ボタン</button></h1>
             <p id="去勢"></p>
+          </li>
+          <li>
+            <h1>耳（たれ耳・立ち耳<button data-name="edit_ear" class="edit_btn">編集ボタン</button></h1>
+            <p id="era"></p>
           </li>
           <li>
             <h1>体重<button data-name="edit_weight" class="edit_btn">編集ボタン</button></h1>
@@ -81,8 +81,8 @@
             <p id="color"></p>
           </li>
           <li>
-            <h1>耳（たれ耳・立ち耳<button data-name="edit_ear" class="edit_btn">編集ボタン</button></h1>
-            <p id="era"></p>
+            <h1>犬種<button data-name="edit_type" class="edit_btn">編集ボタン</button></h1>
+            <p id="犬種"></p>
           </li>
           <li>
             <h1>犬の登録をし、鑑札を受け取っていますか？<button data-name="edit_Q1" class="edit_btn">編集ボタン</button></h1>
@@ -290,38 +290,32 @@
             child.innerHTML = `  
             <form id="myform" class="m_auto">
               <p>体重<span class="sub">必須</span></p>
-                        <div class="weight">
-                            <select class="weight01" id="weight01" required>
-                            </select>
-                            .
-                            <select class="weight02" id="weight02" required>
-                            </select>
-                            kg
-                        </div>
-                        <div class="space_32"></div>   
+                        <input type="text" id="edit_value" placeholder=" 5.2"style="width: 225px; font-size: 16px;" max="142.7" required> kg
 
                         <input type="submit" value="登録" id="post_button"> 
 
                         </form>`;
             modal.appendChild(child);
 
-            let weight01 = document.querySelector('.weight01');
-            let weight02 = document.querySelector('.weight02');
+
+            // let weight01 = document.querySelector('.weight01');
+            // let weight02 = document.querySelector('.weight02');
 
             //年の生成
-            for (let i = 1; i <= 30; i++) {
-              createOptionForElements(weight01, i);
-            }
-            //月の生成
-            for (let i = 0; i <= 9; i++) {
-              createOptionForElements(weight02, i);
-            }
+            // for (let i = 1; i <= 30; i++) {
+            //   createOptionForElements(weight01, i);
+            // }
+            // //月の生成
+            // for (let i = 0; i <= 9; i++) {
+            //   createOptionForElements(weight02, i);
+            // }
             myform = document.getElementById('myform');
             myform.addEventListener('submit', async (e) => {
               e.preventDefault();
-              console.log(weight01.value);
-              console.log(weight02.value);
-              const edit_value = `${weight01.value}.${weight02.value}`
+              // console.log(weight01.value);
+              // console.log(weight02.value);
+              const weight = document.getElementById('edit_value');
+              const edit_value = weight.value
               const washingtonRef = doc(db, "users", user_id, "pets", petID);
               await updateDoc(washingtonRef, {
                 [edit_name]: edit_value
@@ -388,15 +382,43 @@
             });
             break;
 
-            case "edit_type":
+          case "edit_sex":
+            edit_name = "性別"
+            child = document.createElement('div');
+            child.innerHTML = `             
+                        <form id="myform" class="m_auto">
+                          <p>性別<span class="sub">必須</span><br>
+                            <lavel><input type="radio" name="sex" value="男の子"> 男の子</lavel>
+                            <lavel><input type="radio" name="sex" value="女の子" required> 女の子</lavel>
+                        </p>
+                        <div class="space_32"></div>   
+                        <input type="submit" value="登録" id="post_button"> 
+                        </form>`;
+            modal.appendChild(child);
+            myform = document.getElementById('myform');
+            myform.addEventListener('submit', async (e) => {
+              e.preventDefault();
+
+              const edit_value = myform.sex.value;
+              const washingtonRef = doc(db, "users", user_id, "pets", petID);
+              await updateDoc(washingtonRef, {
+                [edit_name]: edit_value
+              });
+              modal.classList.remove('active');
+              overlay.classList.remove('active');
+              child.remove();
+            });
+            break;
+
+          case "edit_type":
             edit_name = "犬種"
             child = document.createElement('div');
             child.innerHTML = `  
             <form id="myform" class="m_auto">
-               <p>犬種 (分からない場合はミックスと記入してください)<span class="sub">必須</span></p>
+               <p>犬種<span class="sub">必須</span><br>不明な場合はミックスを選択してください</p>
                         <div class="type01">
-                            <select name="genre" id="genre">
-                                <option disabled selected>五十音順で選択</option>
+                            <select name="genre" id="genre" required>
+                                <option value="" disabled selected>五十音順で選択</option>
                                 <option value="ミックス犬">ミックス犬</option>
                                 <option value="あ行">あ行</option>
                                 <option value="か行">か行</option>
@@ -413,8 +435,8 @@
                         </div>
                         </br>
                           <div class="type02">
-                              <select name="food-name" id="food-name" disabled>
-                                <option selected>犬種を選択</option>
+                              <select name="food-name" id="food-name" disabled required>
+                                <option value="" selected>犬種を選択</option>
                               </select>
                           </div>
                           <div class="space_32"></div>   
@@ -537,33 +559,7 @@
               child.remove();
             });
             break;
-          case "edit_sex":
-            edit_name = "性別"
-            child = document.createElement('div');
-            child.innerHTML = `             
-                        <form id="myform" class="m_auto">
-                          <p>性別<span class="sub">必須</span><br>
-                            <lavel><input type="radio" name="sex" value="男の子"> 男の子</lavel>
-                            <lavel><input type="radio" name="sex" value="女の子" required> 女の子</lavel>
-                        </p>
-                        <div class="space_32"></div>   
-                        <input type="submit" value="登録" id="post_button"> 
-                        </form>`;
-            modal.appendChild(child);
-            myform = document.getElementById('myform');
-            myform.addEventListener('submit', async (e) => {
-              e.preventDefault();
 
-              const edit_value = myform.sex.value;
-              const washingtonRef = doc(db, "users", user_id, "pets", petID);
-              await updateDoc(washingtonRef, {
-                [edit_name]: edit_value
-              });
-              modal.classList.remove('active');
-              overlay.classList.remove('active');
-              child.remove();
-            });
-            break;
 
           // case "edit_type":
           //   edit_name = "犬種"
@@ -919,7 +915,7 @@
               const change_info01 = confirm("この写真を使用しますか？");
               if (change_info01) {
                 console.log(e.target.files);
-  
+
                 pet_img_file = e.target.files[0];
                 // pet_img
                 const storageRef02 = ref(storage, "pets/" + petID + "/" + "狂犬病予防注射済み票_img");
@@ -947,7 +943,7 @@
                       console.log('File available at', downloadURL);
                       pet_img_url = downloadURL;
                       img02_uploading.textContent = "";
-  
+
                     });
                     const washingtonRef = doc(db, "users", user_id, "pets", petID);
                     updateDoc(washingtonRef, {
@@ -980,7 +976,7 @@
               const change_info02 = confirm("この写真を使用しますか？");
               if (change_info02) {
                 console.log(e.target.files);
-  
+
                 pet_img_file = e.target.files[0];
                 // pet_img
                 const storageRef03 = ref(storage, "pets/" + petID + "/" + "混合ワクチン接種証明書_img");
@@ -1008,7 +1004,7 @@
                       console.log('File available at', downloadURL);
                       pet_img_url = downloadURL;
                       img03_uploading.textContent = "";
-  
+
                     });
                     const washingtonRef = doc(db, "users", user_id, "pets", petID);
                     updateDoc(washingtonRef, {
