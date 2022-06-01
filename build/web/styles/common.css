@@ -178,12 +178,23 @@
     overflow: hidden;
 }
 
+/* .icon_box {
+    background-color: rgb(245, 71, 71);
+    text-align: center;
+    border: 1.5px solid white;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    overflow: hidden;
+    margin-right: 10px;
+} */
+
 .icon_box {
     text-align: center;
     width: 35px;
     height: 35px;
-    /* overflow: hidden; */
-}
+    overflow: hidden;
+} 
 
 .icon_box2 {
     text-align: center;

@@ -45,94 +45,198 @@
       </div>
     </header>
     <main>
-      <div>
+      <div style="width: 90%;" class="m_auto">
         <!-- ----------pet_info-------------- -->
         <ul style="width: 100%;">
-          <li style="width: 250px; height: auto; object-fit: cover;">
-            <img style="width: 100%; height: auto;" src="" alt="" id="p_img">
-            <button data-name="edit_img01" data-type="text" class="edit_btn">編集ボタン</button>
+          <!-- 写真０１ -->
+          <li class="flex_box edit_list">
+            <button class="edit_icon_btn center edit_btn" data-name="edit_img01">
+              <img src="../images/edit.png" alt="" style="width: 16px; margin: auto;">
+            </button>
           </li>
-          <li>
-            <h1>名前<button data-name="edit_name" data-type="text" class="edit_btn">編集ボタン</button></h1>
+          <img style="width: 100%; height: auto;" alt="" id="p_img">
+
+          <!-- 名前 -->
+          <li class="flex_box edit_list">
+            <div class="space_24"></div>
+            <button class="edit_icon_btn center edit_btn" data-name="edit_name">
+              <img src="../images/edit.png" alt="" style="width: 16px; margin: auto;">
+            </button>
+            <h1>名前</h1>
             <p id="name"></p>
           </li>
-          <li>
-            <h1>生年月日<button data-name="edit_birthday" class="edit_btn">編集ボタン</button></h1>
+          <div class="space_24"></div>
+
+          <!-- 生年月日 -->
+          <li class="flex_box edit_list">
+            <button class="edit_icon_btn center edit_btn" data-name="edit_birthday">
+              <img src="../images/edit.png" alt="" style="width: 16px; margin: auto;">
+            </button>
+            <h1>生年月日</h1>
             <p id="birthday"></p>
           </li>
-          <li>
-            <h1>性別 (男の子・女の子)<button data-name="edit_sex" class="edit_btn">編集ボタン</button></h1>
+          <div class="space_24"></div>
+
+          <!-- 性別 (男の子・女の子) -->
+          <li class="flex_box edit_list">
+            <button class="edit_icon_btn center edit_btn" data-name="edit_sex">
+              <img src="../images/edit.png" alt="" style="width: 16px; margin: auto;">
+            </button>
+            <h1>性別 (男の子・女の子)</h1>
             <p id="sex"></p>
           </li>
-          <li>
-            <h1>去勢・避妊（未・済）<button data-name="edit_k" class="edit_btn">編集ボタン</button></h1>
+          <div class="space_24"></div>
+
+          <!-- 去勢・避妊（未・済） -->
+          <li class="flex_box edit_list">
+            <button class="edit_icon_btn center edit_btn" data-name="edit_k">
+              <img src="../images/edit.png" alt="" style="width: 16px; margin: auto;">
+            </button>
+            <h1>去勢・避妊（未・済）</h1>
             <p id="去勢"></p>
           </li>
-          <li>
-            <h1>耳（たれ耳・立ち耳<button data-name="edit_ear" class="edit_btn">編集ボタン</button></h1>
+          <div class="space_24"></div>
+
+          <!-- 耳（たれ耳・立ち耳) -->
+          <li class="flex_box edit_list">
+            <button class="edit_icon_btn center edit_btn" data-name="edit_ear">
+              <img src="../images/edit.png" alt="" style="width: 16px; margin: auto;">
+            </button>
+            <h1>耳（たれ耳・立ち耳)</h1>
             <p id="era"></p>
           </li>
-          <li>
-            <h1>体重<button data-name="edit_weight" class="edit_btn">編集ボタン</button></h1>
+          <div class="space_24"></div>
+
+          <!-- 体重 -->
+          <li class="flex_box edit_list">
+            <button class="edit_icon_btn center edit_btn" data-name="edit_weight">
+              <img src="../images/edit.png" alt="" style="width: 16px; margin: auto;">
+            </button>
+            <h1>体重</h1>
             <p id="weight"></p>
           </li>
-          <li>
-            <h1>毛色<button data-name="edit_color" class="edit_btn">編集ボタン</button></h1>
+          <div class="space_24"></div>
+
+          <!-- 毛色 -->
+          <li class="flex_box edit_list">
+            <button class="edit_icon_btn center edit_btn" data-name="edit_color">
+              <img src="../images/edit.png" alt="" style="width: 16px; margin: auto;">
+            </button>
+            <h1>毛色</h1>
             <p id="color"></p>
           </li>
-          <li>
-            <h1>犬種<button data-name="edit_type" class="edit_btn">編集ボタン</button></h1>
+          <div class="space_24"></div>
+
+          <!-- 犬種 -->
+          <li class="flex_box edit_list">
+            <button class="edit_icon_btn center edit_btn" data-name="edit_type">
+              <img src="../images/edit.png" alt="" style="width: 16px; margin: auto;">
+            </button>
+            <h1>犬種</h1>
             <p id="犬種"></p>
           </li>
-          <li>
-            <h1>犬の登録をし、鑑札を受け取っていますか？<button data-name="edit_Q1" class="edit_btn">編集ボタン</button></h1>
+          <div class="space_24"></div>
+
+          <!-- 犬の鑑札を受け取っていますか？ -->
+          <li class="flex_box edit_list">
+            <button class="edit_icon_btn center edit_btn" data-name="edit_Q1">
+              <img src="../images/edit.png" alt="" style="width: 16px; margin: auto;">
+            </button>
+            <h1>犬の鑑札を受け取っていますか？</h1>
             <p id="登録"></p>
           </li>
-          <li>
-            <h1>狂犬病予防注射を受け、注射済み票を受け取っていますか？<button data-name="edit_Q2" class="edit_btn">編集ボタン</button></h1>
+          <div class="space_24"></div>
+
+          <!-- 注射済み票を受け取っていますか？ -->
+          <li class="flex_box edit_list">
+            <button class="edit_icon_btn center edit_btn" data-name="edit_Q2">
+              <img src="../images/edit.png" alt="" style="width: 16px; margin: auto;">
+            </button>
+            <h1>注射済み票を受け取っていますか？</h1>
             <p id="注射"></p>
           </li>
-          <li>
-            <h1>ごはん(品名・量)<button data-name="edit_meal" class="edit_btn">編集ボタン</button></h1>
+          <div class="space_24"></div>
+
+          <!-- ごはん(品名・量) -->
+          <li class="flex_box edit_list">
+            <button class="edit_icon_btn center edit_btn" data-name="edit_meal">
+              <img src="../images/edit.png" alt="" style="width: 16px; margin: auto;">
+            </button>
+            <h1>ごはん(品名・量)</h1>
             <p id="meal"></p>
           </li>
-          <li>
-            <h1>かかりつけの病院<button data-name="edit_doctor" class="edit_btn">編集ボタン</button></h1>
+          <div class="space_24"></div>
+
+          <!-- ごはん(品名・量) -->
+          <li class="flex_box edit_list">
+            <button class="edit_icon_btn center edit_btn" data-name="edit_doctor">
+              <img src="../images/edit.png" alt="" style="width: 16px; margin: auto;">
+            </button>
+            <h1>かかりつけの病院</h1>
             <p id="doctor"></p>
           </li>
-          <li>
-            <h1>病歴・アレルギー<button data-name="edit_allergy" class="edit_btn">編集ボタン</button></h1>
+          <div class="space_24"></div>
+
+          <!-- 病歴・アレルギー -->
+          <li class="flex_box edit_list">
+            <button class="edit_icon_btn center edit_btn" data-name="edit_allergy">
+              <img src="../images/edit.png" alt="" style="width: 16px; margin: auto;">
+            </button>
+            <h1>病歴・アレルギー</h1>
             <p id="allergy"></p>
           </li>
-          <li>
-            <h1>お薬<button data-name="edit_medicine" class="edit_btn">編集ボタン</button></h1>
+          <div class="space_24"></div>
+
+          <!-- お薬 -->
+          <li class="flex_box edit_list">
+            <button class="edit_icon_btn center edit_btn" data-name="edit_medicine">
+              <img src="../images/edit.png" alt="" style="width: 16px; margin: auto;">
+            </button>
+            <h1>お薬</h1>
             <p id="medicine"></p>
           </li>
-          <li>
-            <h1>サロン<button data-name="edit_salon" class="edit_btn">編集ボタン</button></h1>
+          <div class="space_24"></div>
+
+          <!-- サロン -->
+          <li class="flex_box edit_list">
+            <button class="edit_icon_btn center edit_btn" data-name="edit_salon">
+              <img src="../images/edit.png" alt="" style="width: 16px; margin: auto;">
+            </button>
+            <h1>サロン</h1>
             <p id="salon"></p>
           </li>
-          <li>
-            <h1>マイクロチップ番号<button data-name="edit_microchip" class="edit_btn">編集ボタン</button></h1>
+          <div class="space_24"></div>
+
+          <!-- マイクロチップ番号 -->
+          <li class="flex_box edit_list">
+            <button class="edit_icon_btn center edit_btn" data-name="edit_microchip">
+              <img src="../images/edit.png" alt="" style="width: 16px; margin: auto;">
+            </button>
+            <h1>マイクロチップ番号</h1>
             <p id="microchip_number"></p>
           </li>
-          <li>
-            <h1>写真１：狂犬病予防注射済み票<button data-name="edit_img02" class="edit_btn">編集ボタン</button></h1>
-            <div style="width: 250px; height: auto; object-fit: cover;"><img style="width: 100%;" src="" alt=""
-                id="狂犬病予防注射済み票"></div>
-          </li>
-          <li>
-            <h1>写真２：混合ワクチン接種証明書<button data-name="edit_img03" class="edit_btn">編集ボタン</button></h1>
-            <div style="width: 250px; height: auto; object-fit: cover;">
-              <img style="width: 100%;" src="" alt="" id="混合ワクチン接種証明書">
-          </li>
-      </div>
-      </ul>
-      <!-- ----------pet_info-------------- -->
+          <div class="space_24"></div>
 
-      <div class="space_32"></div>
-      <div class="center">
-      </div>
+          <!-- 写真１：狂犬病予防注射済み票 -->
+          <li class="flex_box edit_list">
+            <button class="edit_icon_btn center edit_btn" data-name="edit_img02">
+              <img src="../images/edit.png" alt="" style="width: 16px; margin: auto;">
+            </button>
+            <h1>狂犬病予防注射済み票</h1>
+          </li>
+          <img style="width: 100%; height: auto;" src="" alt="" id="狂犬病予防注射済み票">
+          <div class="space_24"></div>
+
+          <!-- 混合ワクチン接種証明書 -->
+          <li class="flex_box edit_list">
+            <button class="edit_icon_btn center edit_btn" data-name="edit_img03">
+              <img src="../images/edit.png" alt="" style="width: 16px; margin: auto;">
+            </button>
+            <h1>混合ワクチン接種証明書</h1>
+          </li>
+          <img style="width: 100%; height: auto;" alt="" id="混合ワクチン接種証明書">
+        </ul>
+        <!-- ----------pet_info-------------- -->
     </main>
     <!-- footerは使ってない -->
     <footer class="page-footer"></footer>
@@ -291,7 +395,7 @@
             <form id="myform" class="m_auto">
               <p>体重<span class="sub">必須</span></p>
                         <input type="text" id="edit_value" placeholder=" 5.2"style="width: 225px; font-size: 16px;" max="142.7" required> kg
-
+                        <div class="space_32"></div>   
                         <input type="submit" value="登録" id="post_button"> 
 
                         </form>`;
@@ -903,7 +1007,7 @@
             child = document.createElement('div');
             child.innerHTML = `             
                         <form id="myform" class="m_auto">
-                          <p>写真2:狂犬病予防注射済み票</p>
+                          <p>狂犬病予防注射済み票</p>
                         <input type="file" accept='.jpeg, .png, .jpg' id="狂犬病予防注射済み票">
                         <p id="img02_uploading"></p>
                         <div class="space_32"></div>   
@@ -964,7 +1068,7 @@
             child = document.createElement('div');
             child.innerHTML = `             
                         <form id="myform" class="m_auto">
-                          <p>写真3:混合ワクチン接種証明書</p>
+                          <p>混合ワクチン接種証明書</p>
                         <input type="file" accept='.jpeg, .png, .jpg' id="混合ワクチン接種証明書">
                         <p id="img03_uploading"></p>
                         <div class="space_32"></div>   

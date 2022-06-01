@@ -183,6 +183,22 @@ button {
     border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
+.edit_icon_btn {
+    background-color: white(245, 71, 71);
+    text-align: center;
+    border: 1.5px solid black;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.edit_list > p {
+    margin-left: auto;
+}
+
+
 .uploading {
     opacity: 0.4;
     pointer-events: none;
@@ -276,6 +292,7 @@ button {
     /* activeクラスがついたときにオーバーレイを表示する */
     opacity: 1;
     visibility: visible;
+    height: 100%;
   }
 
 /* モーダルウィンドウ */
@@ -294,6 +311,8 @@ button {
     visibility: hidden;
     /* 表示の変化にかかる時間 */
     transition: .3s;
+    border: 1px solid black;
+    border-radius: 10px;
   }
   /* activeクラスのついたモーダルウィンドウ */
 .modal.active {
