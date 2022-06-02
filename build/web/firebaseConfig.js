@@ -1,8 +1,9 @@
 // firebseの初期化
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js';
+// key=API_KEY
 export function connect_firebase() {
     const firebaseConfig = { 
-        apiKey: env.key,
+        apiKey: "AIzaSyBxcekDS5A88ia8yJNaYqf3zj-IDyZE8o4",
         authDomain: "smore-832e4.firebaseapp.com",
         projectId: "smore-832e4",
         storageBucket: "smore-832e4.appspot.com",
