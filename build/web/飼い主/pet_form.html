@@ -86,7 +86,8 @@
 
                         <div class="space_32"></div>
                         <p>体重<span class="sub">必須</span></p>
-                        <input type="text" id="weight" placeholder=" 5.2"style="width: 225px; font-size: 16px;" max="142.7"> kg
+                        <input type="text" id="weight" placeholder=" 5.2" style="width: 225px; font-size: 16px;"
+                            max="142.7"> kg
                         <div class="space_32"></div>
                         <p>毛色<span class="sub">必須</span></p>
                         <input type="text" id="color" placeholder=" ブラウン" class="input_width">
@@ -193,7 +194,7 @@
         import { make_sign_out_display } from "../functions.js"
         import { getAuth, onAuthStateChanged } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
         import { collection, getFirestore, doc, setDoc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
-        import { getStorage, ref, getDownloadURL, uploadBytes, uploadBytesResumable } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-storage.js";
+        import { getStorage, ref, getDownloadURL, uploadBytes, uploadBytesResumable, deleteObject, listAll, } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-storage.js";
 
         // firebaseと接続
         const app = connect_firebase();
@@ -225,6 +226,8 @@
         function make_docID(user_id) {
             const usersCollectionRef = collection(db, 'users', user_id, 'pets');
             newDoc = doc(usersCollectionRef).id
+            console.log("newDoc");
+            console.log(newDoc);
         }
 
         // input[type="file"]の中身は先に取得する
@@ -409,7 +412,7 @@
             const microchip_number = document.getElementById("microchip_number").value;
             // input テキスト、チェックボックスが空だった時のエラー処理
             const repu_arr01 = [pet_name, sex, weight, type, 去勢, color, 耳, 登録, 注射];
-            const messagebox01 = ["ペット名が入力されていません", "性別が選択されていません","体重が正しく入力されていません", "犬種が選択されていません", "去勢、避妊が選択されていません", "毛色が入力されていません", "耳の種類が選択されていません","鑑札の受け取り項目が選択されていません", "狂犬病予防注射票の受け取り項目が選択されていません"]
+            const messagebox01 = ["ペット名が入力されていません", "性別が選択されていません", "体重が正しく入力されていません", "犬種が選択されていません", "去勢、避妊が選択されていません", "毛色が入力されていません", "耳の種類が選択されていません", "鑑札の受け取り項目が選択されていません", "狂犬病予防注射票の受け取り項目が選択されていません"]
             for (let i = 0; i < repu_arr01.length; i++) {
                 if (repu_arr01[i] == "") {
                     alert(messagebox01[i])
@@ -459,11 +462,27 @@
             }
         });
 
+        function back_page() {
+            window.location.href = './飼い主my_page.html';
+        }
+
         const bock_to_mypage = document.getElementById('bock_to_mypage');
-        bock_to_mypage.addEventListener('click',() => {
+        bock_to_mypage.addEventListener('click', async() => {
             const back_info = confirm('入力を中止しますか？');
             if (back_info) {
-                window.location.href = './飼い主my_page.html';
+                // Create a reference to the file to delete
+                const desertRef = ref(storage, `pets/${newDoc}/`);
+                await listAll(desertRef)
+                    .then(async(res) => {
+                        await res.items.forEach(async(itemRef) => {
+                            await deleteObject(itemRef);
+                        });
+                    }).catch((error) => {
+                        console.log(error.code)
+                        console.log(error.message)
+                        return
+                    });
+                    return back_page()
             } else {
                 return
             }
