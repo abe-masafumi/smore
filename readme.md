@@ -186,3 +186,7 @@ safariはaleatとconfirmが使えない
 [誕生日フォーム](https://zenn.dev/okoe/articles/7876b897c0fccf)
 
 [tips](https://hype4.academy/tools/glassmorphism-generator)
+
+# deploy権限
+
+[実用的なFirebaseのDeploy Scriptを作る](https://meet.google.com/phx-ppvq-yjv?authuser=0)

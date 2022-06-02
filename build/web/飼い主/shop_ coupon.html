@@ -1,13 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>html,body{overflow: hidden}</style>
-  <title>smore</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>smore</title>
+    <link rel="stylesheet" href="../styles/common.css">
+    <link rel="stylesheet" href="../styles/styles.css">
+    <!-- スクロールできなくするcss -->
+    <style>
+        html,
+        body {
+            overflow: hidden
+        }
+    </style>
+
 </head>
+
 <body>
-  クーポンページ未実装
+    <!-- ログインしてないけどページを開いちゃった時の画面 -->
+    <div class="center none" id="prompt" style="height: 600px;">
+        <div class="center">
+            <h1>ログインしてください</h1>
+            <img width="100%" src="../images/Smore_illust_12.png" alt="">
+            <p>ログインは<span id="login" onclick="location.href=['./login_form.html']">こちら</span></p>
+        </div>
+    </div>
+    <!-- ----end---- -->
+    <!-- 通常時の画面 -->
+    <div id="big_container">
+      <header class="page-header row">
+        <div class="col-4 center">
+          <!-- <button onclick="location.href=['./飼い主my_page.html']">戻る</button> -->
+          <div class="icon_box" onclick="location.href=['./飼い主my_page.html']"><img src="../images/angle-left.png" alt=""></div>
+        </div>
+        <h1 class="col-4 center">店舗情報</h1>
+        <div class="col-4 center">
+          <button class="none" id="sign_out">ログアウト</button>
+        </div>
+      </header>
+
+        <main>
+          <div style="width: 90%;" class="m_auto">
+              <ul style="width: 100%;">
+                <div class="space_48"></div>
+      
+                <!-- 店舗名 -->
+                <li class="edit_list">
+                  <div class="space_24"></div>
+                  <div >
+                    <h1>店舗名</h1>
+                  </div>
+                  <p id="shop_name" class="shop_info"></p>
+                </li>
+                <div class="space_24"></div>
+          
+                <!-- 店舗住所 -->
+                <li class="edit_list">
+                  <h1>店舗住所</h1>
+                  <p id="shop_address" class="shop_info"></p>
+                </li>
+                <div class="space_24"></div>
+      
+                <!-- メールアドレス -->
+                <li class="edit_list">
+                  <h1>メールアドレス</h1>
+                  <p id="email" class="shop_info"></p>
+                </li>
+                <div class="space_24"></div>
+      
+                <!-- 電話番号 -->
+                <li class="edit_list">
+                  <h1>電話番号</h1>
+                  <p id="phone_number" class="shop_info"></p>
+                </li>
+                <div class="space_24"></div>
+      
+                <!-- 店舗形態 -->
+                <li class="edit_list">
+                  <h1>店舗形態</h1>
+                  <p id="shop_type" class="shop_info"></p>
+                </li>
+                <div class="space_24"></div>
+              </ul>
+
+            </div>
+        </main>
+        <!-- footerは使ってない -->
+        <footer class="page-footer"></footer>
+    </div>
+    <!-- ----end---- -->
 </body>
+<script type="module">
+
+    import { connect_firebase } from "../firebaseConfig.js"
+    import { make_sign_out_display } from "../functions.js"
+    import { getAuth, onAuthStateChanged } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+    import { getFirestore, getDoc, doc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+
+    // firebaseと接続
+    const app = connect_firebase();
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const shop_name = document.getElementById('shop_name');
+    const shop_address = document.getElementById('shop_address');
+    const email = document.getElementById('email');
+    const phone_number = document.getElementById('phone_number');
+    const shop_type = document.getElementById('shop_type');
+    
+    async function get_shop_data(shop_ID) {
+        const docRef = await doc(db, 'shops', shop_ID);
+        const docSnap = await getDoc(docRef);
+        const data = docSnap.data();
+        console.log(data);
+        shop_name.textContent = data["shop_name"]
+        shop_address.textContent = data["address"]
+        email.textContent = data["email"]
+        phone_number.textContent = data["phone_nomber"]
+        shop_type.textContent = data["shop_type"]
+    }
+
+    function get_url_data() {
+      let params = (new URL(document.location)).searchParams;
+      const shop_ID = params.get('shop_ID');
+      return get_shop_data(shop_ID);
+      
+    }
+
+
+    // ログインしてた時は
+    onAuthStateChanged(auth, async (user) => {
+        // ユーザーがログインしてる AND 店舗情報がすでに登録されていたら画面を店舗管理画面へ移動
+        if (user) {
+            // console.log(user);
+            const uid = user.uid;
+            console.log(uid,"状態:ログイン中");
+            return get_url_data();
+        } else {
+            console.log("状態:ログアウト");
+            make_sign_out_display();
+        }
+    });
+
+</script>
+
 </html>

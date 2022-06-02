@@ -25,7 +25,7 @@ th,
 td {
     margin: 0;
     padding: 0;
-    font-family:sans-serif;
+    font-family: sans-serif;
 }
 
 address,
@@ -95,11 +95,11 @@ body {
 
 header {
     height: 80px;
-    background: rgba( 202, 206, 129, 0.2 );
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 20px );
-    -webkit-backdrop-filter: blur( 20px );
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    background: rgba(202, 206, 129, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .form_container {
@@ -161,13 +161,13 @@ button {
     width: 326px;
     height: 100px;
     overflow: hidden;
-    background: rgba( 202, 206, 129, 0.2 );
+    background: rgba(202, 206, 129, 0.2);
     background-color: #fff;
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 20px );
-    -webkit-backdrop-filter: blur( 20px );
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border-radius: 10px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .div2 {
@@ -176,11 +176,11 @@ button {
     margin-bottom: 10px;
     overflow: hidden;
     background-color: #fff;
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 20px );
-    -webkit-backdrop-filter: blur( 20px );
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border-radius: 8px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .edit_icon_btn {
@@ -194,7 +194,7 @@ button {
     margin-right: 10px;
 }
 
-.edit_list > p {
+.edit_list>p {
     margin-left: auto;
 }
 
@@ -231,7 +231,7 @@ button {
 .weight,
 .type01,
 .type02,
-.shop-type  {
+.shop-type {
     display: flex;
     max-width: 300px;
     align-items: center;
@@ -259,14 +259,14 @@ button {
 .sub {
     width: 20px;
     height: 12px;
-    color:white;
+    color: white;
     background-color: #ca1c30;
 
     font-size: 12px;
     border-radius: 20px;
     padding: 0 5px;
     margin-left: 10px;
-    
+
 }
 
 /* オーバーレイ */
@@ -279,21 +279,21 @@ button {
     width: 100%;
     height: 100vh;
     /* rgbaを使って60%の黒いオーバーレイにする */
-    background: rgba(0, 0, 0, 0.6);  
+    background: rgba(0, 0, 0, 0.6);
     /* デフォルトでは見えないようにする */
     opacity: 0;
     visibility: hidden;
     /* 表示する際の変化の所要時間 */
     transition: .3s;
-  }
-  
-  /* activeクラスのついたオーバーレイ */
-  .overlay.active {
+}
+
+/* activeクラスのついたオーバーレイ */
+.overlay.active {
     /* activeクラスがついたときにオーバーレイを表示する */
     opacity: 1;
     visibility: visible;
     height: 100%;
-  }
+}
 
 /* モーダルウィンドウ */
 .modal {
@@ -313,40 +313,44 @@ button {
     transition: .3s;
     border: 1px solid black;
     border-radius: 10px;
-  }
-  /* activeクラスのついたモーダルウィンドウ */
+}
+
+/* activeクラスのついたモーダルウィンドウ */
 .modal.active {
     opacity: 1;
     visibility: visible;
-  }
-  
-  /* モーダルウィンドウ内の閉じるボタン */
-  .modal .close {
+}
+
+/* モーダルウィンドウ内の閉じるボタン */
+.modal .close {
     position: absolute;
     top: 10px;
     right: 20px;
     cursor: pointer;
     font-size: 20px;
-  }
+}
 
 
-  
+
 .btn {
     display: inline-block;
     /* padding: 0.8em 3em; */
-    background-color: #e3364a; /* 背景色 */
-    box-shadow: 0 5px 0 #ca1c30; /* 影の太さ・色 */
+    background-color: #e3364a;
+    /* 背景色 */
+    box-shadow: 0 5px 0 #ca1c30;
+    /* 影の太さ・色 */
     border-radius: 60px;
     color: #fff;
     cursor: pointer;
-    text-decoration: none; /* 文字の下線を消す */
-  }
+    text-decoration: none;
+    /* 文字の下線を消す */
+}
 
-  /* クリック時 */
+/* クリック時 */
 .btn:active {
     box-shadow: none;
     transform: translateY(5px);
-  }
+}
 
 input:focus,
 input[type=pet]:focus,
@@ -357,14 +361,14 @@ input[type=search]:focus,
 input[type=password]:focus,
 input[type=url]:focus,
 textarea:focus {
-      color: #003a6c;
-      background-color:cornsilk;
-      /* border-color: #ca1c30; */
-  }
+    color: #003a6c;
+    background-color: cornsilk;
+    /* border-color: #ca1c30; */
+}
 
 input[type=radio] {
-height: auto;
-width: auto;
+    height: auto;
+    width: auto;
 }
 
 input[type="submit"] {
@@ -372,4 +376,12 @@ input[type="submit"] {
     width: 140px;
     height: 40px;
     background-color: rgb(100, 151, 182);
+}
+
+.shop_info {
+    border: 1px solid white;
+    border-radius: 10px;
+    background-color: white;
+    width: fit-content;
+    padding: 2px 5px;
 }

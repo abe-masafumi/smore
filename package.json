@@ -17,6 +17,7 @@
     },
     "homepage": "https://github.com/abe-masafumi/smore#readme",
     "dependencies": {
+        "dotenv": "^16.0.1",
         "firebase": "^8.10.1"
     }
 }

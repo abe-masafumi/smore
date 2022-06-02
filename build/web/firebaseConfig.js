@@ -2,7 +2,7 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js';
 export function connect_firebase() {
     const firebaseConfig = { 
-        apiKey: "AIzaSyBxcekDS5A88ia8yJNaYqf3zj-IDyZE8o4",
+        apiKey: env.key,
         authDomain: "smore-832e4.firebaseapp.com",
         projectId: "smore-832e4",
         storageBucket: "smore-832e4.appspot.com",
@@ -13,7 +13,6 @@ export function connect_firebase() {
     const app = initializeApp(firebaseConfig);
     return app
 } 
-
 // export function connect_petDB() {
 //     const firebaseConfig = {
 //         apiKey: "AIzaSyAMJ3jET_8k3FYTSS2agXWasmYvl6c6TTY",
