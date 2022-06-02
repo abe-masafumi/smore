@@ -91,7 +91,7 @@
                     const data = docSnap.data();
                     const li = document.createElement('li');
                     li.innerHTML = `    <div class="flex_box m_auto div2" onclick="location.href=['./shop_ coupon.html?user_ID=${shopID}']">
-      <p class="m_auto">shop name</p>
+      <p class="m_auto">${data["shop_name"]}</p>
       <!-- <p onclick="location.href=['./shop_ coupon.html?user_ID=${shopID}']" ></p> -->
     </div>`;
                     ul.appendChild(li)

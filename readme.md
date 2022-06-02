@@ -3,6 +3,7 @@
 ### firebase cli
 
 [zenn](https://zenn.dev/captain_blue/articles/firebase-command-memo)
+[zenn日本語](https://zenn.dev/pressedkonbu/articles/deploy-flutter-web-app-with-firebase-hosting)
 
 ### firebaseへのhosting
 
@@ -151,7 +152,9 @@ import { } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-SERVICE.js'
 
 <!-- - user_form , shop_form のエラー処理 -->
 
-新規登録ページに利用規約のリンクを入れる
+<!-- - 新規登録ページに利用規約のリンクを入れる -->
+
+- userフォームの追記テキストのスタイル変更
 
 
 
