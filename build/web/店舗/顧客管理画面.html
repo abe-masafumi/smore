@@ -43,14 +43,6 @@
             <!-- ここは店舗名とQRコードボタンを配置 -->
             <div class="space_32"></div>
             <ul class="center" id="shop_ul">
-                <!-- <li> -->
-                    <!-- <div class="flex_box m_auto">
-                        <p>飼い主</p>    
-                        <p style="padding-left: 50px;">ペットの名前</p>
-                        <p style="margin-left: auto;" onclick="location.href=['./user_info.html?user_ID=${uid}&pet_ID=${pet.id}']" ></p>
-                        </div> -->
-                <!-- </li> -->
-                
                 <!-- jsで作成 -->
             </ul>
         </main>
@@ -89,10 +81,9 @@
                     const pet_data = pet.data();
                     // 表示
                     const li = document.createElement('li');
-                    li.innerHTML = `    <div class="m_auto div2 center" onclick="location.href=['./user_info.html?user_ID=${uid}&pet_ID=${pet.id}']">
+                    li.innerHTML = `    <div class="m_auto div2 center" onclick="location.href=['./user_info.html?user_ID=${user}&pet_ID=${pet.id}']">
       <p class="m_auto" style="font-size: 24px;">${pet_data["名前"]}</p>
       <p class="m_auto" style="opacity: 0.8;">${data["名前"]}</p>
-      <!-- <p style="margin-left: auto;" onclick="location.href=['./user_info.html?user_ID=${uid}&pet_ID=${pet.id}']" ></p> -->
       </div>`;
                     ul.appendChild(li)
                 });

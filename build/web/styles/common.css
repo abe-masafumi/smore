@@ -207,7 +207,7 @@
 .icon_box2 img,
 .icon_box img,
 .img_box img {
-    width: 110%;
+    width: 100%;
     height: auto;
     object-fit: cover;
 }

@@ -1,12 +1,283 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>smore</title>
+  <link rel="stylesheet" href="../styles/common.css">
+  <link rel="stylesheet" href="../styles/styles.css">
+  <style>
+    html,
+    body {
+      overflow-x: hidden;
+    }
+  </style>
 </head>
+
 <body>
-  未実装
+  <!-- js読み込み時のroading画面 -->
+  <div id="loading" class="center" style="height: 600px;">loading...</div>
+
+  <!-- ログインしてないけどページを開いちゃった時の画面 -->
+  <div class="center none" id="prompt" style="height: 600px;">
+    <div class="center">
+      <h1>ログインしてください</h1>
+      <img width="100%" src="../images/Smore_illust_12.png" alt="">
+      <p>ログインは<span id="login" onclick="location.href=['./login_form.html']">こちら</span></p>
+    </div>
+  </div>
+  <!-- ----end---- -->
+
+  <!-- 通常時の画面 -->
+  <div id="big_container" class="none">
+    <header class="page-header row">
+      <div class="col-4 center">
+        <div class="icon_box" onclick="location.href=['./顧客管理画面.html']"><img src="../images/angle-left.png" alt=""></div>
+      </div>
+      <h1 class="col-4 center">詳細</h1>
+      <div class="col-4 center">
+      </div>
+    </header>
+    <main>
+      <div style="width: 90%;" class="m_auto">
+
+        <!-- ----------pet_info-------------- -->
+        <ul style="width: 100%;">
+          <div class="space_24"></div>
+
+          <!-- 写真０１ -->
+          <li class="center">
+            <div class="img_box center">
+              <img style="width: 100%; height: auto;" alt="" id="p_img">
+            </div>
+          </li>
+          <div class="space_24"></div>
+
+          <!-- 名前 -->
+          <li class="flex_box edit_list">
+            <div class="space_24"></div>
+            <h1>名前</h1>
+            <p id="name"></p>
+          </li>
+          <div class="space_24"></div>
+
+          <!-- 生年月日 -->
+          <li class="flex_box edit_list">
+            <h1>生年月日</h1>
+            <p id="birthday"></p>
+          </li>
+          <div class=" "></div>
+
+          <!-- 性別 (男の子・女の子) -->
+          <li class="flex_box edit_list">
+            <h1>性別 (男の子・女の子)</h1>
+            <p id="sex"></p>
+          </li>
+          <div class="space_24"></div>
+
+          <!-- 去勢・避妊（未・済） -->
+          <li class="flex_box edit_list">
+            <h1>去勢・避妊（未・済）</h1>
+            <p id="去勢"></p>
+          </li>
+          <div class="space_24"></div>
+
+          <!-- 耳（たれ耳・立ち耳) -->
+          <li class="flex_box edit_list">
+            <h1>耳（たれ耳・立ち耳)</h1>
+            <p id="era"></p>
+          </li>
+          <div class="space_24"></div>
+
+          <!-- 体重 -->
+          <li class="flex_box edit_list">
+            <h1>体重</h1>
+            <p id="weight"></p>
+          </li>
+          <div class="space_24"></div>
+
+          <!-- 毛色 -->
+          <li class="flex_box edit_list">
+            <h1>毛色</h1>
+            <p id="color"></p>
+          </li>
+          <div class="space_24"></div>
+
+          <!-- 犬種 -->
+          <li class="flex_box edit_list">
+            <h1>犬種</h1>
+            <p id="犬種"></p>
+          </li>
+          <div class="space_24"></div>
+
+          <!-- 犬の鑑札を受け取っていますか？ -->
+          <li class="flex_box edit_list">
+            <h1>犬の鑑札を受け取っていますか？</h1>
+            <p id="登録"></p>
+          </li>
+          <div class="space_24"></div>
+
+          <!-- 注射済み票を受け取っていますか？ -->
+          <li class="flex_box edit_list">
+            <h1>注射済み票を受け取っていますか？</h1>
+            <p id="注射"></p>
+          </li>
+          <div class="space_24"></div>
+
+          <!-- ごはん(品名・量) -->
+          <li class="flex_box edit_list">
+            <h1>ごはん(品名・量)</h1>
+            <p id="meal"></p>
+          </li>
+          <div class="space_24"></div>
+
+          <!-- ごはん(品名・量) -->
+          <li class="flex_box edit_list">
+            <h1>かかりつけの病院</h1>
+            <p id="doctor"></p>
+          </li>
+          <div class="space_24"></div>
+
+          <!-- 病歴・アレルギー -->
+          <li class="flex_box edit_list">
+            <h1>病歴・アレルギー</h1>
+            <p id="allergy"></p>
+          </li>
+          <div class="space_24"></div>
+
+          <!-- お薬 -->
+          <li class="flex_box edit_list">
+            <h1>お薬</h1>
+            <p id="medicine"></p>
+          </li>
+          <div class="space_24"></div>
+
+          <!-- サロン -->
+          <li class="flex_box edit_list">
+            <h1>サロン</h1>
+            <p id="salon"></p>
+          </li>
+          <div class="space_24"></div>
+
+          <!-- マイクロチップ番号 -->
+          <li class="flex_box edit_list">
+            <h1>マイクロチップ番号</h1>
+            <p id="microchip_number"></p>
+          </li>
+          <div class="space_24"></div>
+
+          <!-- 写真１：狂犬病予防注射済み票 -->
+          <li class="flex_box edit_list">
+            <h1>狂犬病予防注射済み票</h1>
+          </li>
+          <img style="width: 100%; height: auto;" src="" alt="" id="狂犬病予防注射済み票">
+          <div class="space_24"></div>
+
+          <!-- 混合ワクチン接種証明書 -->
+          <li class="flex_box edit_list">
+            <h1>混合ワクチン接種証明書</h1>
+          </li>
+          <img style="width: 100%; height: auto;" alt="" id="混合ワクチン接種証明書">
+        </ul>
+        <!-- ----------pet_info-------------- -->
+    </main>
+    <!-- footerは使ってない -->
+    <footer class="page-footer"></footer>
+
+  </div>
+  <script type="module">
+    import { connect_firebase } from "../firebaseConfig.js"
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+    import { getFirestore, collection, getDoc, doc, onSnapshot, updateDoc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+    import { getStorage, ref, getDownloadURL, uploadBytes, uploadBytesResumable } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-storage.js";
+
+    // firebaseと接続
+    const app = connect_firebase();
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
+
+    const loading = document.getElementById('loading');
+    const big_container = document.getElementById('big_container');
+    const ul = document.getElementById('pet_data');
+
+    const p_img = document.getElementById('p_img');
+    const name = document.getElementById('name');
+    const 犬種 = document.getElementById('犬種');
+    const 登録 = document.getElementById('登録');
+    const 注射 = document.getElementById('注射');
+    const birthday = document.getElementById('birthday');
+    const sex = document.getElementById('sex');
+    const 去勢 = document.getElementById('去勢');
+    const weight = document.getElementById('weight');
+    const color = document.getElementById('color');
+    const era = document.getElementById('era');
+    const meal = document.getElementById('meal');
+    const doctor = document.getElementById('doctor');
+    const allergy = document.getElementById('allergy');
+    const medicine = document.getElementById('medicine');
+    const salon = document.getElementById('salon');
+    const microchip_number = document.getElementById('microchip_number');
+    const 狂犬病予防注射済み票 = document.getElementById('狂犬病予防注射済み票');
+    const 混合ワクチン接種証明書 = document.getElementById('混合ワクチン接種証明書');
+
+    function get_pet_data(user_ID, pet_ID) {
+      const docRef = doc(db, 'users', user_ID, "pets", pet_ID);
+      const unsub = onSnapshot(docRef, (doc) => {
+        const data = doc.data();
+        console.log(data);
+        p_img.src = data["写真"];
+        name.textContent = data["名前"];
+        犬種.textContent = data["犬種"];
+        登録.textContent = data["犬の登録をし鑑札を受け取っていますか"];
+        注射.textContent = data["狂犬病予防注射を受け注射済み票を受け取っていますか"];
+        birthday.textContent = data["生年月日"];
+        sex.textContent = data["性別"];
+        去勢.textContent = data["去勢避妊"];
+        weight.textContent = data["体重"];
+        color.textContent = data["毛色"];
+        era.textContent = data["耳"];
+        meal.textContent = data["ごはん"];
+        doctor.textContent = data["かかりつけの病院"];
+        allergy.textContent = data["病歴アレルギー"];
+        medicine.textContent = data["お薬"];
+        salon.textContent = data["サロン"];
+        microchip_number.textContent = data["マイクロチップ番号"];
+        狂犬病予防注射済み票.src = data["狂犬病予防注射済み票"];
+        混合ワクチン接種証明書.src = data["混合ワクチン接種証明書"];
+      })
+      loading.classList.add('none');
+      big_container.classList.remove('none');
+
+    }
+    // なるほど順番が変わるのか
+
+
+    function get_url_data() {
+      let params = (new URL(document.location)).searchParams;
+      const user_ID = params.get('user_ID');
+      const pet_ID = params.get('pet_ID');
+      console.log("user_ID", user_ID);
+      console.log("petID", pet_ID);
+      return get_pet_data(user_ID, pet_ID)
+    }
+
+    // ログイン状態の確認 この関数はログイン状態が変わるたびに呼び出される
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const user_id = user.uid;
+        const u_email = user.email;
+        console.log(user_id, "状態:ログイン中");
+        return get_url_data(user_id)
+      } else {
+        // User is signed out
+        console.log("状態:ログアウト");
+        make_sign_out_display();
+      }
+    });
+  </script>
 </body>
+
 </html>

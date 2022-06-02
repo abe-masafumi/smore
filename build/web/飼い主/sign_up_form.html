@@ -42,6 +42,10 @@
           <p><input type="checkbox" id="password_check02">
             パスワードを表示する</p>
           <div class="space_48"></div>
+          <div>
+            <p>登録することにより、お客様は<a href="">サービス利用規約</a>および<a href="">プライバシーポリシー</a>に同意したことになります。</p>
+          </div>
+          <div class="space_48"></div>
           <div class="text_center">
             <input type="submit" value="登録">
           </div>
@@ -105,7 +109,6 @@
             if (errorCode == "auth/weak-password") alert("パスワードを正しく入力してください");
             // すでに登録されている場合
             if (errorCode == "auth/email-already-in-use") alert("このメールアドレスはすでに登録されています");
-
           });
       } else {
         alert("パスワードが一致しません");

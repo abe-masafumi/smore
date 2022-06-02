@@ -53,14 +53,21 @@
       <div style="width: 90%;" class="m_auto">
         <!-- ----------pet_info-------------- -->
         <ul style="width: 100%;">
+          <div class="space_24"></div>
+
           <!-- 写真０１ -->
-          <li class="flex_box edit_list">
-            <button class="edit_icon_btn center edit_btn" data-name="edit_img01">
-              <img src="../images/edit.png" alt="" style="width: 16px; margin: auto;">
-            </button>
-            <h1>ペット写真</h1>
+          <li class="center">
+            <!-- <h1>ペット写真</h1> -->
+            <div style="position: relative;">
+              <div class="img_box center">
+                <img style="width: 100%; height: auto;" alt="" id="p_img">
+              </div>
+              <button class="edit_icon_btn center edit_btn" data-name="edit_img01" style="position: absolute; bottom: 5px; right: -10px;">
+                <img src="../images/edit.png" alt="" style="width: 16px; margin: auto;">
+              </button>
+            </div>
           </li>
-          <img style="width: 100%; height: auto;" alt="" id="p_img">
+          <div class="space_24"></div>
 
           <!-- 名前 -->
           <li class="flex_box edit_list">
@@ -364,10 +371,10 @@
     console.log(edit_btn[0].value);
     for (let i = 0; i < edit_btn.length; i++) {
       edit_btn[i].addEventListener('click', function (e) {
-
         const tag_name = e.currentTarget.dataset['name'];
 
         switch (tag_name) {
+
           case "edit_name":
             edit_name = "名前"
             child = document.createElement('div');
@@ -375,7 +382,7 @@
                         <form id="myform" class="m_auto">
                         <div class="space_32"></div>
                         <p>ペットの名前<span class="sub">必須</span></p>
-                        <input type="text" placeholder=" ぽち" id="edit_value" required style="font-size: 16px;">
+                        <input type="text" placeholder=" ぽち" id="edit_value" required class="input_width">
                         <div class="space_32"></div>   
                         <input type="submit" value="登録" id="post_button"> 
                         </form>`;
@@ -702,7 +709,7 @@
             child.innerHTML = `             
                         <form id="myform" class="m_auto">
                           <p>毛色<span class="sub">必須</span></p>
-                        <input type="text" id="edit_value" placeholder=" ブラウン" required style="font-size: 16px;">
+                        <input type="text" id="edit_value" placeholder=" ブラウン" required class="input_width">
                         <div class="space_32"></div>   
                         <input type="submit" value="登録" id="post_button"> 
                         </form>`;
@@ -755,7 +762,7 @@
             child.innerHTML = `             
                         <form id="myform" class="m_auto">
                           <p>ごはん(品名・一日の給餌量)</p>
-                        <label ><input type="text" id="edit_value" placeholder=" ミシュワン,200" style="font-size: 16px;"> g</label>
+                        <label ><input type="text" id="edit_value" placeholder=" ミシュワン,200" class="input_width"> g</label>
                         <div class="space_32"></div>   
                         <input type="submit" value="登録" id="post_button"> 
                         </form>`;
@@ -780,7 +787,7 @@
             child.innerHTML = `             
                         <form id="myform" class="m_auto">
                           <p>かかりつけの病院</p>
-                        <input type="text" id="edit_value" placeholder=" 病院名" style="font-size: 16px;">
+                        <input type="text" id="edit_value" placeholder=" 病院名" class="input_width">
                         <div class="space_32"></div>   
                         <input type="submit" value="登録" id="post_button"> 
                         </form>`;
@@ -804,7 +811,7 @@
             child.innerHTML = `             
                         <form id="myform" class="m_auto">
                           <p>病歴・アレルギー</p>
-                        <input type="text" id="edit_value" placeholder=" 皮膚炎,チキンアレルギー" style="font-size: 16px;">
+                        <input type="text" id="edit_value" placeholder=" 皮膚炎,チキンアレルギー" class="input_width">
                         <div class="space_32"></div>   
                         <input type="submit" value="登録" id="post_button"> 
                         </form>`;
@@ -828,7 +835,7 @@
             child.innerHTML = `             
                         <form id="myform" class="m_auto">
                           <p>お薬 (現在服用中のお薬)</p>
-                        <input type="text" id="edit_value" placeholder=" マイフリーガード" style="font-size: 16px;">
+                        <input type="text" id="edit_value" placeholder=" マイフリーガード" class="input_width">
                         <div class="space_32"></div>   
                         <input type="submit" value="登録" id="post_button"> 
                         </form>`;
@@ -852,7 +859,7 @@
             child.innerHTML = `             
                         <form id="myform" class="m_auto">
                           <p>サロン</p>
-                        <input type="text" id="edit_value" placeholder=" サロン名" style="font-size: 16px;">
+                        <input type="text" id="edit_value" placeholder=" サロン名" class="input_width">
                         <div class="space_32"></div>   
                         <input type="submit" value="登録" id="post_button"> 
                         </form>`;
@@ -877,7 +884,7 @@
                         <form id="myform" class="m_auto">
                           <p>マイクロチップ番号 (15桁の数字)</p>
                         <input type="number" id="edit_value" placeholder=" 392141111111111"
-                            style="font-size: 16px;">
+                        class="input_width">
                         <div class="space_32"></div>   
                         <input type="submit" value="登録" id="post_button"> 
                         </form>`;
