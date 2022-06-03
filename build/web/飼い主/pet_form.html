@@ -190,7 +190,7 @@
     <!-- <script src="../体重.js"></script> -->
     <script type="module">
 
-        import { connect_firebase } from "../firebaseConfig.js"
+        import { connect_firebase } from "../firebase.config.js"
         import { make_sign_out_display } from "../functions.js"
         import { getAuth, onAuthStateChanged } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
         import { collection, getFirestore, doc, setDoc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
@@ -467,14 +467,14 @@
         }
 
         const bock_to_mypage = document.getElementById('bock_to_mypage');
-        bock_to_mypage.addEventListener('click', async() => {
+        bock_to_mypage.addEventListener('click', async () => {
             const back_info = confirm('入力を中止しますか？');
             if (back_info) {
                 // Create a reference to the file to delete
                 const desertRef = ref(storage, `pets/${newDoc}/`);
                 await listAll(desertRef)
-                    .then(async(res) => {
-                        await res.items.forEach(async(itemRef) => {
+                    .then(async (res) => {
+                        await res.items.forEach(async (itemRef) => {
                             await deleteObject(itemRef);
                         });
                     }).catch((error) => {
@@ -482,7 +482,7 @@
                         console.log(error.message)
                         return
                     });
-                    return back_page()
+                return back_page()
             } else {
                 return
             }

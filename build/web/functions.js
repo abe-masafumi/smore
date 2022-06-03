@@ -1,4 +1,4 @@
-import { connect_firebase } from "./firebaseConfig.js"
+import { connect_firebase } from "./firebase.config.js"
 import { getAuth,signOut } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
 
 const app = connect_firebase();

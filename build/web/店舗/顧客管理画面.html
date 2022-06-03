@@ -9,10 +9,11 @@
     <link rel="stylesheet" href="../styles/common.css">
     <link rel="stylesheet" href="../styles/styles.css">
     <style>
-        html, body {
-          overflow-x: hidden;
+        html,
+        body {
+            overflow-x: hidden;
         }
-      </style>
+    </style>
 </head>
 
 <body>
@@ -30,7 +31,8 @@
         <header class="page-header row">
             <div class="center col-4">
                 <!-- <p onclick="location.href=['./店舗管理画面.html']">戻る</p> -->
-                <div class="icon_box" onclick="location.href=['./店舗管理画面.html']"><img src="../images/home.png" alt=""></div>
+                <div class="icon_box" onclick="location.href=['./店舗管理画面.html']"><img src="../images/home.png" alt="">
+                </div>
             </div>
             <div class="col-4 center">
                 <h1>顧客管理画面</h1>
@@ -51,7 +53,7 @@
     </div>
     <!-- ----end---- -->
     <script type="module">
-        import { connect_firebase } from "../firebaseConfig.js"
+        import { connect_firebase } from "../firebase.config.js"
         import { make_sign_out_display } from "../functions.js"
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
         import { getFirestore, collection, getDocs, getDoc, doc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";

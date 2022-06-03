@@ -65,7 +65,7 @@
     <!-- ----end---- -->
   </div>
   <script type="module">
-    import { connect_firebase } from "../firebaseConfig.js"
+    import { connect_firebase } from "../firebase.config.js"
     import { make_sign_out_display } from "../functions.js"
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
     import { getFirestore, doc, setDoc, getDoc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
@@ -116,20 +116,20 @@
 
       // 入力チェック
       const value_arr = [name, address, phone_number];
-      const message_arr = ["名前が入力されていません","メールアドレスが入力されていません","電話番号が入力されていません"]
+      const message_arr = ["名前が入力されていません", "メールアドレスが入力されていません", "電話番号が入力されていません"]
 
       for (let i = 0; i < value_arr.length; i++) {
-                if (value_arr[i] == "") {
-                    alert(message_arr[i])
-                    return
-                }
-            }
+        if (value_arr[i] == "") {
+          alert(message_arr[i])
+          return
+        }
+      }
 
 
       // 電話番号のチェック
       if (!phone_number.match(/^(0{1}\d{9,14})$/)) {
         alert('電話番号が正しくありません');
-        return 
+        return
       }
 
       // 携帯番号の正規表現チェック

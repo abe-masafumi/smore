@@ -9,7 +9,8 @@
   <link rel="stylesheet" href="../styles/common.css">
   <link rel="stylesheet" href="../styles/styles.css">
   <style>
-    html, body {
+    html,
+    body {
       overflow-x: hidden;
     }
   </style>
@@ -62,7 +63,8 @@
               <div class="img_box center">
                 <img style="width: 100%; height: auto;" alt="" id="p_img">
               </div>
-              <button class="edit_icon_btn center edit_btn" data-name="edit_img01" style="position: absolute; bottom: 5px; right: -10px;">
+              <button class="edit_icon_btn center edit_btn" data-name="edit_img01"
+                style="position: absolute; bottom: 5px; right: -10px;">
                 <img src="../images/edit.png" alt="" style="width: 16px; margin: auto;">
               </button>
             </div>
@@ -258,7 +260,7 @@
   <!-- ----end---- -->
 
   <script type="module">
-    import { connect_firebase } from "../firebaseConfig.js"
+    import { connect_firebase } from "../firebase.config.js"
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
     import { getFirestore, collection, getDoc, doc, onSnapshot, updateDoc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
     import { getStorage, ref, getDownloadURL, uploadBytes, uploadBytesResumable } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-storage.js";

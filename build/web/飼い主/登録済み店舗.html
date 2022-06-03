@@ -9,10 +9,11 @@
     <link rel="stylesheet" href="../styles/common.css">
     <link rel="stylesheet" href="../styles/styles.css">
     <style>
-        html, body {
-          overflow-x: hidden;
+        html,
+        body {
+            overflow-x: hidden;
         }
-      </style>
+    </style>
 </head>
 
 <body>
@@ -54,7 +55,7 @@
             </ul>
         </main>
         <!-- 未実装のため、メッセージ -->
-        <div class="m_auto"  style="width: 90%; background-color: rgb(241, 250, 185);">
+        <div class="m_auto" style="width: 90%; background-color: rgb(241, 250, 185);">
             <div class="text_center">今後お店からお得な情報が届く<br>機能を拡充予定です。</div>
         </div>
         <!-- footerは使ってない -->
@@ -62,7 +63,7 @@
     </div>
     <!-- ----end---- -->
     <script type="module">
-        import { connect_firebase } from "../firebaseConfig.js"
+        import { connect_firebase } from "../firebase.config.js"
         import { make_sign_out_display } from "../functions.js"
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
         import { getFirestore, getDoc, doc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";

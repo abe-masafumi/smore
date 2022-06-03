@@ -45,7 +45,8 @@
             パスワードを表示する</p>
           <div class="space_24"></div>
           <div>
-            <p>登録することにより、お客様は<a href="https://www.smore-pets.com/terms" target=”_blank”>サービス利用規約</a>および<a href="https://www.smore-pets.com/policy">プライバシーポリシー</a>に同意したことになります。</p>
+            <p>登録することにより、お客様は<a href="https://www.smore-pets.com/terms" target=”_blank”>サービス利用規約</a>および<a
+                href="https://www.smore-pets.com/policy">プライバシーポリシー</a>に同意したことになります。</p>
           </div>
           <div class="space_24"></div>
 
@@ -66,7 +67,7 @@
   <!-- ----end---- -->
   <script src="../form_sign_up_common.js"></script>
   <script type="module">
-    import { connect_firebase } from "../firebaseConfig.js"
+    import { connect_firebase } from "../firebase.config.js"
     import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
     // firebaseと接続
     const app = connect_firebase();

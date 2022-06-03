@@ -49,7 +49,7 @@
                 <div class="space_32"></div>
                 <p>パスワードを忘れた方は<a href="https://www.smore-pets.com/contact-us">こちら</a></p>
                 <div class="space_48"></div>
-                <!-- 登録してない人に登録画面へ遷移 --> 
+                <!-- 登録してない人に登録画面へ遷移 -->
                 <!-- <p>アカウントをお持ちでない場合は<span style="color: #7828FD;" onclick="location.href=['./sign_up_form.html']">登録</span></p> -->
                 <p style="font-size: 18px;">新規登録は<a href="./sign_up_form.html">こちら</a></p>
             </div>
@@ -61,7 +61,7 @@
 
     <script src="../form_login_common.js"></script>
     <script type="module">
-        import { connect_firebase } from "../firebaseConfig.js"
+        import { connect_firebase } from "../firebase.config.js"
         import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
         import { getFirestore, doc, getDoc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 

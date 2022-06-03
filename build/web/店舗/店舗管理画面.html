@@ -48,7 +48,8 @@
                 </div>
                 <div class="col-4 center">
                     <!-- <button onclick="location.href=['./qrcode.html']">QRボタン</button> -->
-                    <div class="icon_box" onclick="location.href=['./qrcode.html']"><img src="../images/QR.png" alt=""></div>
+                    <div class="icon_box" onclick="location.href=['./qrcode.html']"><img src="../images/QR.png" alt="">
+                    </div>
                 </div>
 
             </div>
@@ -69,7 +70,7 @@
 </body>
 <script type="module">
 
-    import { connect_firebase } from "../firebaseConfig.js"
+    import { connect_firebase } from "../firebase.config.js"
     import { make_sign_out_display } from "../functions.js"
     import { getAuth, onAuthStateChanged } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
     import { getFirestore, getDoc, doc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
@@ -95,7 +96,7 @@
         if (user) {
             console.log(user);
             const uid = user.uid;
-            console.log(uid,"状態:ログイン中");
+            console.log(uid, "状態:ログイン中");
             return get_data(uid);
         } else {
             console.log("状態:ログアウト");

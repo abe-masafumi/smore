@@ -34,7 +34,8 @@
   <div id="big_container" class="none">
     <header class="page-header row">
       <div class="col-4 center">
-        <div class="icon_box" onclick="location.href=['./顧客管理画面.html']"><img src="../images/angle-left.png" alt=""></div>
+        <div class="icon_box" onclick="location.href=['./顧客管理画面.html']"><img src="../images/angle-left.png" alt="">
+        </div>
       </div>
       <h1 class="col-4 center">詳細</h1>
       <div class="col-4 center">
@@ -188,7 +189,7 @@
 
   </div>
   <script type="module">
-    import { connect_firebase } from "../firebaseConfig.js"
+    import { connect_firebase } from "../firebase.config.js"
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
     import { getFirestore, collection, getDoc, doc, onSnapshot, updateDoc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
     import { getStorage, ref, getDownloadURL, uploadBytes, uploadBytesResumable } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-storage.js";

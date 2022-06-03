@@ -9,10 +9,11 @@
     <link rel="stylesheet" href="../styles/common.css">
     <link rel="stylesheet" href="../styles/styles.css">
     <style>
-        html, body {
-          overflow-x: hidden;
+        html,
+        body {
+            overflow-x: hidden;
         }
-      </style>
+    </style>
 </head>
 
 <body>
@@ -50,13 +51,13 @@
                 </div>
             </div>
             <ul class="center" id="pet_ul">
-            <!-- jsで作成 -->
+                <!-- jsで作成 -->
             </ul>
             <div class="space_32"></div>
             <div style="margin: auto;">
                 <div class="flex_box" style="width: 250px; margin: auto;">
                     <img id="image" src="../images/plus_icon.png" onclick="location.href=['./pet_form.html']">
-<!-- 
+                    <!-- 
                     <button id="pet_add_button" onclick="location.href=['./pet_form.html']"
                         style="font-size: 26px; text-align:center; line-height: 26px;">+</button> -->
                     <p style="padding-left: 10px; font-size: 18px; margin: auto;">新しくペットを登録する</p>
@@ -69,7 +70,7 @@
     </div>
     <!-- ----end---- -->
     <script type="module">
-        import { connect_firebase } from "../firebaseConfig.js"
+        import { connect_firebase } from "../firebase.config.js"
         import { make_sign_out_display } from "../functions.js"
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
         import { getFirestore, collection, getDoc, doc, onSnapshot } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";

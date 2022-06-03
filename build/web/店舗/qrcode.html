@@ -16,6 +16,7 @@
   </style>
   <title>smore</title>
 </head>
+
 <body>
   <!-- ログインしてないけどページを開いちゃった時の画面 -->
   <div class="center none" id="prompt" style="height: 600px;">
@@ -29,22 +30,22 @@
   <!-- QRコードの表示 -->
   <header class="page-header row">
     <div class="center col-3">
-        <!-- <p onclick="location.href=['./店舗管理画面.html']">戻る</p> -->
-        <div class="icon_box" onclick="location.href=['./店舗管理画面.html']"><img src="../images/home.png" alt=""></div>
+      <!-- <p onclick="location.href=['./店舗管理画面.html']">戻る</p> -->
+      <div class="icon_box" onclick="location.href=['./店舗管理画面.html']"><img src="../images/home.png" alt=""></div>
     </div>
     <div class="col-6 center">
-        <h1>店舗専用のQRコード</h1>
+      <h1>店舗専用のQRコード</h1>
     </div>
     <div class="col-3 center">
-        <button id="sign_out" class="none">ログアウト</button>
+      <button id="sign_out" class="none">ログアウト</button>
     </div>
-</header>
+  </header>
   <div class="center" style="height: 500px;">
     <img src="" alt="qrcode" id="img" style="height: 250px;">
   </div>
   <!-- ----end---- -->
   <script type="module">
-    import { connect_firebase } from "../firebaseConfig.js"
+    import { connect_firebase } from "../firebase.config.js"
     import { make_sign_out_display } from "../functions.js"
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
     import { getFirestore, getDoc, doc } from " https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
