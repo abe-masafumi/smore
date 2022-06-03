@@ -121,20 +121,6 @@
 .text_left {
     text-align: left;
 }
-/* 
-.btn {
-    display: inline-block;
-    border-style: none; */
-    /* width: 200px; */
-    /* text-align: center; */
-    /* cursor: pointer; */
-    /* text-align: center; */
-    /* margin: 10px auto;
-    height: 35px;
-    width: 300px;
-    font-size: 20px;
-    border-radius: 20px;
-} */
 
 .none {
     display: none;
